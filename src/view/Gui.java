@@ -15,6 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Gui {
+import javax.swing.JFrame;
+import java.awt.EventQueue;
 
+public class Gui {
+    private JFrame frame;
+
+    public Gui() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 }
