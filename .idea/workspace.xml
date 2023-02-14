@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Gui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +72,7 @@
       <workItem from="1675190953969" duration="6000" />
       <workItem from="1675273629760" duration="936000" />
       <workItem from="1675763790025" duration="159000" />
-      <workItem from="1676370177005" duration="1283000" />
+      <workItem from="1676370177005" duration="1751000" />
     </task>
     <task id="LOCAL-00001" summary="prova prima commit">
       <created>1675190526508</created>
@@ -101,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676370371469</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Jframe">
+      <created>1676371513877</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676371513877</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +142,7 @@
     <MESSAGE value="prova prima commit" />
     <MESSAGE value="prova commit classe" />
     <MESSAGE value="package model" />
-    <option name="LAST_COMMIT_MESSAGE" value="package model" />
+    <MESSAGE value="Jframe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jframe" />
   </component>
 </project>
