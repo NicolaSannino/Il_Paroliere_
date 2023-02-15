@@ -23,7 +23,7 @@ public class Gui extends JFrame implements ActionListener{
     private JLabel Matrice;
     public Gui() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         for(int i=1;i<5;i++){
             for (int j=1;j<5;j++){
