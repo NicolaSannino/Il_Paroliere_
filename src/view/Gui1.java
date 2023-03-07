@@ -18,7 +18,7 @@ public class Gui1 extends JFrame implements ActionListener{
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         panel = new JPanel();
         panel.setLayout(new GridLayout(4, 4));
         for (int i = 1; i <= 16; i++) {
