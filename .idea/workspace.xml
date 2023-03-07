@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="commit prova matrice ciclo for" />
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Gui1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Gui1.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,34 +60,10 @@
       <updated>1675189711879</updated>
       <workItem from="1675189713685" duration="605000" />
       <workItem from="1675190401634" duration="5000" />
-      <workItem from="1675190467395" duration="468000" />
-      <workItem from="1675190953969" duration="6000" />
-      <workItem from="1675273629760" duration="351000" />
-      <workItem from="1676368007333" duration="6486000" />
-      <workItem from="1676453395279" duration="397000" />
+      <workItem from="1675763700181" duration="408000" />
+      <workItem from="1676367942818" duration="3722000" />
+      <workItem from="1676453329761" duration="888000" />
     </task>
-    <task id="LOCAL-00001" summary="prova prima commit">
-      <created>1675190526508</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1675190526508</updated>
-    </task>
-    <task id="LOCAL-00002" summary="commit libreire gui 1">
-      <created>1676370986522</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1676370986522</updated>
-    </task>
-    <task id="LOCAL-00003" summary="commit prova matrice ciclo for">
-      <created>1676453537278</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1676453537278</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,28 +74,10 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="prova prima commit" />
-    <MESSAGE value="commit libreire gui 1" />
-    <MESSAGE value="commit prova matrice ciclo for" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit prova matrice ciclo for" />
   </component>
 </project>
