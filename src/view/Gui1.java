@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.*;
 
 import javax.swing.JFrame;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 public class Gui1 extends JFrame implements ActionListener{
     private JFrame frame;
@@ -22,7 +23,9 @@ public class Gui1 extends JFrame implements ActionListener{
         setResizable(true);
         panel = new JPanel();
         panel.setLayout(new GridLayout(12, 16));
-
+        char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
+        char[] vocali = {'a', 'e', 'i', 'o', 'u'};
+        int j=0;
         for (int i = 1; i <= 192; i++) {
             if(i==24){
                 JLabel label = new JLabel("Il Paro");
@@ -35,43 +38,66 @@ public class Gui1 extends JFrame implements ActionListener{
                 panel.add(label);
             }else if(i >= 71 && i <= 74){
                 Random rand = new Random();
-                int randomNum = rand.nextInt(26) + 97;
-                char a = (char) randomNum;
-                JButton btn = new JButton(Character.toString(a));
-                btn.setHorizontalAlignment(JButton.CENTER);
-                btn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                panel.add(btn);
+                int num;
+                if (j%2==0){
+                    num = vocali[rand.nextInt(5)];
+                }else{
+                    num = consonanti[rand.nextInt(18)];
+                }
+                char a = (char) num;
+                    JButton btn = new JButton(Character.toString(a));
+                    btn.setHorizontalAlignment(JButton.CENTER);
+                    btn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    panel.add(btn);
+                    j++;
             }else if(i >= 87 && i <= 90){
                 Random rand = new Random();
-                int randomNum = rand.nextInt(26) + 97;
-                char a = (char) randomNum;
+                int num;
+                if (j%2==0) {
+                    num = consonanti[rand.nextInt(18)];
+                }else{
+                    num = vocali[rand.nextInt(5)];
+                }
+                char a = (char) num;
                 JButton btn = new JButton(Character.toString(a));
                 btn.setHorizontalAlignment(JButton.CENTER);
                 btn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 panel.add(btn);
+                j++;
             }else if(i >= 103 && i <= 106){
                 Random rand = new Random();
-                int randomNum = rand.nextInt(26) + 97;
-                char a = (char) randomNum;
+                int num;
+                if (j%2==0) {
+                    num = vocali[rand.nextInt(5)];
+                }else{
+                    num = consonanti[rand.nextInt(18)];
+                }
+                char a = (char) num;
                 JButton btn = new JButton(Character.toString(a));
                 btn.setHorizontalAlignment(JButton.CENTER);
                 btn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 panel.add(btn);
+                j++;
             } else if(i >= 119 && i <= 122){
                 Random rand = new Random();
-                int randomNum = rand.nextInt(26) + 97;
-                char a = (char) randomNum;
+                int num;
+                if (j%2==0) {
+                    num = consonanti[rand.nextInt(18)];
+                }else{
+                    num = vocali[rand.nextInt(5)];
+                }
+                char a = (char) num;
                 JButton btn = new JButton(Character.toString(a));
                 btn.setHorizontalAlignment(JButton.CENTER);
                 btn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 panel.add(btn);
+                j++;
             }else{
                 JLabel label = new JLabel();
                 label.setHorizontalAlignment(JLabel.CENTER);
                 //label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 panel.add(label);
             }
-
             //JLabel label = new JLabel(Integer.toString(i));
             //label.setHorizontalAlignment(JLabel.CENTER);
             //label.setBorder(BorderFactory.createLineBorder(Color.BLACK));

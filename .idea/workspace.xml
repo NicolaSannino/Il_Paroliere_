@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="aggiorna seconda matrice">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="titolo matrice e aggiunta lettere random matrice">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Gui1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Gui1.java" afterDir="false" />
     </list>
@@ -15,6 +15,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -68,7 +69,9 @@
       <workItem from="1678264120184" duration="21000" />
       <workItem from="1678268399956" duration="1263000" />
       <workItem from="1679148302909" duration="3000" />
-      <workItem from="1679148352999" duration="2031000" />
+      <workItem from="1679148352999" duration="2241000" />
+      <workItem from="1679150768813" duration="432000" />
+      <workItem from="1679391033676" duration="6227000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -84,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678185326830</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="titolo matrice e aggiunta lettere random matrice">
+      <created>1679150576927</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679150576927</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +111,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -116,6 +126,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prima matrice" />
     <MESSAGE value="aggiorna seconda matrice" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiorna seconda matrice" />
+    <MESSAGE value="titolo matrice e aggiunta lettere random matrice" />
+    <option name="LAST_COMMIT_MESSAGE" value="titolo matrice e aggiunta lettere random matrice" />
   </component>
 </project>
