@@ -1,14 +1,14 @@
-import view.Gui1;
+import view.jframe;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            Gui1 window = new Gui1();
-            window.getFrame().setExtendedState(window.getFrame().MAXIMIZED_BOTH);
-            window.getFrame().setVisible(true);
+            jframe f = new jframe("Il Paroliere");
+            f.setDefaultCloseOperation(jframe.EXIT_ON_CLOSE);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
 }
