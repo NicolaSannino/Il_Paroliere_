@@ -1,27 +1,21 @@
 package view;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-public class jframe extends JFrame implements ActionListener{
+public class CampoGioco extends JFrame implements ActionListener{
 
 	private JLabel Testo, Titolo;
 	private JButton Tabella, Invio; 
 
-	public jframe(String titolo) {
+	public CampoGioco(String titolo) {
 		this.setTitle(titolo);
 		this.setLayout(null);
 		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
@@ -38,6 +32,7 @@ public class jframe extends JFrame implements ActionListener{
 					num = consonanti[rand.nextInt(18)];
 				}
 				Tabella=new JButton(""+(char)num);
+				Tabella.setName("Btn"+a);
 				this.add(Tabella);
 				Tabella.addActionListener(this);
 				Tabella.setBounds(250+(i*50),250+(j*50),50,50);
@@ -54,6 +49,7 @@ public class jframe extends JFrame implements ActionListener{
 		Invio=new JButton("Cerca Parola");
 		this.add(Invio);
 		Invio.setBounds(335,700,135,20);
+		Invio.addActionListener(this);
 
 
 		this.setSize(800, 800);
@@ -73,7 +69,7 @@ public class jframe extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String azione=e.getActionCommand();	
 
-		for(int i=97;i<122;i++){
+		for(int i=97;i<123;i++){
 			i=(char)i;
 			if(azione.equals(Character.toString(i))){
 				if(Testo.getText().equals("Parola da trovare")){
@@ -83,6 +79,10 @@ public class jframe extends JFrame implements ActionListener{
 					Testo.setText(Testo.getText()+azione);
 				}
 			}		
+		}
+		if(azione.equals("Cerca Parola")){
+			System.out.println(Testo.getText());
+			//interrogo db
 		}
 	}
 }
