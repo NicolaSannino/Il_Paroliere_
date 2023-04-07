@@ -66,11 +66,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Invio.setBounds(335,700,135,20);
 		Invio.addActionListener(this);
 
-		//this.setSize(800, 800);
-		//this.setVisible(true);
-		//this.centerFrame(this);
-
-
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
 		this.setLayout(null);
