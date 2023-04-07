@@ -101,7 +101,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		}
 		if(azione.equals("Cerca Parola")){
 			System.out.println(Testo.getText());
-			//interrogo db
 		}
 	}
 }
