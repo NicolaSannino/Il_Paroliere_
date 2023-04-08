@@ -11,12 +11,14 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 
 public class CampoGioco extends JFrame implements ActionListener{
 
 	private JLabel Testo;
 	private JButton Tabella, Invio;
+	private JPanel GrigliaGioco;
 
 	public CampoGioco(){
 
@@ -31,7 +33,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		labelTitolo.setOpaque(true);
 		labelTitolo.setVerticalAlignment(labelTitolo.TOP);
 		labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
-		labelTitolo.setBounds(550, 10, 400, 70);
+		//labelTitolo.setBounds(550, 10, 400, 70);
+		labelTitolo.setSize(400, 70);
+		this.centerComponent(labelTitolo, 20);
+
+		GrigliaGioco = new JPanel();
+		GrigliaGioco.setLayout(new GridLayout(4, 4, 10, 10));
 
 		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
 		char[] vocali = {'a', 'e', 'i', 'o', 'u'};
@@ -51,22 +58,35 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 				Tabella = new JButton(""+(char)num);
 				Tabella.setName("Btn"+a);
-				this.add(Tabella);
 				Tabella.addActionListener(this);
-				Tabella.setBounds(250+(i*50),250+(j*50),50,50);
+				Tabella.setSize(50, 50);
+				GrigliaGioco.add(Tabella);
+
 				a++;
 			}
 		}
 
-		Testo = new JLabel("Parola da trovare");
+		GrigliaGioco.setVisible(true);
+		GrigliaGioco.setSize(250, 250);
+		GrigliaGioco.setBackground(new Color(123, 50, 250));
+		this.centerComponent(GrigliaGioco, 200);
+
+		Border border = BorderFactory.createLineBorder(Color.blue, 3);
+
+		Testo = new JLabel("Inerisci Lettere");
 		this.add(Testo);
-		Testo.setSize(100,50);
-		this.centerLabel(Testo, 600);
+		Testo.setBorder(border);
+		Testo.setVerticalAlignment(labelTitolo.CENTER);
+		Testo.setHorizontalAlignment(labelTitolo.CENTER);
+		Testo.setSize(200,40);
+		this.centerComponent(Testo, 550);
 
 		Invio = new JButton("Cerca Parola");
 		this.add(Invio);
-		Invio.setBounds(335,700,135,20);
+		//Invio.setBounds(335,700,135,20);
 		Invio.addActionListener(this);
+		Invio.setSize(200,50);
+		this.centerComponent(Invio, 700);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
@@ -74,24 +94,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
 
+		this.add(GrigliaGioco);
 		this.setVisible(true);
 		this.add(labelTitolo);
 	}
 
-	public static void centerFrame(JFrame f)
-	{
+	public void centerComponent(JComponent c, int y){
 		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-		Dimension frameSize = f.getSize ();
-		f.setLocation ((screenSize.width - frameSize.width) / 2,
-				(screenSize.height - frameSize.height) / 2);
+		Dimension frameSize = c.getSize ();
+		c.setLocation ((screenSize.width - frameSize.width) / 2, y);
 	}
-	public void centerLabel(JLabel l, int y)
-	{
-		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-		Dimension frameSize = l.getSize ();
-		l.setLocation ((screenSize.width - frameSize.width) / 2, y);
-	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -100,7 +112,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for(int i=97;i<123;i++){
 			i=(char)i;
 			if(azione.equals(Character.toString(i))){
-				if(Testo.getText().equals("Parola da trovare")){
+				if(Testo.getText().equals("Inerisci Lettere")){
 					Testo.setText("");
 					Testo.setText(Testo.getText()+azione);
 				}else{
