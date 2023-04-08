@@ -60,7 +60,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Testo = new JLabel("Parola da trovare");
 		this.add(Testo);
-		Testo.setBounds(350,600,100,50);
+		Testo.setSize(100,50);
+		this.centerLabel(Testo, 600);
+
 		Invio = new JButton("Cerca Parola");
 		this.add(Invio);
 		Invio.setBounds(335,700,135,20);
@@ -76,13 +78,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(labelTitolo);
 	}
 
-	public static void centerFrame(Frame f)
+	public static void centerFrame(JFrame f)
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
 		Dimension frameSize = f.getSize ();
 		f.setLocation ((screenSize.width - frameSize.width) / 2,
 				(screenSize.height - frameSize.height) / 2);
 	}
+	public void centerLabel(JLabel l, int y)
+	{
+		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+		Dimension frameSize = l.getSize ();
+		l.setLocation ((screenSize.width - frameSize.width) / 2, y);
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
