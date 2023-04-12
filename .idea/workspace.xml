@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="commit aggiornamento">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +25,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -43,6 +43,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2L6RmBRJinVOSYnhfaY42B11D2a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -54,14 +57,26 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/IdeaProjects/ProgettoProvaGPO&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nicol/Downloads/mysql-connector-j-8.0.32.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Settings.JavaScript&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\file" />
+      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\src\model" />
+      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\src\model\file" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -75,20 +90,22 @@
       <workItem from="1675763700181" duration="408000" />
       <workItem from="1676367942818" duration="3722000" />
       <workItem from="1676453329761" duration="1679000" />
-      <workItem from="1678183396337" duration="5927000" />
-      <workItem from="1678262813504" duration="79000" />
-      <workItem from="1678263433344" duration="94000" />
-      <workItem from="1678364963911" duration="52000" />
-      <workItem from="1679392560859" duration="1647000" />
-      <workItem from="1679568085707" duration="2321000" />
-      <workItem from="1679577587697" duration="2386000" />
-      <workItem from="1679740515344" duration="1992000" />
-      <workItem from="1679744010567" duration="3995000" />
-      <workItem from="1679998306414" duration="15000" />
-      <workItem from="1679998475602" duration="50000" />
-      <workItem from="1680825823049" duration="2035000" />
-      <workItem from="1680968047259" duration="499000" />
-      <workItem from="1680970373998" duration="2572000" />
+      <workItem from="1678183396337" duration="863000" />
+      <workItem from="1678185459497" duration="2365000" />
+      <workItem from="1678364233574" duration="414000" />
+      <workItem from="1678365132279" duration="12000" />
+      <workItem from="1678365276809" duration="11000" />
+      <workItem from="1678365874637" duration="49000" />
+      <workItem from="1679394311076" duration="2043000" />
+      <workItem from="1679568018964" duration="1193000" />
+      <workItem from="1679569236855" duration="1177000" />
+      <workItem from="1679990122454" duration="2077000" />
+      <workItem from="1679996509959" duration="3234000" />
+      <workItem from="1680090245494" duration="896000" />
+      <workItem from="1680553326093" duration="1956000" />
+      <workItem from="1680594412862" duration="641000" />
+      <workItem from="1680601503572" duration="2019000" />
+      <workItem from="1681298010146" duration="1245000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -97,56 +114,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676454368951</updated>
     </task>
-    <task id="LOCAL-00002" summary="seconda matrice">
-      <created>1678184374622</created>
+    <task id="LOCAL-00002" summary="Accesso file e DB">
+      <created>1680601550239</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1678184374622</updated>
+      <updated>1680601550239</updated>
     </task>
-    <task id="LOCAL-00003" summary="nuova grafica 1">
-      <created>1680826545869</created>
+    <task id="LOCAL-00003" summary="Accesso file e DB">
+      <created>1680602334078</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1680826545869</updated>
+      <updated>1680602334078</updated>
     </task>
-    <task id="LOCAL-00004" summary="implementazione matrice in campo gioco">
-      <created>1680827086135</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1680827086135</updated>
-    </task>
-    <task id="LOCAL-00005" summary="implementazione matrice in campo gioco 2">
-      <created>1680827207273</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1680827207273</updated>
-    </task>
-    <task id="LOCAL-00006" summary="implementazione matrice in campo gioco 3">
-      <created>1680827346757</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1680827346757</updated>
-    </task>
-    <task id="LOCAL-00007" summary="commit view">
-      <created>1680827474015</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1680827474015</updated>
-    </task>
-    <task id="LOCAL-00008" summary="commit aggiornamento">
-      <created>1680827699161</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1680827699161</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,13 +159,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prima matrice" />
-    <MESSAGE value="seconda matrice" />
-    <MESSAGE value="nuova grafica 1" />
-    <MESSAGE value="implementazione matrice in campo gioco" />
-    <MESSAGE value="implementazione matrice in campo gioco 2" />
-    <MESSAGE value="implementazione matrice in campo gioco 3" />
-    <MESSAGE value="commit view" />
-    <MESSAGE value="commit aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit aggiornamento" />
+    <MESSAGE value="Accesso file e DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Accesso file e DB" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

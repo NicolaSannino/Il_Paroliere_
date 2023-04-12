@@ -17,6 +17,8 @@ import javax.swing.border.Border;
 public class CampoGioco extends JFrame implements ActionListener{
 
 	private JLabel Testo;
+	private JTextField testo;
+
 	private JButton Tabella, Invio;
 	private JPanel GrigliaGioco;
 
@@ -33,7 +35,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		labelTitolo.setOpaque(true);
 		labelTitolo.setVerticalAlignment(labelTitolo.TOP);
 		labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
-		//labelTitolo.setBounds(550, 10, 400, 70);
+		labelTitolo.setBounds(550, 10, 400, 70);
 		labelTitolo.setSize(400, 70);
 		this.centerComponent(labelTitolo, 20);
 
@@ -74,11 +76,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Border border = BorderFactory.createLineBorder(Color.blue, 3);
 
 		Testo = new JLabel("Inerisci Lettere");
+		testo= new JTextField("Inserisci lettere");
 		this.add(Testo);
-		Testo.setBorder(border);
-		Testo.setVerticalAlignment(labelTitolo.CENTER);
-		Testo.setHorizontalAlignment(labelTitolo.CENTER);
-		Testo.setSize(200,40);
+		this.add(testo);
+
+		testo.setBorder(border);
+		//testo.setVerticalAlignment(labelTitolo.CENTER);
+		//testo.setHorizontalAlignment(labelTitolo.CENTER);
+		//testo.setSize(200,40);
+		testo.setBounds(684,560,130,31);
+		testo.setBackground(new Color(0, 0, 255));
 		this.centerComponent(Testo, 550);
 
 		Invio = new JButton("Cerca Parola");
@@ -112,16 +119,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for(int i=97;i<123;i++){
 			i=(char)i;
 			if(azione.equals(Character.toString(i))){
-				if(Testo.getText().equals("Inerisci Lettere")){
-					Testo.setText("");
-					Testo.setText(Testo.getText()+azione);
+				if(testo.getText().equals("Inserisci lettere")){
+					testo.setText("");
+					testo.setText(testo.getText()+azione);
 				}else{
-					Testo.setText(Testo.getText()+azione);
+					testo.setText(testo.getText()+azione);
 				}
 			}
 		}
 		if(azione.equals("Cerca Parola")){
-			System.out.println(Testo.getText());
+			System.out.println(testo.getText());
 		}
 	}
 }
