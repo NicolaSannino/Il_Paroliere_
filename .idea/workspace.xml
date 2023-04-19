@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-    </list>
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +102,7 @@
       <workItem from="1680553326093" duration="1956000" />
       <workItem from="1680594412862" duration="641000" />
       <workItem from="1680601503572" duration="2019000" />
-      <workItem from="1681298010146" duration="1245000" />
+      <workItem from="1681298010146" duration="1326000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -128,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680602334078</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Modifica homepage">
+      <created>1681299322006</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681299322006</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +164,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prima matrice" />
     <MESSAGE value="Accesso file e DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Accesso file e DB" />
+    <MESSAGE value="Modifica homepage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica homepage" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
