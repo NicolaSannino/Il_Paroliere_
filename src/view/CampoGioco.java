@@ -6,12 +6,16 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
+import model.DBConnection;
+import model.DBConnectionMariaDB;
+import model.Query;
 
 
 public class CampoGioco extends JFrame implements ActionListener{
@@ -129,6 +133,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 		}
 		if(azione.equals("Cerca Parola")){
 			System.out.println(testo.getText());
+			DBConnectionMariaDB conn = new DBConnectionMariaDB();
+			Query q=new Query();
+			try {
+				if(q.ricercaParolaDb(testo.getText(),conn) == true){
+					System.out.println("parola trovata");
+				}else{
+					System.out.println("parola non trovata");
+				}
+			} catch (SQLException ex) {
+				throw new RuntimeException(ex);
+			}
+
 		}
 	}
 }

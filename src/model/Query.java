@@ -1,13 +1,10 @@
 package model;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.sql.Connection;
 import java.sql.ResultSet;
-import model.DBConnection;
 import java.sql.SQLException;
-import model.DBConnection;
 
 public class Query {
 
@@ -42,6 +39,21 @@ public class Query {
         String querySelect="INSERT INTO tbl_parole (parola) VALUES('"+parola+"')";
         return conn.QueryGenerica(conn.getC(),querySelect);
     }
+
+    public boolean ricercaParolaDb(String p, DBConnectionMariaDB conn) throws SQLException {
+        String querySelect="SELECT parola FROM tbl_parole WHERE parola='"+p+"';";
+        ResultSet s= conn.QuerySelect(conn.getC(),querySelect,0);
+        if(s ==null) {
+            return false;
+        }
+        String parola=s.getString("parola");
+        if(parola.equals(p)==true){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
     public boolean inserimentoParole() {
         //connessione al db

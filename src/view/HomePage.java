@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class HomePage extends JFrame implements ActionListener {
 
     JButton btnOpenGioco = new JButton();
