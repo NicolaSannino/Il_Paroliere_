@@ -31,7 +31,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.setTitle("Campo da Gioco");
 
 		JLabel labelTitolo = new JLabel();
-		labelTitolo.setText("Campo Da GIoco");
+		labelTitolo.setText("Campo Da Gioco");
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
 
@@ -79,18 +79,24 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Border border = BorderFactory.createLineBorder(Color.blue, 3);
 
-		Testo = new JLabel("Inerisci Lettere");
-		testo= new JTextField("Inserisci lettere");
-		this.add(Testo);
+		//Testo = new JLabel("Inerisci lettere");
+		testo = new JTextField("Inserisci lettere");
+		testo.setOpaque(false);
+		//this.add(Testo);
 		this.add(testo);
+
+		Font fontA=new Font ("Book Antiqua", Font. BOLD, 15);
 
 		testo.setBorder(border);
 		//testo.setVerticalAlignment(labelTitolo.CENTER);
 		//testo.setHorizontalAlignment(labelTitolo.CENTER);
 		//testo.setSize(200,40);
-		testo.setBounds(684,560,130,31);
-		testo.setBackground(new Color(0, 0, 255));
-		this.centerComponent(Testo, 550);
+		//testo.setBackground(new Color(0, 0, 255));
+		//testo.setBounds(684,560,130,31);
+		testo.setSize(230,30);
+		testo.setFont(fontA);
+		testo.setForeground(Color.white);
+		this.centerComponent(testo, 550);
 
 		Invio = new JButton("Cerca Parola");
 		this.add(Invio);
@@ -102,6 +108,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
 		this.setLayout(null);
+		//this.setLayout(new FlowLayout());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
 
