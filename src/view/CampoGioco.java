@@ -26,6 +26,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 	private JButton Tabella, Invio;
 	private JPanel GrigliaGioco;
 
+	//label e classe timer
+	private Timer timer;
+	private JLabel timeLabel;
+	int minutes=10;
+	int seconds = 8;
+	boolean fine=false;
+
 	public CampoGioco(){
 
 		this.setTitle("Campo da Gioco");
@@ -79,8 +86,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Border border = BorderFactory.createLineBorder(Color.blue, 3);
 
-		//Testo = new JLabel("Inerisci lettere");
-		testo = new JTextField("Inserisci lettere");
+		//Testo = new JLabel("Inerisci Lettere");
+		testo= new JTextField("Inserisci lettere");
+
 		testo.setOpaque(false);
 		//this.add(Testo);
 		this.add(testo);
@@ -106,11 +114,42 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.centerComponent(Invio, 700);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800, 600);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int frameWidth = (int) screenSize.getWidth();
+		int frameHeight = (int) screenSize.getHeight();
+
+		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
-		//this.setLayout(new FlowLayout());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
+
+		timeLabel = new JLabel("00:00:00");
+		timeLabel.setFont(new Font("Arial", Font.BOLD, 50));
+		CentraOggetti c= new CentraOggetti();
+		c.centraLabel(timeLabel,this,100);
+		this.add(timeLabel);
+
+
+		timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(fine==false){
+					seconds--;
+					int hour = seconds / 3600;
+					int minute = (seconds % 3600) / 60;
+					int second = seconds % 60;
+					timeLabel.setText(String.format("%02d:%02d:%02d", hour, minute, second));
+					if(Integer.compare(seconds,0)==0){
+						fine=true;
+						timer.stop();
+						CampoGioco.this.dispose();
+					}
+				}
+			}
+		});
+		timer.start();
+
+
 
 		this.add(GrigliaGioco);
 		this.setVisible(true);
