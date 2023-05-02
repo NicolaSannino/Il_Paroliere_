@@ -7,13 +7,13 @@ public class CentraOggetti {
 
     }
 
-    public void centraLabel(JLabel label,JFrame f,int h){
-        int labelWidth = label.getPreferredSize().width;;
-        int labelHeight = label.getPreferredSize().height;
+    public void centraLabel(JComponent c,JFrame f,int h){
+        int labelWidth = c.getPreferredSize().width;;
+        int labelHeight = c.getPreferredSize().height;
         int containerWidth = f.getWidth();
         int containerHeight = f.getHeight();
         int labelX = (containerWidth - labelWidth) / 2;
         int labelY = (containerHeight - labelHeight) / 2;
-        label.setBounds(labelX, h, labelWidth, labelHeight);
+        c.setBounds(labelX, h, labelWidth, labelHeight);
     }
 }
