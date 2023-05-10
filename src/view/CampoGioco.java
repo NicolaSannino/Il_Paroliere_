@@ -30,7 +30,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	private Timer timer;
 	private JLabel timeLabel;
 	int minutes=10;
-	int seconds = 8;
+	int seconds = 480;
 	boolean fine=false;
 
 	public CampoGioco(){
@@ -38,16 +38,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.setTitle("Campo da Gioco");
 
 		JLabel labelTitolo = new JLabel();
-		labelTitolo.setText("Campo Da Gioco");
+		labelTitolo.setText("Campo Da Gioco Paroliere");
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
 
 		labelTitolo.setBackground(new Color(123, 50, 250));
 		labelTitolo.setOpaque(true);
-		labelTitolo.setVerticalAlignment(labelTitolo.TOP);
-		labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
-		labelTitolo.setBounds(550, 10, 400, 70);
-		labelTitolo.setSize(400, 70);
+		//labelTitolo.setVerticalAlignment(labelTitolo.TOP);
+		//labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
+		//labelTitolo.setBounds(550, 10, 400, 70);
+		labelTitolo.setSize(500, 70);
 		this.centerComponent(labelTitolo, 20);
 
 		GrigliaGioco = new JPanel();
@@ -120,7 +120,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		int frameHeight = (int) screenSize.getHeight();
 
 		timeLabel = new JLabel("00:00");
-		timeLabel.setFont(new Font("MV Boli", Font.PLAIN, 35));
+		timeLabel.setFont(new Font("MV Boli", Font.BOLD, 35));
 		//CentraOggetti c = new CentraOggetti();
 		//c.centraLabel(timeLabel,this,100);
 		timeLabel.setBounds(30, 30, 200,40);
@@ -133,7 +133,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					int hour = seconds / 3600;
 					int minute = (seconds % 3600) / 60;
 					int second = seconds % 60;
-					timeLabel.setText(String.format("%02d:%02d:%02d", hour, minute, second));
+					timeLabel.setText(String.format("%02d:%02d", minute, second));
 					if(Integer.compare(seconds,0)==0){
 						fine = true;
 						timer.stop();
@@ -146,6 +146,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
+		this.setResizable(false);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
 		this.add(GrigliaGioco);

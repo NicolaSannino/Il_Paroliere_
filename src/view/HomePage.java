@@ -5,7 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class HomePage extends JFrame implements ActionListener {
 
-    JButton btnOpenGioco = new JButton();
+    JButton btnOpenGioco = new JButton(){
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            g.setColor(Color.BLUE);
+            g.fillRect(2, 2, getWidth() - 4, getHeight() - 4);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 14));
+            g.drawString("Clicca", getWidth() / 2 - 25, getHeight() / 2 + 5);
+        }
+    };
 
     public HomePage(){
 
@@ -16,6 +26,7 @@ public class HomePage extends JFrame implements ActionListener {
         this.setLayout(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.getContentPane().setBackground(new Color(123, 50, 250));
+        this.setResizable(false);
 
         JLabel labelTitolo = new JLabel();
         labelTitolo.setText("Homepage Paroliere");
