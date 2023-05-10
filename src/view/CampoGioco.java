@@ -93,7 +93,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//this.add(Testo);
 		this.add(testo);
 
-		Font fontA=new Font ("Book Antiqua", Font. BOLD, 15);
+		Font fontA = new Font ("Book Antiqua", Font. BOLD, 15);
 
 		testo.setBorder(border);
 		//testo.setVerticalAlignment(labelTitolo.CENTER);
@@ -119,28 +119,23 @@ public class CampoGioco extends JFrame implements ActionListener{
 		int frameWidth = (int) screenSize.getWidth();
 		int frameHeight = (int) screenSize.getHeight();
 
-		this.setSize(frameWidth, frameHeight);
-		this.setLayout(null);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.getContentPane().setBackground(new Color(123, 50, 250));
-
-		timeLabel = new JLabel("00:00:00");
-		timeLabel.setFont(new Font("Arial", Font.BOLD, 50));
-		CentraOggetti c= new CentraOggetti();
-		c.centraLabel(timeLabel,this,100);
+		timeLabel = new JLabel("00:00");
+		timeLabel.setFont(new Font("MV Boli", Font.PLAIN, 35));
+		//CentraOggetti c = new CentraOggetti();
+		//c.centraLabel(timeLabel,this,100);
+		timeLabel.setBounds(30, 30, 200,40);
 		this.add(timeLabel);
-
 
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(fine==false){
+				if(fine == false){
 					seconds--;
 					int hour = seconds / 3600;
 					int minute = (seconds % 3600) / 60;
 					int second = seconds % 60;
 					timeLabel.setText(String.format("%02d:%02d:%02d", hour, minute, second));
 					if(Integer.compare(seconds,0)==0){
-						fine=true;
+						fine = true;
 						timer.stop();
 						CampoGioco.this.dispose();
 					}
@@ -149,8 +144,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 		});
 		timer.start();
 
-
-
+		this.setSize(frameWidth, frameHeight);
+		this.setLayout(null);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.getContentPane().setBackground(new Color(123, 50, 250));
 		this.add(GrigliaGioco);
 		this.setVisible(true);
 		this.add(labelTitolo);
