@@ -20,6 +20,7 @@ import model.Query;
 
 public class CampoGioco extends JFrame implements ActionListener{
 
+	private char[][] tabella = new char[4][4];
 	private JLabel Testo;
 	private JTextField testo;
 
@@ -70,6 +71,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 
 				Tabella = new JButton(""+(char)num);
+				tabella[i-1][j-1]=(char)num;
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
 				Tabella.setSize(50, 50);
@@ -78,6 +80,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 				a++;
 			}
 		}
+
+		stampaMatrice();
 
 		GrigliaGioco.setVisible(true);
 		GrigliaGioco.setSize(250, 250);
@@ -189,6 +193,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 				throw new RuntimeException(ex);
 			}
 
+		}
+	}
+
+	public void stampaMatrice(){
+		for(int i=0;i<4;i++){
+			System.out.println();
+			for(int j=0;j<4;j++){
+				System.out.println(tabella[i][j]);
+			}
 		}
 	}
 }
