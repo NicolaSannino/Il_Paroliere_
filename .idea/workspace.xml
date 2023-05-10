@@ -116,7 +116,8 @@
       <workItem from="1681976898413" duration="1446000" />
       <workItem from="1683020611645" duration="1703000" />
       <workItem from="1683716290290" duration="13000" />
-      <workItem from="1683734996464" duration="3512000" />
+      <workItem from="1683734996464" duration="3638000" />
+      <workItem from="1683742601572" duration="6554000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -188,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683021884725</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="matrice per controllo parola all'interno del paroliere">
+      <created>1683738602828</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1683738602828</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +236,8 @@
     <MESSAGE value="commit aggiornamento" />
     <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
     <MESSAGE value="modifica classe centra ogetti" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifica classe centra ogetti" />
+    <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
+    <option name="LAST_COMMIT_MESSAGE" value="matrice per controllo parola all'interno del paroliere" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
