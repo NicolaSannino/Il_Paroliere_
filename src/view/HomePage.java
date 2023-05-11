@@ -55,7 +55,7 @@ public class HomePage extends JFrame implements ActionListener {
 
         if (e.getSource() == btnOpenGioco){
             this.dispose();
-            CampoGioco newPage = new CampoGioco();
+            CampoGiocoFacile newPage = new CampoGiocoFacile();
         }
     }
 }

@@ -2,7 +2,6 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -14,17 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
-import model.DBConnection;
+
 import model.DBConnectionMariaDB;
 import model.Query;
-import javax.swing.JFrame;
+
 import javax.swing.JToggleButton;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-
-public class CampoGioco extends JFrame implements ActionListener{
+public class CampoGiocoFacile extends JFrame implements ActionListener{
 	Vector<JButton> buttonsclick=new Vector(0,1);
 
 	JButton[][] buttons = new JButton[4][4];
@@ -33,22 +28,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	private char[][] tabella = new char[4][4];
 
-	private JLabel Testo;
+	private JLabel Testo, timeLabel, ContBtnTabella;
 	private JTextField testo;
-
-	private JButton Tabella, Invio, Annulla;
+	private JButton Tabella, Invio, Annulla, Termina;
 	private JPanel GrigliaGioco, ContBtn;
 
-	//label e classe timer
 	private Timer timer;
-	private JLabel timeLabel;
+
 	int minutes=10;
 	int seconds = 480;
 	boolean fine = false;
 
 	boolean buttonTesto = true;
 
-	public CampoGioco(){
+	public CampoGiocoFacile(){
 
 		this.setTitle("Campo da Gioco");
 
@@ -57,19 +50,14 @@ public class CampoGioco extends JFrame implements ActionListener{
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
 
-		CentraOggetti c=new CentraOggetti();
-		toggleButton.setSize(70,70);
+		CentraOggetti c = new CentraOggetti();
 		toggleButton.addActionListener(this);
-		this.add(toggleButton);
 		toggleButton.setBackground(Color.WHITE);
 		toggleButton.setForeground(Color.GRAY);
 		toggleButton.setPreferredSize(new Dimension(80, 40));
 		toggleButton.setMargin(new Insets(0, 10, 0, 10));
-
+		toggleButton.setBounds(400,300,80,25);
 		toggleButton.setVisible(true);
-		c.centerComponent(toggleButton,20);
-
-
 
 		labelTitolo.setBackground(new Color(123, 50, 250));
 		labelTitolo.setOpaque(true);
@@ -81,11 +69,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		GrigliaGioco = new JPanel();
 		ContBtn = new JPanel();
-		GrigliaGioco.setLayout(new GridLayout(4, 4, 10, 10));
+		GrigliaGioco.setLayout(new GridLayout(4, 4, 0, 0));
 
 		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
 		char[] vocali = {'a', 'e', 'i', 'o', 'u'};
 		int a=0;
+
+		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3);
 
 		for(int i = 1;i < 5;i++){
 			a++;
@@ -100,12 +90,29 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 
 				Tabella = new JButton(""+(char)num);
-				tabella[i-1][j-1]=(char)num;
+				ContBtnTabella = new JLabel();
+
+				tabella[i-1][j-1] = (char)num;
 				buttons[i-1][j-1] = Tabella;
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
-				Tabella.setSize(50, 50);
-				GrigliaGioco.add(Tabella);
+				//Tabella.setSize(50, 50);
+
+				ContBtnTabella.setSize(55,55);
+				ContBtnTabella.setLayout(null);
+				ContBtnTabella.setBorder(border2);
+
+				int labelWidth = ContBtnTabella.getWidth();
+				int labelHeight = ContBtnTabella.getHeight();
+
+				int x = (75 - 50) / 2;
+				int y = (75 - 50) / 2;
+
+				Tabella.setBounds(x, y, 50, 50);
+
+				ContBtnTabella.add(Tabella);
+
+				GrigliaGioco.add(ContBtnTabella);
 
 				a++;
 			}
@@ -113,12 +120,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		stampaMatrice();
 
-		GrigliaGioco.setVisible(true);
-		GrigliaGioco.setSize(250, 250);
-		GrigliaGioco.setBackground(new Color(123, 50, 250));
-		this.centerComponent(GrigliaGioco, 200);
+		ContBtnTabella.setVisible(true);
+		ContBtnTabella.setBackground(new Color(123, 50, 250));
 
-		Border border = BorderFactory.createLineBorder(Color.blue, 3);
+		GrigliaGioco.setVisible(true);
+		GrigliaGioco.setSize(302, 302);
+		GrigliaGioco.setBackground(new Color(123, 50, 250));
+		GrigliaGioco.setBorder(border2);
+		this.centerComponent(GrigliaGioco, 160);
+
+		Border border = BorderFactory.createLineBorder(Color.black, 3);
 
 		Testo = new JLabel("Inserisci lettere");
 		testo= new JTextField("Inserisci lettere");
@@ -136,7 +147,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 								   }
 							   });
 
-			//testo.setOpaque(false);
 		this.add(Testo);
 		this.add(testo);
 		testo.setVisible(false);
@@ -145,11 +155,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Testo.setBorder(border);
 		testo.setBorder(border);
-		//testo.setVerticalAlignment(labelTitolo.CENTER);
-		//testo.setHorizontalAlignment(labelTitolo.CENTER);
-		//testo.setSize(200,40);
-		//testo.setBackground(new Color(0, 0, 255));
-		//testo.setBounds(684,560,130,31);
 		Testo.setSize(230,30);
 		testo.setSize(230,30);
 		Testo.setFont(fontA);
@@ -160,30 +165,32 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.centerComponent(Testo, 550);
 		this.centerComponent(testo, 550);
 
-		Invio = new JButton("Cerca Parola");
+		Invio = new JButton();
+		Invio.setText("Cerca Parola");
 		Invio.addActionListener(this);
-		Invio.setSize(200,50);
-		//this.centerComponent(Invio, 700);
-		//this.add(Invio);
+		Invio.setBounds(0,0,200,50);
 
-		Annulla = new JButton("Annulla Parola");
+		Annulla = new JButton();
+		Annulla.setText("Annulla Parola");
 		Annulla.addActionListener(this);
-		Annulla.setSize(200,80);
-		//this.centerComponent(Annulla, 100);
-		//this.add(Annulla);
+		Annulla.setBounds(250,0,200,50);
 
 		ContBtn.add(Invio);
 		ContBtn.add(Annulla);
 		ContBtn.setVisible(true);
-		ContBtn.setSize(400,100);
-		//ContBtn.setBackground(new Color(123, 50, 250));
-		ContBtn.setBackground(Color.WHITE);
+		ContBtn.setSize(450,50);
+		ContBtn.setBackground(new Color(123, 50, 250));
+		ContBtn.setLayout(null);
 		this.centerComponent(ContBtn, 700);
+
+		Termina = new JButton();
+		Termina.setText("Termina Partita");
+		Termina.addActionListener(this);
+		Termina.setBounds(1300, 40, 170, 40);
 
 		timeLabel = new JLabel("00:00");
 		timeLabel.setFont(new Font("MV Boli", Font.BOLD, 35));
 		timeLabel.setBounds(30, 30, 200,40);
-		this.add(timeLabel);
 
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,7 +205,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					if(Integer.compare(seconds,0)==0){
 						fine = true;
 						timer.stop();
-						CampoGioco.this.dispose();
+						CampoGiocoFacile.this.dispose();
 					}
 				}
 			}
@@ -209,14 +216,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 		int frameWidth = (int) screenSize.getWidth();
 		int frameHeight = (int) screenSize.getHeight();
 
+		this.add(labelTitolo);
+		this.add(GrigliaGioco);
+		this.add(ContBtn);
+		this.add(Termina);
+		this.add(timeLabel);
+		this.add(toggleButton);
+
 		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
-		this.add(labelTitolo);
-		this.add(GrigliaGioco);
-		this.add(ContBtn);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
