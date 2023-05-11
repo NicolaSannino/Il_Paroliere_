@@ -18,8 +18,15 @@ import model.DBConnectionMariaDB;
 import model.Query;
 
 import javax.swing.JToggleButton;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class CampoGiocoFacile extends JFrame implements ActionListener{
+
+	DefaultTableModel model;
+	JPanel panelTabella;
+
+	JTable table;
 	Vector<JButton> buttonsclick=new Vector(0,1);
 
 	JButton[][] buttons = new JButton[4][4];
@@ -119,6 +126,41 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		}
 
 		stampaMatrice();
+
+		//Tabella Risultati
+
+		// Creazione dell'oggetto TableCellRenderer personalizzato
+		Font font = new Font("Arial", Font.PLAIN, 14);
+		Color foregroundColor = Color.BLUE;
+		TableCellRenderer renderer = new CustomTableCellRenderer(font, foregroundColor);
+
+		// Creazione campi del modello dati della tabella
+		model = new DefaultTableModel();
+		model.addColumn("Parola");
+		model.addColumn("Punteggio");
+		model.addRow(new Object[]{"Parola", "Punteggio"});
+
+		// Creazione dell'etichetta con il titolo della tabella
+		JLabel titleLabel = new JLabel("Titolo della Tabella");
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+		// Creazione della tabella
+		table=new JTable();
+		table.setSize(200,200);
+		table.setModel(model);
+		table.setDefaultRenderer(Object.class, renderer);
+
+		//Panel in cui inserire tabella
+		panelTabella= new JPanel();
+		this.add(panelTabella);
+		panelTabella.add(Box.createVerticalStrut(10)); // Spazio vuoto tra etichetta e tabella
+		panelTabella.add(titleLabel);
+		titleLabel.setVisible(true);
+		//panelTabella.setBackground(Color.WHITE);
+		panelTabella.setBounds(1000,300,300,300);
+		panelTabella.setVisible(true);
+		panelTabella.add(table);
+		table.setVisible(true);
 
 		ContBtnTabella.setVisible(true);
 		ContBtnTabella.setBackground(new Color(123, 50, 250));
