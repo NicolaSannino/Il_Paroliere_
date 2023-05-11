@@ -37,17 +37,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 	private JLabel Testo;
 	private JTextField testo;
 
-	private JButton Tabella, Invio;
-	private JPanel GrigliaGioco;
+	private JButton Tabella, Invio, Annulla;
+	private JPanel GrigliaGioco, ContBtn;
 
 	//label e classe timer
 	private Timer timer;
 	private JLabel timeLabel;
 	int minutes=10;
 	int seconds = 480;
-	boolean fine=false;
+	boolean fine = false;
 
-	boolean buttonTesto=false;
+	boolean buttonTesto = true;
 
 	public CampoGioco(){
 
@@ -81,11 +81,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.centerComponent(labelTitolo, 20);
 
 		GrigliaGioco = new JPanel();
+		ContBtn = new JPanel();
 		GrigliaGioco.setLayout(new GridLayout(4, 4, 10, 10));
 
 		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
 		char[] vocali = {'a', 'e', 'i', 'o', 'u'};
 		int a=0;
+
 		for(int i = 1;i < 5;i++){
 			a++;
 			for(int j = 1;j < 5; j++){
@@ -142,37 +144,45 @@ public class CampoGioco extends JFrame implements ActionListener{
 		testo.setFont(fontA);
 		Testo.setForeground(Color.BLACK);
 		testo.setForeground(Color.BLACK);
+		testo.setOpaque(false);
 		this.centerComponent(Testo, 550);
 		this.centerComponent(testo, 550);
 
 		Invio = new JButton("Cerca Parola");
-		this.add(Invio);
-		//Invio.setBounds(335,700,135,20);
 		Invio.addActionListener(this);
 		Invio.setSize(200,50);
-		this.centerComponent(Invio, 700);
+		//this.centerComponent(Invio, 700);
+		//this.add(Invio);
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Annulla = new JButton("Annulla Parola");
+		Annulla.addActionListener(this);
+		Annulla.setSize(200,80);
+		//this.centerComponent(Annulla, 100);
+		//this.add(Annulla);
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int frameWidth = (int) screenSize.getWidth();
-		int frameHeight = (int) screenSize.getHeight();
+		ContBtn.add(Invio);
+		ContBtn.add(Annulla);
+		ContBtn.setVisible(true);
+		ContBtn.setSize(400,100);
+		//ContBtn.setBackground(new Color(123, 50, 250));
+		ContBtn.setBackground(Color.WHITE);
+		this.centerComponent(ContBtn, 700);
 
 		timeLabel = new JLabel("00:00");
 		timeLabel.setFont(new Font("MV Boli", Font.BOLD, 35));
-		//CentraOggetti c = new CentraOggetti();
-		//c.centraLabel(timeLabel,this,100);
 		timeLabel.setBounds(30, 30, 200,40);
 		this.add(timeLabel);
 
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(fine == false){
+
 					seconds--;
 					int hour = seconds / 3600;
 					int minute = (seconds % 3600) / 60;
 					int second = seconds % 60;
 					timeLabel.setText(String.format("%02d:%02d", minute, second));
+
 					if(Integer.compare(seconds,0)==0){
 						fine = true;
 						timer.stop();
@@ -183,14 +193,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 		});
 		timer.start();
 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int frameWidth = (int) screenSize.getWidth();
+		int frameHeight = (int) screenSize.getHeight();
+
 		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
-		this.add(GrigliaGioco);
-		this.setVisible(true);
 		this.add(labelTitolo);
+		this.add(GrigliaGioco);
+		this.add(ContBtn);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void centerComponent(JComponent c, int y){
@@ -205,16 +221,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 		String azione = e.getActionCommand();
 
 		if(azione.equals("Bottoni") || azione.equals("Tastiera")){
-			if (toggleButton.isSelected()) {
+			if (toggleButton.isSelected() && buttonTesto) {
 				// se il pulsante è selezionato, eseguire queste azion
 				toggleButton.setText("Tastiera");
 				testo.setVisible(true);
 				Testo.setVisible(false);
 			} else {
-				// se il pulsante non è selezionato, eseguire queste azioni
-				toggleButton.setText("Bottoni");
-				testo.setVisible(false);
-				Testo.setVisible(true);
+				if(buttonTesto){
+					// se il pulsante non è selezionato, eseguire queste azioni
+					toggleButton.setText("Bottoni");
+					testo.setVisible(false);
+					Testo.setVisible(true);
+				}
 			}
 		}else{
 			JButton button = (JButton) e.getSource();
@@ -239,10 +257,28 @@ public class CampoGioco extends JFrame implements ActionListener{
 					}
 				}
 			}
+
+			if(testo.getText().equals("") && testo.getText().equals("Cerca Parola")){
+				buttonTesto=true;
+			}else{
+				buttonTesto=false;
+			}
+
+			if(Testo.getText().equals("") && Testo.getText().equals("Cerca Parola")){
+				buttonTesto=true;
+			}else{
+				buttonTesto=false;
+			}
+
+			if(azione.equals("Annulla Parola")){
+				buttonTesto=true;
+			}
+
 			if (azione.equals("Cerca Parola")) {
 				System.out.println(Testo.getText());
 				DBConnectionMariaDB conn = new DBConnectionMariaDB();
 				Query q = new Query();
+				buttonTesto=true;
 
 
 				if (controllaParola(Testo.getText()) == true) {
@@ -395,8 +431,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 
 	}
-
-
 
 	public boolean ifBottoneGiaCliccato(JButton b){
 		boolean trovato=false;
