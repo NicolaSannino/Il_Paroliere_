@@ -4,8 +4,7 @@ import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Random;
@@ -121,10 +120,23 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Border border = BorderFactory.createLineBorder(Color.blue, 3);
 
-		Testo = new JLabel("Inserisci Lettere");
+		Testo = new JLabel("Inserisci lettere");
 		testo= new JTextField("Inserisci lettere");
+		testo.addFocusListener(new FocusListener() {
+								   public void focusGained(FocusEvent e) {
+									   if (testo.getText().equals("Inserisci lettere")) {
+										   testo.setText("");
+										   buttonTesto=false;
+										   testo.setForeground(Color.BLACK);
+									   }
+								   }
 
-		//testo.setOpaque(false);
+								   public void focusLost(FocusEvent e) {
+
+								   }
+							   });
+
+			//testo.setOpaque(false);
 		this.add(Testo);
 		this.add(testo);
 		testo.setVisible(false);
@@ -221,17 +233,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 		String azione = e.getActionCommand();
 
 		if(azione.equals("Bottoni") || azione.equals("Tastiera")){
+			System.out.println(buttonTesto);
 			if (toggleButton.isSelected() && buttonTesto) {
-				// se il pulsante è selezionato, eseguire queste azion
+				// se il pulsante è selezionato, eseguire queste azioni
 				toggleButton.setText("Tastiera");
 				testo.setVisible(true);
 				Testo.setVisible(false);
+				AzzeraBottoni();
 			} else {
 				if(buttonTesto){
 					// se il pulsante non è selezionato, eseguire queste azioni
 					toggleButton.setText("Bottoni");
 					testo.setVisible(false);
 					Testo.setVisible(true);
+					SettaBottoni();
 				}
 			}
 		}else{
@@ -241,7 +256,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			for (int i = 97; i < 123; i++) {
 				i = (char) i;
 				if (azione.equals(Character.toString(i))) {
-					if (Testo.getText().equals("Inserisci Lettere")) {
+					if (Testo.getText().equals("Inserisci lettere")) {
 						Testo.setText("");
 						Testo.setText(Testo.getText() + azione);
 					} else {
@@ -258,20 +273,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 			}
 
-			if(testo.getText().equals("") && testo.getText().equals("Cerca Parola")){
-				buttonTesto=true;
-			}else{
-				buttonTesto=false;
-			}
-
-			if(Testo.getText().equals("") && Testo.getText().equals("Cerca Parola")){
-				buttonTesto=true;
-			}else{
-				buttonTesto=false;
-			}
 
 			if(azione.equals("Annulla Parola")){
 				buttonTesto=true;
+				buttonsclick.clear();
+				if(toggleButton.isSelected()){
+					testo.setText("Inserisci lettere");
+					Testo.setText("Inserisci lettere");
+					AzzeraBottoni();
+				}else{
+					testo.setText("Inserisci lettere");
+					Testo.setText("Inserisci lettere");
+					SettaBottoni();
+				}
+
 			}
 
 			if (azione.equals("Cerca Parola")) {
@@ -280,11 +295,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 				Query q = new Query();
 				buttonTesto=true;
 
+				String t;
+				if(toggleButton.isSelected()){
+					t=testo.getText();
+				}else{
+					t=Testo.getText();
+				}
+				//System.out.println(Testo.getText());
 
-				if (controllaParola(Testo.getText()) == true) {
+				if (controllaParola(t) == true) {
 					System.out.println("parola trovata");
 					try {
-						if(q.ricercaParolaDb(Testo.getText(),conn) == true){
+						if(q.ricercaParolaDb(t,conn) == true){
 							System.out.println("parola trovata");
 						}else{
 							System.out.println("parola non trovata");
@@ -296,8 +318,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 				} else {
 					System.out.println("parola non trovata");
 				}
-
-
+				if(toggleButton.isSelected()){
+					testo.setText("Inserisci lettere");
+					Testo.setText("Inserisci lettere");
+					AzzeraBottoni();
+				}else{
+					testo.setText("Inserisci lettere");
+					Testo.setText("Inserisci lettere");
+					//SettaBottoni();
+				}
+				buttonsclick.clear();
+				
 			}
 		}
 	}
@@ -432,16 +463,32 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	}
 
-	public boolean ifBottoneGiaCliccato(JButton b){
-		boolean trovato=false;
-		Iterator <JButton> j = buttonsclick.iterator();
+	public boolean ifBottoneGiaCliccato(JButton b) {
+		boolean trovato = false;
+		Iterator<JButton> j = buttonsclick.iterator();
 
-		while(j.hasNext() && trovato==false){
-			if(b.equals(j.next())){
-				trovato=true;
+		while (j.hasNext() && trovato == false) {
+			if (b.equals(j.next())) {
+				trovato = true;
 			}
 		}
 
 		return trovato;
+	}
+
+	public void AzzeraBottoni(){
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				buttons[i][j].setEnabled(false);
+			}
+		}
+	}
+
+	public void SettaBottoni(){
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				buttons[i][j].setEnabled(true);
+			}
+		}
 	}
 }
