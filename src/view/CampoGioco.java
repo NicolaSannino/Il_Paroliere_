@@ -18,6 +18,11 @@ import javax.swing.border.Border;
 import model.DBConnection;
 import model.DBConnectionMariaDB;
 import model.Query;
+import javax.swing.JFrame;
+import javax.swing.JToggleButton;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class CampoGioco extends JFrame implements ActionListener{
@@ -25,9 +30,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	JButton[][] buttons = new JButton[4][4];
 
+	JToggleButton toggleButton=new JToggleButton("Bottoni");
+
 	private char[][] tabella = new char[4][4];
+
 	private JLabel Testo;
-	//private JTextField testo;
+	private JTextField testo;
 
 	private JButton Tabella, Invio;
 	private JPanel GrigliaGioco;
@@ -39,6 +47,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 	int seconds = 480;
 	boolean fine=false;
 
+	boolean buttonTesto=false;
+
 	public CampoGioco(){
 
 		this.setTitle("Campo da Gioco");
@@ -47,6 +57,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 		labelTitolo.setText("Campo Da Gioco Paroliere");
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
+
+		CentraOggetti c=new CentraOggetti();
+		toggleButton.setSize(70,70);
+		toggleButton.addActionListener(this);
+		this.add(toggleButton);
+		toggleButton.setBackground(Color.WHITE);
+		toggleButton.setForeground(Color.GRAY);
+		toggleButton.setPreferredSize(new Dimension(80, 40));
+		toggleButton.setMargin(new Insets(0, 10, 0, 10));
+
+		toggleButton.setVisible(true);
+		c.centerComponent(toggleButton,20);
+
+
 
 		labelTitolo.setBackground(new Color(123, 50, 250));
 		labelTitolo.setOpaque(true);
@@ -96,24 +120,30 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Border border = BorderFactory.createLineBorder(Color.blue, 3);
 
 		Testo = new JLabel("Inserisci Lettere");
-		//testo= new JTextField("Inserisci lettere");
+		testo= new JTextField("Inserisci lettere");
 
 		//testo.setOpaque(false);
 		this.add(Testo);
-		//this.add(testo);
+		this.add(testo);
+		testo.setVisible(false);
 
 		Font fontA = new Font ("Book Antiqua", Font. BOLD, 15);
 
 		Testo.setBorder(border);
+		testo.setBorder(border);
 		//testo.setVerticalAlignment(labelTitolo.CENTER);
 		//testo.setHorizontalAlignment(labelTitolo.CENTER);
 		//testo.setSize(200,40);
 		//testo.setBackground(new Color(0, 0, 255));
 		//testo.setBounds(684,560,130,31);
 		Testo.setSize(230,30);
+		testo.setSize(230,30);
 		Testo.setFont(fontA);
-		Testo.setForeground(Color.white);
+		testo.setFont(fontA);
+		Testo.setForeground(Color.BLACK);
+		testo.setForeground(Color.BLACK);
 		this.centerComponent(Testo, 550);
+		this.centerComponent(testo, 550);
 
 		Invio = new JButton("Cerca Parola");
 		this.add(Invio);
@@ -173,51 +203,66 @@ public class CampoGioco extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		boolean trovato=false;
 		String azione = e.getActionCommand();
-		JButton button = (JButton) e.getSource();
-		buttonsclick.add(button);
 
-		for (int i = 97; i < 123; i++) {
-			i = (char) i;
-			if (azione.equals(Character.toString(i))) {
-				if (Testo.getText().equals("Inserisci Lettere")) {
-					Testo.setText("");
-					Testo.setText(Testo.getText() + azione);
-				} else {
-					Testo.setText(Testo.getText() + azione);
-				}
-				for(int n=0;n<4 && trovato==false;n++){
-					for(int j=0;j<4 && trovato==false;j++){
-						if(buttons[n][j].equals(button)){
-							updateButtons(n,j);
-							trovato=true;
+		if(azione.equals("Bottoni") || azione.equals("Tastiera")){
+			if (toggleButton.isSelected()) {
+				// se il pulsante è selezionato, eseguire queste azion
+				toggleButton.setText("Tastiera");
+				testo.setVisible(true);
+				Testo.setVisible(false);
+			} else {
+				// se il pulsante non è selezionato, eseguire queste azioni
+				toggleButton.setText("Bottoni");
+				testo.setVisible(false);
+				Testo.setVisible(true);
+			}
+		}else{
+			JButton button = (JButton) e.getSource();
+			buttonsclick.add(button);
+
+			for (int i = 97; i < 123; i++) {
+				i = (char) i;
+				if (azione.equals(Character.toString(i))) {
+					if (Testo.getText().equals("Inserisci Lettere")) {
+						Testo.setText("");
+						Testo.setText(Testo.getText() + azione);
+					} else {
+						Testo.setText(Testo.getText() + azione);
+					}
+					for(int n=0;n<4 && trovato==false;n++){
+						for(int j=0;j<4 && trovato==false;j++){
+							if(buttons[n][j].equals(button)){
+								updateButtons(n,j);
+								trovato=true;
+							}
 						}
 					}
 				}
 			}
-		}
-		if (azione.equals("Cerca Parola")) {
-			System.out.println(Testo.getText());
-			DBConnectionMariaDB conn = new DBConnectionMariaDB();
-			Query q = new Query();
+			if (azione.equals("Cerca Parola")) {
+				System.out.println(Testo.getText());
+				DBConnectionMariaDB conn = new DBConnectionMariaDB();
+				Query q = new Query();
 
 
-			if (controllaParola(Testo.getText()) == true) {
-				System.out.println("parola trovata");
-				try {
-					if(q.ricercaParolaDb(Testo.getText(),conn) == true){
-						System.out.println("parola trovata");
-					}else{
-						System.out.println("parola non trovata");
+				if (controllaParola(Testo.getText()) == true) {
+					System.out.println("parola trovata");
+					try {
+						if(q.ricercaParolaDb(Testo.getText(),conn) == true){
+							System.out.println("parola trovata");
+						}else{
+							System.out.println("parola non trovata");
+						}
+					} catch (SQLException ex) {
+						throw new RuntimeException(ex);
 					}
-				} catch (SQLException ex) {
-					throw new RuntimeException(ex);
+
+				} else {
+					System.out.println("parola non trovata");
 				}
 
-			} else {
-				System.out.println("parola non trovata");
+
 			}
-
-
 		}
 	}
 
