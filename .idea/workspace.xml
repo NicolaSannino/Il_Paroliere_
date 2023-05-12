@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/view/CustomTableCellRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGiocoFacile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGiocoFacile.java" afterDir="false" />
     </list>
@@ -125,7 +124,8 @@
       <workItem from="1683742601572" duration="6936000" />
       <workItem from="1683790253441" duration="8724000" />
       <workItem from="1683823718615" duration="1778000" />
-      <workItem from="1683828876198" duration="2754000" />
+      <workItem from="1683828876198" duration="5107000" />
+      <workItem from="1683910162578" duration="1036000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -225,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683824615976</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Creazione tabella">
+      <created>1683831750157</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683831750157</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +276,8 @@
     <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
     <MESSAGE value="bottone scelta" />
     <MESSAGE value="aggiustamento paroliere, click bottoni e ricerca" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiustamento paroliere, click bottoni e ricerca" />
+    <MESSAGE value="Creazione tabella" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creazione tabella" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -149,6 +149,8 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		table.setSize(200,200);
 		table.setModel(model);
 		table.setDefaultRenderer(Object.class, renderer);
+		//table.setDefaultRenderer(Object.class, new NonScrivibiliCellRenderer());
+		table.disable();
 
 		//Panel in cui inserire tabella
 		panelTabella= new JPanel();
@@ -285,6 +287,12 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		boolean trovato=false;
 		String azione = e.getActionCommand();
 
+		if(testo.getText().equals("") || testo.getText().equals("Inserisci lettere")){
+			buttonTesto=true;
+		}else{
+			buttonTesto=false;
+		}
+
 		if(azione.equals("Bottoni") || azione.equals("Tastiera")){
 			System.out.println(buttonTesto);
 			if (toggleButton.isSelected() && buttonTesto) {
@@ -357,10 +365,12 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				//System.out.println(Testo.getText());
 
 				if (controllaParola(t) == true) {
-					System.out.println("parola trovata");
+					//System.out.println("parola trovata");
 					try {
 						if(q.ricercaParolaDb(t,conn) == true){
-							System.out.println("parola trovata");
+							//System.out.println("parola trovata");
+							model.addRow(new Object[]{t, "1"});
+							table.setModel(model);
 						}else{
 							System.out.println("parola non trovata");
 						}
@@ -378,7 +388,7 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				}else{
 					testo.setText("Inserisci lettere");
 					Testo.setText("Inserisci lettere");
-					//SettaBottoni();
+					SettaBottoni();
 				}
 				buttonsclick.clear();
 				
@@ -460,9 +470,9 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				if(col < 3){
 					if(ifBottoneGiaCliccato(buttons[row -1][col +1 ])==false){
 						buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
-						if(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){
-							buttons[row - 1][col - 1].setEnabled(true); // Cellula sopra
-						}
+					}
+					if(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){
+						buttons[row - 1][col - 1].setEnabled(true); // Cellula sopra
 					}
 				}else{
 					if(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){
@@ -485,9 +495,9 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				if(col < 3){
 					if(ifBottoneGiaCliccato(buttons[row +1][col +1 ])==false){
 						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
-						if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
-							buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
-						}
+					}
+					if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
+						buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
 					}
 				}else{
 					if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
@@ -499,9 +509,8 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 					buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
 				}
 			}
-		}else{
-
 		}
+
 		if (col > 0) {
 			if(ifBottoneGiaCliccato(buttons[row][col - 1])==false){
 				buttons[row][col - 1].setEnabled(true); // Cellula a sinistra
@@ -543,5 +552,9 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				buttons[i][j].setEnabled(true);
 			}
 		}
+	}
+
+	public void CalcolaPunteggio(String parola){
+
 	}
 }
