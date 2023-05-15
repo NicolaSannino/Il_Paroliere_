@@ -110,19 +110,24 @@ public class CampoGioco extends JFrame implements ActionListener{
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
 
-				ContBtnTabella.setSize(55,55);
+				ContBtnTabella.setSize(75,75);
 				ContBtnTabella.setLayout(null);
 				ContBtnTabella.setBorder(border2);
 
 				int labelWidth = ContBtnTabella.getWidth();
 				int labelHeight = ContBtnTabella.getHeight();
 
-				int x = (75 - 50) / 2;
-				int y = (75 - 50) / 2;
+				int x = (labelWidth - 50) / 2;
+				int y = (labelHeight - 50) / 2;
+
+				//Tabella.setSize(50,50);
+
+				ContBtnTabella.add(Tabella);
 
 				Tabella.setBounds(x, y, 50, 50);
 
-				ContBtnTabella.add(Tabella);
+				//Tabella.setHorizontalAlignment(SwingConstants.LEFT);
+				//Tabella.setVerticalAlignment(SwingConstants.CENTER);
 
 				GrigliaGioco.add(ContBtnTabella);
 
@@ -136,10 +141,20 @@ public class CampoGioco extends JFrame implements ActionListener{
 		ContBtnTabella.setBackground(new Color(123, 50, 250));
 
 		GrigliaGioco.setVisible(true);
-		GrigliaGioco.setSize(302, 302);
+
+		if(difficolta == 4){
+			GrigliaGioco.setSize(302, 302);
+			this.centerComponent(GrigliaGioco, 160);
+		}else if(difficolta == 5){
+			GrigliaGioco.setSize(376, 376);
+			this.centerComponent(GrigliaGioco, 140);
+		} else if (difficolta == 6) {
+			GrigliaGioco.setSize(450, 450);
+			this.centerComponent(GrigliaGioco, 130);
+		}
+
 		GrigliaGioco.setBackground(new Color(123, 50, 250));
 		GrigliaGioco.setBorder(border2);
-		this.centerComponent(GrigliaGioco, 160);
 
 		//sogfheigfegfufghsdòhfguperihv
 		System.out.println(this.getDifficolta());
@@ -217,8 +232,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Testo.setForeground(Color.BLACK);
 		testo.setForeground(Color.BLACK);
 		testo.setOpaque(false);
-		this.centerComponent(Testo, 550);
-		this.centerComponent(testo, 550);
+
+		if(difficolta == 6){
+			this.centerComponent(Testo, 620);
+			this.centerComponent(testo, 620);
+		}else{
+			this.centerComponent(Testo, 550);
+			this.centerComponent(testo, 550);
+		}
+
 
 		//======================================================================================================
 		// BOTTONI PER CERCARE O ANNULARE LA PAROLA INSERITA E TERMINA PARTITA
