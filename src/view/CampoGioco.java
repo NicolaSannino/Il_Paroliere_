@@ -20,20 +20,22 @@ import model.Query;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import view.HomePage;
 
 public class CampoGioco extends JFrame implements ActionListener{
 
+	private int difficolta=6;
 	DefaultTableModel model;
 	JPanel panelTabellaRis;
 
 	JTable table;
 	Vector<JButton> buttonsclick=new Vector(0,1);
 
-	JButton[][] buttons = new JButton[4][4];
+	JButton[][] buttons = new JButton[difficolta][difficolta];
 
 	JToggleButton toggleButton=new JToggleButton("Bottoni");
 
-	private char[][] tabella = new char[4][4];
+	private char[][] tabella = new char[difficolta][difficolta];
 
 	private JLabel Testo, timeLabel, ContBtnTabella;
 	private JTextField testo;
@@ -48,7 +50,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	boolean buttonTesto = true;
 
-	public CampoGioco(){
+	public CampoGioco(int dim){
+
+		difficolta=dim;
 
 		this.setTitle("Campo da Gioco");
 
@@ -73,7 +77,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		GrigliaGioco = new JPanel();
 		ContBtn = new JPanel();
-		GrigliaGioco.setLayout(new GridLayout(4, 4, 0, 0));
+		GrigliaGioco.setLayout(new GridLayout(difficolta, difficolta, 0, 0));
 
 		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
 		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3); //Bordo dei btn della griglia
@@ -83,12 +87,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		int a=0;
 
 		//======================================================================================================
-		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
+		// CREAZIONE GRIGLIA DA GIOCO BOTTONI 4*4
 		//======================================================================================================
 
-		for(int i = 1;i < 5;i++){
+		for(int i = 1;i < difficolta+1;i++){
 			a++;
-			for(int j = 1;j < 5; j++){
+			for(int j = 1;j < difficolta+1; j++){
 				Random rand = new Random();
 				int num;
 
@@ -136,6 +140,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 		GrigliaGioco.setBackground(new Color(123, 50, 250));
 		GrigliaGioco.setBorder(border2);
 		this.centerComponent(GrigliaGioco, 160);
+
+		//sogfheigfegfufghsdòhfguperihv
+		System.out.println(this.getDifficolta());
 
 		//======================================================================================================
 		// CREAZIONE TABELLA RISULTATI
@@ -354,8 +361,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 					} else {
 						Testo.setText(Testo.getText() + azione);
 					}
-					for(int n=0;n<4 && trovato==false;n++){
-						for(int j=0;j<4 && trovato==false;j++){
+					for(int n=0;n<difficolta && trovato==false;n++){
+						for(int j=0;j<difficolta && trovato==false;j++){
 							if(buttons[n][j].equals(button)){
 								updateButtons(n,j);
 								trovato=true;
@@ -367,6 +374,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 
 			if(azione.equals("Annulla Parola")){
+				//System.out.println(difficolta);
 				buttonTesto=true;
 				buttonsclick.clear();
 				if(toggleButton.isSelected()){
@@ -432,16 +440,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		}
 
 		if(azione.equals("Nuova Partita")){
-			CampoGioco newPage = new CampoGioco();
+			CampoGioco newPage = new CampoGioco(difficolta);
 			this.dispose();
 		}
 
 	}
 
 	public void stampaMatrice(){
-		for(int i=0;i<4;i++){
+		for(int i=0;i<difficolta;i++){
 			System.out.println();
-			for(int j=0;j<4;j++){
+			for(int j=0;j<difficolta;j++){
 				System.out.println(tabella[i][j]);
 			}
 		}
@@ -505,8 +513,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	private void updateButtons(int row, int col) {
 		// Impostazione della cliccabilità di tutti i bottoni a false
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < difficolta; i++) {
+			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
 			}
 		}
@@ -517,7 +525,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 
 			if(col>0){
-				if(col < 3){
+				if(col < difficolta-1){
 					if(ifBottoneGiaCliccato(buttons[row -1][col +1 ])==false){
 						buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
 					}
@@ -530,19 +538,26 @@ public class CampoGioco extends JFrame implements ActionListener{
 					}
 				}
 			}else{
-				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
-					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
+				if(row<difficolta){
+
+					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
+						buttons[row][col + 1].setEnabled(true); // Cellula sopra
+					}
+					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
+						buttons[row-1][col + 1].setEnabled(true); // Cellula sopra
+					}
 				}
+
 			}
 
 		}
-		if (row < 3) {
+		if (row < difficolta-1) {
 			if(ifBottoneGiaCliccato(buttons[row + 1][col])==false){
 				buttons[row + 1][col].setEnabled(true); // Cellula sotto
 			}
 
 			if(col>0){
-				if(col < 3){
+				if(col < difficolta-1){
 					if(ifBottoneGiaCliccato(buttons[row +1][col +1 ])==false){
 						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
 					}
@@ -566,7 +581,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 				buttons[row][col - 1].setEnabled(true); // Cellula a sinistra
 			}
 		}
-		if (col < 3) {
+		if (col < difficolta-1) {
 			if(ifBottoneGiaCliccato(buttons[row][col + 1])==false){
 				buttons[row][col + 1].setEnabled(true); // Cellula a destra
 			}
@@ -589,16 +604,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 	}
 
 	public void AzzeraBottoni(){
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < difficolta; i++) {
+			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
 			}
 		}
 	}
 
 	public void SettaBottoni(){
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < difficolta; i++) {
+			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(true);
 			}
 		}
@@ -606,5 +621,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	public void CalcolaPunteggio(String parola){
 
+	}
+
+	public int getDifficolta() {
+		return difficolta;
+	}
+
+	public void setDifficolta(int difficolta) {
+		this.difficolta = difficolta;
 	}
 }

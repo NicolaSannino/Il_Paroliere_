@@ -12,6 +12,8 @@ public class HomePage extends JFrame implements ActionListener {
     private JPanel panelComboBox;
     private JLabel titoloSelectBox;
 
+    String selectedOption="Facile";
+
 
     public HomePage(){
 
@@ -67,6 +69,14 @@ public class HomePage extends JFrame implements ActionListener {
         this.add(panelComboBox);
     }
 
+    public String getSelectedOption() {
+        return selectedOption;
+    }
+
+    public void setSelectedOption(String selectedOption) {
+        this.selectedOption = selectedOption;
+    }
+
     public void centerComponent(JComponent c, int y){
         Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
         Dimension frameSize = c.getSize ();
@@ -77,12 +87,26 @@ public class HomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnOpenGioco){
-            CampoGioco newPage = new CampoGioco();
+            if(selectedOption.equals("Facile")){
+                CampoGioco newPage = new CampoGioco(4);
+            }
+
+            if(selectedOption.equals("Medio")){
+                CampoGioco newPage = new CampoGioco(5);
+            }
+
+            if(selectedOption.equals("Difficile")){
+                CampoGioco newPage = new CampoGioco(6);
+            }
+
+            //lunghezza da passare nel costruttore
+
+            //newPage.setDifficolta(selectedOption);
             this.dispose();
         }
 
         if(e.getSource() == selectBox){
-            String selectedOption = (String) selectBox.getSelectedItem();
+            selectedOption = (String) selectBox.getSelectedItem();
             System.out.println("Opzione selezionata: " + selectedOption);
         }
     }
