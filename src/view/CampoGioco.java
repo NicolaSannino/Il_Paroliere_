@@ -347,7 +347,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		boolean trovato=false;
 		String azione = e.getActionCommand();
 
-		if(testo.getText().equals("") || testo.getText().equals("Inserisci lettere")){
+		if((testo.getText().equals("") || testo.getText().equals("Inserisci lettere")&& (Testo.getText().equals("Inserisci lettere")||Testo.getText().equals("")))){
 			buttonTesto=true;
 		}else{
 			buttonTesto=false;
