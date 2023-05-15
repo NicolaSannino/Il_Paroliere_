@@ -8,6 +8,11 @@ public class HomePage extends JFrame implements ActionListener {
 
     JButton btnOpenGioco = new JButton();
 
+    private JComboBox<String> selectBox;
+    private JPanel panelComboBox;
+    private JLabel titoloSelectBox;
+
+
     public HomePage(){
 
         this.setTitle("HomePage Il Paroliere");
@@ -39,9 +44,27 @@ public class HomePage extends JFrame implements ActionListener {
         btnOpenGioco.setSize(250, 50);
         this.centerComponent(btnOpenGioco, 600);
 
+        // Creazione della select box
+        String[] options = {"Facile", "Medio", "Difficile"};
+        selectBox = new JComboBox<>(options);
+        selectBox.addActionListener(this);
+
+        titoloSelectBox = new JLabel();
+        titoloSelectBox.setText("Seleziona la difficoltà");
+        titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 25));
+
+        panelComboBox = new JPanel();
+        panelComboBox.setSize(300, 100);
+        panelComboBox.setBackground(new Color(123, 50, 250));
+        panelComboBox.setLayout(new FlowLayout());
+        centerComponent(panelComboBox, 230);
+        panelComboBox.add(titoloSelectBox);
+        panelComboBox.add(selectBox);
+
         this.setVisible(true);
         this.add(labelTitolo);
         this.add(btnOpenGioco);
+        this.add(panelComboBox);
     }
 
     public void centerComponent(JComponent c, int y){
@@ -54,8 +77,13 @@ public class HomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnOpenGioco){
+            CampoGioco newPage = new CampoGioco();
             this.dispose();
-            CampoGiocoFacile newPage = new CampoGiocoFacile();
+        }
+
+        if(e.getSource() == selectBox){
+            String selectedOption = (String) selectBox.getSelectedItem();
+            System.out.println("Opzione selezionata: " + selectedOption);
         }
     }
 }

@@ -21,10 +21,10 @@ import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class CampoGiocoFacile extends JFrame implements ActionListener{
+public class CampoGioco extends JFrame implements ActionListener{
 
 	DefaultTableModel model;
-	JPanel panelTabella;
+	JPanel panelTabellaRis;
 
 	JTable table;
 	Vector<JButton> buttonsclick=new Vector(0,1);
@@ -37,18 +37,18 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 
 	private JLabel Testo, timeLabel, ContBtnTabella;
 	private JTextField testo;
-	private JButton Tabella, Invio, Annulla, Termina;
+	private JButton Tabella, Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn;
 
 	private Timer timer;
 
-	int minutes=10;
+	int minutes = 10;
 	int seconds = 480;
 	boolean fine = false;
 
 	boolean buttonTesto = true;
 
-	public CampoGiocoFacile(){
+	public CampoGioco(){
 
 		this.setTitle("Campo da Gioco");
 
@@ -68,9 +68,6 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 
 		labelTitolo.setBackground(new Color(123, 50, 250));
 		labelTitolo.setOpaque(true);
-		//labelTitolo.setVerticalAlignment(labelTitolo.TOP);
-		//labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
-		//labelTitolo.setBounds(550, 10, 400, 70);
 		labelTitolo.setSize(500, 70);
 		this.centerComponent(labelTitolo, 20);
 
@@ -78,11 +75,16 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		ContBtn = new JPanel();
 		GrigliaGioco.setLayout(new GridLayout(4, 4, 0, 0));
 
+		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
+		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3); //Bordo dei btn della griglia
+
 		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
 		char[] vocali = {'a', 'e', 'i', 'o', 'u'};
 		int a=0;
 
-		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3);
+		//======================================================================================================
+		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
+		//======================================================================================================
 
 		for(int i = 1;i < 5;i++){
 			a++;
@@ -103,7 +105,6 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				buttons[i-1][j-1] = Tabella;
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
-				//Tabella.setSize(50, 50);
 
 				ContBtnTabella.setSize(55,55);
 				ContBtnTabella.setLayout(null);
@@ -127,43 +128,6 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 
 		stampaMatrice();
 
-		//Tabella Risultati
-
-		// Creazione dell'oggetto TableCellRenderer personalizzato
-		Font font = new Font("Arial", Font.PLAIN, 14);
-		Color foregroundColor = Color.BLUE;
-		TableCellRenderer renderer = new CustomTableCellRenderer(font, foregroundColor);
-
-		// Creazione campi del modello dati della tabella
-		model = new DefaultTableModel();
-		model.addColumn("Parola");
-		model.addColumn("Punteggio");
-		model.addRow(new Object[]{"Parola", "Punteggio"});
-
-		// Creazione dell'etichetta con il titolo della tabella
-		JLabel titleLabel = new JLabel("Titolo della Tabella");
-		titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
-		// Creazione della tabella
-		table=new JTable();
-		table.setSize(200,200);
-		table.setModel(model);
-		table.setDefaultRenderer(Object.class, renderer);
-		//table.setDefaultRenderer(Object.class, new NonScrivibiliCellRenderer());
-		table.disable();
-
-		//Panel in cui inserire tabella
-		panelTabella= new JPanel();
-		this.add(panelTabella);
-		panelTabella.add(Box.createVerticalStrut(10)); // Spazio vuoto tra etichetta e tabella
-		panelTabella.add(titleLabel);
-		titleLabel.setVisible(true);
-		//panelTabella.setBackground(Color.WHITE);
-		panelTabella.setBounds(1000,300,300,300);
-		panelTabella.setVisible(true);
-		panelTabella.add(table);
-		table.setVisible(true);
-
 		ContBtnTabella.setVisible(true);
 		ContBtnTabella.setBackground(new Color(123, 50, 250));
 
@@ -173,7 +137,47 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		GrigliaGioco.setBorder(border2);
 		this.centerComponent(GrigliaGioco, 160);
 
-		Border border = BorderFactory.createLineBorder(Color.black, 3);
+		//======================================================================================================
+		// CREAZIONE TABELLA RISULTATI
+		//======================================================================================================
+
+		//Creazione dell'oggetto TableCellRenderer personalizzato
+		Font font = new Font("Arial", Font.BOLD, 13);
+		Color foregroundColor = Color.black;
+		TableCellRenderer renderer = new CustomTableCellRenderer(font, foregroundColor);
+
+		//Creazione campi del modello dati della tabella
+		model = new DefaultTableModel();
+		model.addColumn("Parola");
+		model.addColumn("Punteggio");
+		model.addRow(new Object[]{"Parola", "Punteggio"});
+
+		//Creazione dell'etichetta con il titolo della tabella
+		JLabel titleLabelTblRis = new JLabel("Statistiche Partita");
+		titleLabelTblRis.setFont(new Font("MV Boli", Font.PLAIN, 22));
+
+		// Creazione della tabella
+		table = new JTable();
+		table.setSize(200,200);
+		table.setModel(model);
+		table.setDefaultRenderer(Object.class, renderer);
+		//table.setDefaultRenderer(Object.class, new NonScrivibiliCellRenderer());
+		table.disable();
+
+		//Panel in cui inserire tabella
+		panelTabellaRis = new JPanel();
+		panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
+		panelTabellaRis.add(titleLabelTblRis);
+		panelTabellaRis.setVisible(true);
+		panelTabellaRis.setBounds(1150,160,300,450);
+		panelTabellaRis.add(table);
+		panelTabellaRis.setBackground(Color.CYAN);
+		//panelTabellaRis.setBackground(new Color(123, 50, 250));
+		table.setVisible(true);
+
+		//======================================================================================================
+		// JLABEL PER INSERIMENTO PAROLA DA CERCARE
+		//======================================================================================================
 
 		Testo = new JLabel("Inserisci lettere");
 		testo= new JTextField("Inserisci lettere");
@@ -181,7 +185,7 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 								   public void focusGained(FocusEvent e) {
 									   if (testo.getText().equals("Inserisci lettere")) {
 										   testo.setText("");
-										   buttonTesto=false;
+										   buttonTesto = false;
 										   testo.setForeground(Color.BLACK);
 									   }
 								   }
@@ -209,6 +213,10 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		this.centerComponent(Testo, 550);
 		this.centerComponent(testo, 550);
 
+		//======================================================================================================
+		// BOTTONI PER CERCARE O ANNULARE LA PAROLA INSERITA E TERMINA PARTITA
+		//======================================================================================================
+
 		Invio = new JButton();
 		Invio.setText("Cerca Parola");
 		Invio.addActionListener(this);
@@ -230,7 +238,16 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		Termina = new JButton();
 		Termina.setText("Termina Partita");
 		Termina.addActionListener(this);
-		Termina.setBounds(1300, 40, 170, 40);
+		Termina.setBounds(1330, 40, 170, 40);
+
+		NuovaPartita = new JButton();
+		NuovaPartita.setText("Nuova Partita");
+		NuovaPartita.addActionListener(this);
+		NuovaPartita.setBounds(30, 700, 170, 50);
+
+		//======================================================================================================
+		// TIMER DELLA PARTITA
+		//======================================================================================================
 
 		timeLabel = new JLabel("00:00");
 		timeLabel.setFont(new Font("MV Boli", Font.BOLD, 35));
@@ -249,12 +266,16 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 					if(Integer.compare(seconds,0)==0){
 						fine = true;
 						timer.stop();
-						CampoGiocoFacile.this.dispose();
+						CampoGioco.this.dispose();
 					}
 				}
 			}
 		});
 		timer.start();
+
+		//======================================================================================================
+		// IMPOSTAZIONI FRAME
+		//======================================================================================================
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int frameWidth = (int) screenSize.getWidth();
@@ -266,6 +287,8 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		this.add(Termina);
 		this.add(timeLabel);
 		this.add(toggleButton);
+		this.add(panelTabellaRis);
+		this.add(NuovaPartita);
 
 		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
@@ -276,11 +299,19 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	//======================================================================================================
+	// METODO CENTRA COMPONENTI
+	//======================================================================================================
+
 	public void centerComponent(JComponent c, int y){
 		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
 		Dimension frameSize = c.getSize ();
 		c.setLocation ((screenSize.width - frameSize.width) / 2, y);
 	}
+
+	//======================================================================================================
+	// METODO PER GLI ACTIONLISTENER DEI BOTTONI
+	//======================================================================================================
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -394,6 +425,17 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 				
 			}
 		}
+
+		if(azione.equals("Termina Partita")){
+			HomePage newPage = new HomePage();
+			this.dispose();
+		}
+
+		if(azione.equals("Nuova Partita")){
+			CampoGioco newPage = new CampoGioco();
+			this.dispose();
+		}
+
 	}
 
 	public void stampaMatrice(){
@@ -430,6 +472,10 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		return false;
 	}
 
+	//======================================================================================================
+	// METODO PER CERCARE LA PAROLA
+	//======================================================================================================
+
 	private boolean cercaParola(String parola, int riga, int colonna, int indice) {
 		// Se tutte le lettere della parola sono state trovate, restituisce true
 		if (indice == parola.length()) {
@@ -452,6 +498,10 @@ public class CampoGiocoFacile extends JFrame implements ActionListener{
 		// Se la parola non è stata trovata, restituisce false
 		return false;
 	}
+
+	//======================================================================================================
+	// METODO PER VERIFICARE LA CLICCABILITA DEI BOTTONI
+	//======================================================================================================
 
 	private void updateButtons(int row, int col) {
 		// Impostazione della cliccabilità di tutti i bottoni a false
