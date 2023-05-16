@@ -1,11 +1,11 @@
 package view;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PageStatistiche extends JFrame implements ActionListener {
-
     JButton btnExit;
 
     public PageStatistiche(){
@@ -30,13 +30,31 @@ public class PageStatistiche extends JFrame implements ActionListener {
         this.centerComponent(this, labelTitolo, 20);
 
         //======================================================================================================
-        // IMPOSTAZIONI FRAME
+        // CREAZIONE BOTTONE TORNA HOMEPAGE
         //======================================================================================================
 
         btnExit = new JButton();
         btnExit.setText("HOME PAGE");
         btnExit.addActionListener(this);
         btnExit.setBounds(70, 35, 150, 40);
+
+
+
+        //======================================================================================================
+        // CREAZIONE TABELLA STATISTICHE
+        //======================================================================================================
+
+        Object[][] data = {
+                {"Partita", "Punteggio", "Tempo", "Parole Trovate", "Difficoltà"}
+                //risposta query
+
+        };
+        String[] columnNames = {"Partita", "Punteggio", "Tempo", "Parole Trovate", "Difficoltà"};
+        JTable table = new JTable(data, columnNames);
+        table.setSize(500,200);
+        this.centerComponent(this, table, 200);
+        //JScrollPane scrollPane = new JScrollPane(table);
+        this.add(table);
 
         //======================================================================================================
         // IMPOSTAZIONI FRAME
@@ -51,6 +69,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         centerFrame(this);
+
+
     }
 
     public void centerComponent(Frame f, JComponent c, int y){
@@ -66,6 +86,13 @@ public class PageStatistiche extends JFrame implements ActionListener {
         f.setLocation ((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2 -30);
     }
+
+
+
+
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

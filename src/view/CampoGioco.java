@@ -20,8 +20,9 @@ import model.Query;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import view.HomePage;
+
 import controller.dailettera;
+
 public class CampoGioco extends JFrame implements ActionListener{
 	private int difficolta=6;
 
