@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione pag statistiche">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
     </list>
@@ -132,7 +131,9 @@
       <workItem from="1684172006695" duration="2317000" />
       <workItem from="1684178708007" duration="1959000" />
       <workItem from="1684222834116" duration="5713000" />
-      <workItem from="1684248192151" duration="4342000" />
+      <workItem from="1684253157801" duration="262000" />
+      <workItem from="1684253477220" duration="199000" />
+      <workItem from="1684253766085" duration="2542000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -260,12 +261,12 @@
       <option name="project" value="LOCAL" />
       <updated>1684230053659</updated>
     </task>
-    <task id="LOCAL-00019" summary="sistemazione pag statistiche">
-      <created>1684230812231</created>
+    <task id="LOCAL-00019" summary="aggiustamento">
+      <created>1684233030876</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1684230812231</updated>
+      <updated>1684233030876</updated>
     </task>
     <option name="localTasksCounter" value="20" />
     <servers />
@@ -284,7 +285,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -315,8 +316,8 @@
     <MESSAGE value="Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella" />
     <MESSAGE value="controllo cambio bottone testo sistemato" />
     <MESSAGE value="aggiunta pagina statistiche e hom page rifatta" />
-    <MESSAGE value="sistemazione pag statistiche" />
-    <option name="LAST_COMMIT_MESSAGE" value="sistemazione pag statistiche" />
+    <MESSAGE value="aggiustamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiustamento" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

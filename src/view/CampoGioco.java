@@ -18,6 +18,7 @@ import model.DBConnectionMariaDB;
 import model.Query;
 
 import javax.swing.JToggleButton;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -185,8 +186,11 @@ public class CampoGioco extends JFrame implements ActionListener{
 		table = new JTable();
 		table.setSize(200,200);
 		table.setModel(model);
-		table.setDefaultRenderer(Object.class, renderer);
+		//table.setDefaultRenderer(Object.class, renderer);
 		//table.setDefaultRenderer(Object.class, new NonScrivibiliCellRenderer());
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		table.setDefaultRenderer(Object.class, centerRenderer);
 		table.disable();
 
 		//Panel in cui inserire tabella
@@ -199,6 +203,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		panelTabellaRis.setBackground(Color.CYAN);
 		//panelTabellaRis.setBackground(new Color(123, 50, 250));
 		table.setVisible(true);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		panelTabellaRis.add(scrollPane, BorderLayout.CENTER);
+		panelTabellaRis.setVisible(true);
+		panelTabellaRis.setBackground(Color.BLACK);
+		panelTabellaRis.setSize(400,200);
 
 		//======================================================================================================
 		// JLABEL PER INSERIMENTO PAROLA DA CERCARE

@@ -1,5 +1,6 @@
 package view;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class PageStatistiche extends JFrame implements ActionListener {
     JButton btnExit;
+    DefaultTableModel model;
+    JTable table;
 
     public PageStatistiche(){
 
@@ -44,17 +47,47 @@ public class PageStatistiche extends JFrame implements ActionListener {
         // CREAZIONE TABELLA STATISTICHE
         //======================================================================================================
 
+        JPanel panel = new JPanel(new BorderLayout());
+
+        // Creazione campi del modello dati della tabella
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Partita");
+        model.addColumn("Punteggio");
+        model.addColumn("Tempo");
+        model.addColumn("Parole Trovate");
+        model.addColumn("Difficoltà");
+
+        // Aggiungi dati di esempio
+        for (int i = 0; i < 100; i++) {
+            model.addRow(new Object[]{"Dato " + i, "Dato " + i, "Dato " + i, "Dato " + i, "Dato " + i});
+        }
+
+        // Creazione della tabella
+        JTable table = new JTable(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setRowHeight(40);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
+        table.disable();
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.setVisible(true);
+        panel.setBackground(Color.BLACK);
+        panel.setSize(400,200);
+
+        centerComponent(this,panel,250);
+
+        this.add(panel);
+
         Object[][] data = {
                 {"Partita", "Punteggio", "Tempo", "Parole Trovate", "Difficoltà"}
                 //risposta query
 
         };
-        String[] columnNames = {"Partita", "Punteggio", "Tempo", "Parole Trovate", "Difficoltà"};
-        JTable table = new JTable(data, columnNames);
-        table.setSize(500,200);
-        this.centerComponent(this, table, 200);
-        //JScrollPane scrollPane = new JScrollPane(table);
-        this.add(table);
+
 
         //======================================================================================================
         // IMPOSTAZIONI FRAME
