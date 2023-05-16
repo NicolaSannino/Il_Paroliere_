@@ -6,25 +6,22 @@ import java.awt.event.ActionListener;
 
 public class HomePage extends JFrame implements ActionListener {
 
-    JButton btnOpenGioco = new JButton();
+    JButton btnOpenGioco, btnStatistiche;
 
     private JComboBox<String> selectBox;
-    private JPanel panelComboBox;
+    private JPanel panelComboBox, ContBtn;
     private JLabel titoloSelectBox;
 
-    String selectedOption="Facile";
-
+    String selectedOption = "Facile";
 
     public HomePage(){
 
         this.setTitle("HomePage Il Paroliere");
+        this.setSize(1100, 700);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
-        this.setLayout(null);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.getContentPane().setBackground(new Color(123, 50, 250));
-        this.setResizable(false);
+        //======================================================================================================
+        // TITOLO FRAME
+        //======================================================================================================
 
         JLabel labelTitolo = new JLabel();
         labelTitolo.setText("Homepage Paroliere");
@@ -35,18 +32,13 @@ public class HomePage extends JFrame implements ActionListener {
         labelTitolo.setOpaque(true);
         labelTitolo.setVerticalAlignment(labelTitolo.TOP);
         labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
-        //labelTitolo.setBounds(550, 10, 400, 70);
         labelTitolo.setSize(400, 70);
-        this.centerComponent(labelTitolo, 20);
+        this.centerComponent(this,labelTitolo, 20);
 
-        //btnOpenGioco.setBounds(650, 500, 200, 40);
-        btnOpenGioco.setFocusable(false);
-        btnOpenGioco.addActionListener(this);
-        btnOpenGioco.setText("Gioca");
-        btnOpenGioco.setSize(250, 50);
-        this.centerComponent(btnOpenGioco, 600);
+        //======================================================================================================
+        // CREAZIONE SELECT BOX DIFFICOLTA
+        //======================================================================================================
 
-        // Creazione della select box
         String[] options = {"Facile", "Medio", "Difficile"};
         selectBox = new JComboBox<>(options);
         selectBox.addActionListener(this);
@@ -59,14 +51,50 @@ public class HomePage extends JFrame implements ActionListener {
         panelComboBox.setSize(300, 100);
         panelComboBox.setBackground(new Color(123, 50, 250));
         panelComboBox.setLayout(new FlowLayout());
-        centerComponent(panelComboBox, 230);
         panelComboBox.add(titoloSelectBox);
         panelComboBox.add(selectBox);
+        this.centerComponent(this, panelComboBox, 230);
 
-        this.setVisible(true);
+        //======================================================================================================
+        // BOTTONI PER AVVIARE PARTITA O PAGINA STATISTICHE
+        //======================================================================================================
+
+        ContBtn = new JPanel();
+
+        btnOpenGioco = new JButton();
+        btnOpenGioco.setFocusable(false);
+        btnOpenGioco.addActionListener(this);
+        btnOpenGioco.setText("Gioca");
+        btnOpenGioco.setBounds(0,0,200,50);
+
+        btnStatistiche = new JButton();
+        btnStatistiche.setFocusable(false);
+        btnStatistiche.addActionListener(this);
+        btnStatistiche.setText("Statistiche");
+        btnStatistiche.setBounds(250,0,200,50);
+
+        ContBtn.add(btnOpenGioco);
+        ContBtn.add(btnStatistiche);
+        ContBtn.setVisible(true);
+        ContBtn.setSize(450,50);
+        ContBtn.setBackground(new Color(123, 50, 250));
+        ContBtn.setLayout(null);
+        this.centerComponent(this, ContBtn, 500);
+
+        //======================================================================================================
+        // IMPOSTAZIONI FRAME
+        //======================================================================================================
+
         this.add(labelTitolo);
-        this.add(btnOpenGioco);
         this.add(panelComboBox);
+        this.add(ContBtn);
+
+        this.setLayout(null);
+        this.setResizable(false);
+        this.getContentPane().setBackground(new Color(123, 50, 250));
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        centerFrame(this);
     }
 
     public String getSelectedOption() {
@@ -77,17 +105,25 @@ public class HomePage extends JFrame implements ActionListener {
         this.selectedOption = selectedOption;
     }
 
-    public void centerComponent(JComponent c, int y){
+    public void centerComponent(Frame f, JComponent c, int y){
+        Dimension frameSize = f.getSize();
+        Dimension componentSize = c.getSize();
+        c.setLocation ((frameSize.width - componentSize.width) / 2, y);
+    }
+
+    public static void centerFrame(Frame f)
+    {
         Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-        Dimension frameSize = c.getSize ();
-        c.setLocation ((screenSize.width - frameSize.width) / 2, y);
+        Dimension frameSize = f.getSize ();
+        f.setLocation ((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.height) / 2 - 30);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnOpenGioco){
-            if(selectedOption.equals("Difficile")){
+            if(selectedOption.equals("Facile")){
                 CampoGioco newPage = new CampoGioco(4);
             }
 
@@ -95,13 +131,15 @@ public class HomePage extends JFrame implements ActionListener {
                 CampoGioco newPage = new CampoGioco(5);
             }
 
-            if(selectedOption.equals("Facile")){
+            if(selectedOption.equals("Difficile")){
                 CampoGioco newPage = new CampoGioco(6);
             }
 
-            //lunghezza da passare nel costruttore
+            this.dispose();
+        }
 
-            //newPage.setDifficolta(selectedOption);
+        if(e.getSource() == btnStatistiche){
+            PageStatistiche pagStat = new PageStatistiche();
             this.dispose();
         }
 
