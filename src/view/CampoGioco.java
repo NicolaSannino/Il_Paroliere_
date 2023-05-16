@@ -25,11 +25,17 @@ import view.HomePage;
 public class CampoGioco extends JFrame implements ActionListener{
 
 	private int difficolta=6;
+	int punteggio;
+	int rowCount;
+	int columnCount;
+	boolean parolaEsistente = false;
+	Vector<String> paroleTrovate = new Vector(0,1);
+
 	DefaultTableModel model;
 	JPanel panelTabellaRis;
 
 	JTable table;
-	Vector<JButton> buttonsclick=new Vector(0,1);
+	Vector<JButton> buttonsclick = new Vector(0,1);
 
 	JButton[][] buttons = new JButton[difficolta][difficolta];
 
@@ -423,15 +429,27 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}else{
 					t=Testo.getText();
 				}
+
 				//System.out.println(Testo.getText());
 
-				if (controllaParola(t) == true) {
+				Iterator<String> c = paroleTrovate.iterator();
+				while(c.hasNext() && parolaEsistente == false){
+					if(t.equals(c.next())){
+						parolaEsistente=true;
+					}
+				}
+
+				if (controllaParola(t) == true && parolaEsistente == false) {
 					//System.out.println("parola trovata");
 					try {
 						if(q.ricercaParolaDb(t,conn) == true){
 							//System.out.println("parola trovata");
-							model.addRow(new Object[]{t, "1"});
+
+							paroleTrovate.add(t);
+							punteggio = t.length();
+							model.addRow(new Object[]{t, punteggio});
 							table.setModel(model);
+
 						}else{
 							System.out.println("parola non trovata");
 						}
