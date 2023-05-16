@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +129,7 @@
       <workItem from="1684150742409" duration="333000" />
       <workItem from="1684172006695" duration="2317000" />
       <workItem from="1684178708007" duration="1959000" />
-      <workItem from="1684222834116" duration="5713000" />
+      <workItem from="1684222834116" duration="6292000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -251,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684183396056</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="creazione tabella statistiche e salvataggio partita">
+      <created>1684229718814</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1684229718814</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,7 +304,8 @@
     <MESSAGE value="Creazione tabella" />
     <MESSAGE value="Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella" />
     <MESSAGE value="controllo cambio bottone testo sistemato" />
-    <option name="LAST_COMMIT_MESSAGE" value="controllo cambio bottone testo sistemato" />
+    <MESSAGE value="creazione tabella statistiche e salvataggio partita" />
+    <option name="LAST_COMMIT_MESSAGE" value="creazione tabella statistiche e salvataggio partita" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

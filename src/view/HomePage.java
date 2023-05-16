@@ -124,7 +124,7 @@ public class HomePage extends JFrame implements ActionListener {
 
         if (e.getSource() == btnOpenGioco){
             if(selectedOption.equals("Facile")){
-                CampoGioco newPage = new CampoGioco(4);
+                CampoGioco newPage = new CampoGioco(6);
             }
 
             if(selectedOption.equals("Medio")){
@@ -132,7 +132,7 @@ public class HomePage extends JFrame implements ActionListener {
             }
 
             if(selectedOption.equals("Difficile")){
-                CampoGioco newPage = new CampoGioco(6);
+                CampoGioco newPage = new CampoGioco(4);
             }
 
             this.dispose();
