@@ -156,9 +156,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		GrigliaGioco.setBackground(new Color(123, 50, 250));
 		GrigliaGioco.setBorder(border2);
 
-		//sogfheigfegfufghsdòhfguperihv
-		System.out.println(this.getDifficolta());
-
 		//======================================================================================================
 		// CREAZIONE TABELLA RISULTATI
 		//======================================================================================================
@@ -204,18 +201,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Testo = new JLabel("Inserisci lettere");
 		testo= new JTextField("Inserisci lettere");
 		testo.addFocusListener(new FocusListener() {
-								   public void focusGained(FocusEvent e) {
-									   if (testo.getText().equals("Inserisci lettere")) {
-										   testo.setText("");
-										   buttonTesto = false;
-										   testo.setForeground(Color.BLACK);
-									   }
-								   }
+			public void focusGained(FocusEvent e) {
+				if (testo.getText().equals("Inserisci lettere")) {
+					testo.setText("");
+					buttonTesto = false;
+					testo.setForeground(Color.BLACK);
+				}
+			}
 
-								   public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent e) {
 
-								   }
-							   });
+			}
+		});
 
 		this.add(Testo);
 		this.add(testo);
@@ -295,7 +292,19 @@ public class CampoGioco extends JFrame implements ActionListener{
 					if(Integer.compare(seconds,0)==0){
 						DBConnectionMariaDB connTermine1 = new DBConnectionMariaDB();
 						Query q2 = new Query();
-						q2.getInsertPartita(totPunteggio,"08:00:00",numParTrovate,connTermine1);
+						String dif1="Facile";
+						if(Integer.compare(difficolta,6)==0){
+							dif1="Facile";
+						}
+
+						if(Integer.compare(difficolta,5)==0){
+							dif1="Medio";
+						}
+
+						if(Integer.compare(difficolta,4)==0){
+							dif1="Difficile";
+						}
+						q2.getInsertPartita(totPunteggio,"08:00:00",dif1,numParTrovate,connTermine1);
 						fine = true;
 						timer.stop();
 						CampoGioco.this.dispose();
@@ -472,7 +481,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					SettaBottoni();
 				}
 				buttonsclick.clear();
-				
+
 			}
 		}
 
@@ -486,6 +495,19 @@ public class CampoGioco extends JFrame implements ActionListener{
 			int totMinuti=(totSec % 3600) / 60;
 			int totSecondi=totSec % 60;
 
+			String dif="Facile";
+			if(Integer.compare(difficolta,6)==0){
+				dif="Facile";
+			}
+
+			if(Integer.compare(difficolta,5)==0){
+				dif="Medio";
+			}
+
+			if(Integer.compare(difficolta,4)==0){
+				dif="Difficile";
+			}
+
 
 			String tempo=Integer.toString(totOra)+":"+Integer.toString(totMinuti)+":"+Integer.toString(totSecondi);
 
@@ -493,7 +515,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			System.out.println(totPunteggio);
 			System.out.println(numParTrovate);
 
-			q1.getInsertPartita(totPunteggio,tempo,numParTrovate,connTermine);
+			q1.getInsertPartita(totPunteggio,tempo,dif,numParTrovate,connTermine);
 
 			HomePage newPage = new HomePage();
 			this.dispose();

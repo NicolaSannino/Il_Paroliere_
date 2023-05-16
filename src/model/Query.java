@@ -41,27 +41,31 @@ public class Query {
         String query="SELECT * FROM partite";
         ResultSet s= c.QuerySelect(c.getC(),query,codice);
         int i=0;
-        String numero,punteggio,tempo,parole_trovate;
+        String numero,punteggio,tempo,parole_trovate,diff;
         if(s!=null) {
-            String[][] dati=new String[100][4];
+            String[][] dati=new String[100][5];
             numero=s.getString("numero");
             punteggio=s.getString("punteggio");
             tempo=s.getString("tempo");
             parole_trovate=s.getString("parole_trovate");
+            diff=s.getString("difficolta");
             dati[0][0]=numero;
             dati[0][1]=numero;
             dati[0][2]=numero;
             dati[0][3]=numero;
+            dati[0][4]=diff;
             int j=1;
             while(s.next()){
                 numero=s.getString("numero");
                 punteggio=s.getString("punteggio");
                 tempo=s.getString("tempo");
                 parole_trovate=s.getString("parole_trovate");
+                diff=s.getString("difficolta");
                 dati[j][0]=numero;
                 dati[j][1]=numero;
                 dati[j][2]=numero;
                 dati[j][3]=numero;
+                dati[j][4]=diff;
                 j++;
             }
             return dati;
@@ -69,8 +73,8 @@ public class Query {
         return null;
     }
 
-    public boolean getInsertPartita(int punteggio,String tempo,int parole,DBConnectionMariaDB conn){
-        String querySelect="INSERT INTO partite (punteggio,tempo,parole_trovate) VALUES("+punteggio+",'"+tempo+"',"+parole+")";
+    public boolean getInsertPartita(int punteggio,String tempo,String diff,int parole,DBConnectionMariaDB conn){
+        String querySelect="INSERT INTO partite (punteggio,tempo,parole_trovate,difficolta) VALUES("+punteggio+",'"+tempo+"',"+parole+",'"+diff+"')";
         return conn.QueryGenerica(conn.getC(),querySelect);
     }
 
