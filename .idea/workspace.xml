@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="Tabelle per difficolta">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione tutto">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_1_4_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_1_4_6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +27,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -54,7 +57,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Downloads/mariadb-java-client-1.4.6.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Download/mariadb-java-client-1.4.6.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -112,10 +115,8 @@
       <workItem from="1683908937621" duration="4688000" />
       <workItem from="1683978584694" duration="3534000" />
       <workItem from="1684002176052" duration="2973000" />
-      <workItem from="1684147706732" duration="164000" />
-      <workItem from="1684169408503" duration="2471000" />
-      <workItem from="1684178792169" duration="3492000" />
-      <workItem from="1684220296441" duration="2415000" />
+      <workItem from="1684179959940" duration="832000" />
+      <workItem from="1684219377233" duration="2127000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -208,21 +209,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683831465335</updated>
     </task>
-    <task id="LOCAL-00014" summary="aggiunta selectBox per selezionare la difficoltà">
-      <created>1684147832447</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1684147832447</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Tabelle per difficolta">
-      <created>1684183073743</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1684183073743</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,8 +252,6 @@
     <MESSAGE value="commit sistemazione grafica 2" />
     <MESSAGE value="sistemazione btn on off" />
     <MESSAGE value="sistemazione tutto" />
-    <MESSAGE value="aggiunta selectBox per selezionare la difficoltà" />
-    <MESSAGE value="Tabelle per difficolta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tabelle per difficolta" />
+    <option name="LAST_COMMIT_MESSAGE" value="sistemazione tutto" />
   </component>
 </project>

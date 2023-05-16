@@ -21,7 +21,7 @@ import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import view.HomePage;
-
+import controller.dailettera;
 public class CampoGioco extends JFrame implements ActionListener{
 
 	private int difficolta=6;
@@ -88,8 +88,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
 		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3); //Bordo dei btn della griglia
 
-		char[] consonanti = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'z'};
-		char[] vocali = {'a', 'e', 'i', 'o', 'u'};
 		int a=0;
 
 		//======================================================================================================
@@ -101,17 +99,11 @@ public class CampoGioco extends JFrame implements ActionListener{
 			for(int j = 1;j < difficolta+1; j++){
 				Random rand = new Random();
 				int num;
-
-				if (a%2 == 0){
-					num = vocali[rand.nextInt(5)];
-				}else{
-					num = consonanti[rand.nextInt(18)];
-				}
-
-				Tabella = new JButton(""+(char)num);
+				num=rand.nextInt(100000);
+				Tabella = new JButton(""+(char)dailettera.controllo(num));
 				ContBtnTabella = new JLabel();
 
-				tabella[i-1][j-1] = (char)num;
+				tabella[i-1][j-1] = (char)dailettera.controllo(num);
 				buttons[i-1][j-1] = Tabella;
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
