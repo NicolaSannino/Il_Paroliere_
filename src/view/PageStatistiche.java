@@ -72,6 +72,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         if(e.getSource() == btnExit){
             HomePage pageHome = new HomePage();
+            this.dispose();
         }
     }
 }

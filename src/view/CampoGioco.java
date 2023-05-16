@@ -267,7 +267,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Termina = new JButton();
 		Termina.setText("Termina Partita");
 		Termina.addActionListener(this);
-		Termina.setBounds(1330, 40, 170, 40);
+		Termina.setBounds(1270, 40, 170, 40);
 
 		NuovaPartita = new JButton();
 		NuovaPartita.setText("Nuova Partita");
