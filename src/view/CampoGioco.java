@@ -24,13 +24,13 @@ import javax.swing.table.TableCellRenderer;
 import controller.dailettera;
 
 public class CampoGioco extends JFrame implements ActionListener{
-	private int difficolta=6;
 
-	int numParTrovate=0;
-	int totPunteggio=0;
+	private int difficolta = 6;
+
+	int numParTrovate = 0;
+	int totPunteggio = 0;
 	int punteggio;
-	int rowCount;
-	int columnCount;
+
 	boolean parolaEsistente = false;
 	Vector<String> paroleTrovate = new Vector(0,1);
 
@@ -45,12 +45,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 	JToggleButton toggleButton=new JToggleButton("Bottoni");
 
 	private char[][] tabella = new char[difficolta][difficolta];
-
 	private JLabel Testo, timeLabel, ContBtnTabella;
 	private JTextField testo;
 	private JButton Tabella, Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn;
-
 	private Timer timer;
 
 	int minutes = 10;
@@ -61,14 +59,31 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	public CampoGioco(int dim){
 
-		difficolta=dim;
-
 		this.setTitle("Campo da Gioco");
+		this.setSize(1500, 800);
+
+		difficolta = dim;
+
+		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
+		Border border2 = BorderFactory.createLineBorder(Color.WHITE	, 3); //Bordo dei btn della griglia
+
+		//======================================================================================================
+		// TITOLO CAMPO DA GIOCO
+		//======================================================================================================
 
 		JLabel labelTitolo = new JLabel();
 		labelTitolo.setText("Campo Da Gioco Paroliere");
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
+
+		labelTitolo.setBackground(new Color(123, 50, 250));
+		labelTitolo.setOpaque(true);
+		labelTitolo.setSize(500, 70);
+		this.centerComponent(this, labelTitolo, 20);
+
+		//======================================================================================================
+		// BOTTONE ATTIVA DISATTIVA JBUTTON
+		//======================================================================================================
 
 		CentraOggetti c = new CentraOggetti();
 		toggleButton.addActionListener(this);
@@ -79,25 +94,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 		toggleButton.setBounds(400,300,80,25);
 		toggleButton.setVisible(true);
 
-		labelTitolo.setBackground(new Color(123, 50, 250));
-		labelTitolo.setOpaque(true);
-		labelTitolo.setSize(500, 70);
-		this.centerComponent(labelTitolo, 20);
+		//======================================================================================================
+		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
+		//======================================================================================================
 
 		GrigliaGioco = new JPanel();
 		ContBtn = new JPanel();
 		GrigliaGioco.setLayout(new GridLayout(difficolta, difficolta, 0, 0));
 
-		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
-		Border border2 = BorderFactory.createLineBorder(Color.CYAN, 3); //Bordo dei btn della griglia
+		int a = 0;
 
-		int a=0;
-
-		//======================================================================================================
-		// CREAZIONE GRIGLIA DA GIOCO BOTTONI 4*4
-		//======================================================================================================
-
-		for(int i = 1;i < difficolta+1;i++){
+		for(int i = 1;i < difficolta+1; i++){
 			a++;
 			for(int j = 1;j < difficolta+1; j++){
 				Random rand = new Random();
@@ -118,17 +125,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 				int labelWidth = ContBtnTabella.getWidth();
 				int labelHeight = ContBtnTabella.getHeight();
 
-				int x = (labelWidth - 50) / 2;
-				int y = (labelHeight - 50) / 2;
-
-				//Tabella.setSize(50,50);
+				int x = (labelWidth - 55) / 2;
+				int y = (labelHeight - 55) / 2;
 
 				ContBtnTabella.add(Tabella);
 
-				Tabella.setBounds(x, y, 50, 50);
-
-				//Tabella.setHorizontalAlignment(SwingConstants.LEFT);
-				//Tabella.setVerticalAlignment(SwingConstants.CENTER);
+				Tabella.setBounds(x, y, 55, 55);
+				Tabella.setBackground(Color.BLACK);
+				Tabella.setFont(new Font("MV Boli", Font.BOLD, 20));
+				Tabella.setForeground(Color.WHITE);
 
 				GrigliaGioco.add(ContBtnTabella);
 
@@ -145,13 +150,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		if(difficolta == 4){
 			GrigliaGioco.setSize(302, 302);
-			this.centerComponent(GrigliaGioco, 160);
+			this.centerComponent(this, GrigliaGioco, 160);
 		}else if(difficolta == 5){
 			GrigliaGioco.setSize(376, 376);
-			this.centerComponent(GrigliaGioco, 140);
+			this.centerComponent(this, GrigliaGioco, 140);
 		} else if (difficolta == 6) {
 			GrigliaGioco.setSize(450, 450);
-			this.centerComponent(GrigliaGioco, 130);
+			this.centerComponent(this, GrigliaGioco, 130);
 		}
 
 		GrigliaGioco.setBackground(new Color(123, 50, 250));
@@ -232,11 +237,11 @@ public class CampoGioco extends JFrame implements ActionListener{
 		testo.setOpaque(false);
 
 		if(difficolta == 6){
-			this.centerComponent(Testo, 620);
-			this.centerComponent(testo, 620);
+			this.centerComponent(this, Testo, 620);
+			this.centerComponent(this, testo, 620);
 		}else{
-			this.centerComponent(Testo, 550);
-			this.centerComponent(testo, 550);
+			this.centerComponent(this, Testo, 550);
+			this.centerComponent(this, testo, 550);
 		}
 
 
@@ -260,7 +265,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		ContBtn.setSize(450,50);
 		ContBtn.setBackground(new Color(123, 50, 250));
 		ContBtn.setLayout(null);
-		this.centerComponent(ContBtn, 700);
+		this.centerComponent(this, ContBtn, 700);
 
 		Termina = new JButton();
 		Termina.setText("Termina Partita");
@@ -319,10 +324,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// IMPOSTAZIONI FRAME
 		//======================================================================================================
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int frameWidth = (int) screenSize.getWidth();
-		int frameHeight = (int) screenSize.getHeight();
-
 		this.add(labelTitolo);
 		this.add(GrigliaGioco);
 		this.add(ContBtn);
@@ -332,23 +333,30 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(panelTabellaRis);
 		this.add(NuovaPartita);
 
-		this.setSize(frameWidth, frameHeight);
 		this.setLayout(null);
 		this.setResizable(false);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		centerFrame(this);
 	}
 
 	//======================================================================================================
-	// METODO CENTRA COMPONENTI
+	// METODO CENTRA COMPONENTI - FRAME
 	//======================================================================================================
 
-	public void centerComponent(JComponent c, int y){
+	public void centerComponent(Frame f, JComponent c, int y){
+		Dimension frameSize = f.getSize();
+		Dimension componentSize = c.getSize();
+		c.setLocation ((frameSize.width - componentSize.width) / 2, y);
+	}
+
+	public static void centerFrame(Frame f)
+	{
 		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-		Dimension frameSize = c.getSize ();
-		c.setLocation ((screenSize.width - frameSize.width) / 2, y);
+		Dimension frameSize = f.getSize ();
+		f.setLocation ((screenSize.width - frameSize.width) / 2,
+				(screenSize.height - frameSize.height) / 2 - 20);
 	}
 
 	//======================================================================================================

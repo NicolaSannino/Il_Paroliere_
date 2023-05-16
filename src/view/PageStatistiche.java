@@ -69,8 +69,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         centerFrame(this);
-
-
     }
 
     public void centerComponent(Frame f, JComponent c, int y){
@@ -86,13 +84,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
         f.setLocation ((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2 -30);
     }
-
-
-
-
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
