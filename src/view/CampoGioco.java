@@ -23,8 +23,10 @@ import javax.swing.table.TableCellRenderer;
 import view.HomePage;
 import controller.dailettera;
 public class CampoGioco extends JFrame implements ActionListener{
-
 	private int difficolta=6;
+
+	int numParTrovate=0;
+	int totPunteggio=0;
 	int punteggio;
 	int rowCount;
 	int columnCount;
@@ -291,6 +293,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 					timeLabel.setText(String.format("%02d:%02d", minute, second));
 
 					if(Integer.compare(seconds,0)==0){
+						DBConnectionMariaDB connTermine1 = new DBConnectionMariaDB();
+						Query q2 = new Query();
+						q2.getInsertPartita(totPunteggio,"08:00:00",numParTrovate,connTermine1);
 						fine = true;
 						timer.stop();
 						CampoGioco.this.dispose();
@@ -441,6 +446,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 							punteggio = t.length();
 							model.addRow(new Object[]{t, punteggio});
 							table.setModel(model);
+							totPunteggio=totPunteggio+punteggio;
+							numParTrovate++;
 
 						}else{
 							System.out.println("parola non trovata");
@@ -452,6 +459,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 				} else {
 					System.out.println("parola non trovata");
 				}
+
+				parolaEsistente=false;
+
 				if(toggleButton.isSelected()){
 					testo.setText("Inserisci lettere");
 					Testo.setText("Inserisci lettere");
@@ -467,6 +477,24 @@ public class CampoGioco extends JFrame implements ActionListener{
 		}
 
 		if(azione.equals("Termina Partita")){
+			DBConnectionMariaDB connTermine = new DBConnectionMariaDB();
+			Query q1 = new Query();
+
+			int totSec=480-seconds;
+
+			int totOra=totSec / 3600;
+			int totMinuti=(totSec % 3600) / 60;
+			int totSecondi=totSec % 60;
+
+
+			String tempo=Integer.toString(totOra)+":"+Integer.toString(totMinuti)+":"+Integer.toString(totSecondi);
+
+			System.out.println(tempo);
+			System.out.println(totPunteggio);
+			System.out.println(numParTrovate);
+
+			q1.getInsertPartita(totPunteggio,tempo,numParTrovate,connTermine);
+
 			HomePage newPage = new HomePage();
 			this.dispose();
 		}
@@ -650,11 +678,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 		}
 	}
-
-	public void CalcolaPunteggio(String parola){
-
-	}
-
 	public int getDifficolta() {
 		return difficolta;
 	}
