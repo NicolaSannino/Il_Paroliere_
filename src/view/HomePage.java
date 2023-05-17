@@ -146,6 +146,7 @@ public class HomePage extends JFrame implements ActionListener {
             try {
                 PageStatistiche pagStat = new PageStatistiche();
             } catch (SQLException ex) {
+                System.out.println("Non ci sono partite");
                 throw new RuntimeException(ex);
             }
             this.dispose();

@@ -5,6 +5,7 @@ import model.Query;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +69,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         String[][] risultati = q.getQuerySelectPartite();
         if(risultati[0][0] != null){
-            for (int i = 0; i < risultati.length; i++) {
+            for (int i = 0; i < lunghezza(risultati); i++) {
                 model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4]});
             }
             // Creazione della tabella
@@ -82,6 +83,13 @@ public class PageStatistiche extends JFrame implements ActionListener {
             table.getTableHeader().setReorderingAllowed(false);
             table.disable();
 
+            // Rendi le colonne non ridimensionabili
+            TableColumn column;
+            for (int i = 0; i < table.getColumnCount(); i++) {
+                column = table.getColumnModel().getColumn(i);
+                column.setResizable(false); // Rendi la colonna non ridimensionabile
+            }
+
             JScrollPane scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
@@ -92,12 +100,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
 
             this.add(panel);
-
-            Object[][] data = {
-                    {"Partita", "Punteggio", "Tempo", "Parole Trovate", "Difficoltà"}
-                    //risposta query
-
-            };
 
 
             //======================================================================================================
@@ -131,6 +133,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
         Dimension frameSize = f.getSize ();
         f.setLocation ((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2 -30);
+    }
+
+    public int lunghezza(String[][] str){
+        boolean trovato=false;
+        int i=0;
+        while(str[i][0] != null && trovato==false){
+            if(str[i][0] == null){
+                trovato=true;
+            }
+            i++;
+        }
+        return i;
     }
 
     @Override

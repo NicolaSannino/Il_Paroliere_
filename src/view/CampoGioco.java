@@ -21,6 +21,7 @@ import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import controller.dailettera;
 
@@ -176,40 +177,39 @@ public class CampoGioco extends JFrame implements ActionListener{
 		model = new DefaultTableModel();
 		model.addColumn("Parola");
 		model.addColumn("Punteggio");
-		//model.addRow(new Object[]{"Parola", "Punteggio"});
 
-		//Creazione dell'etichetta con il titolo della tabella
-		JLabel titleLabelTblRis = new JLabel("Statistiche Partita");
-		titleLabelTblRis.setFont(new Font("MV Boli", Font.PLAIN, 22));
 
 		// Creazione della tabella
-		table = new JTable();
-		table.setSize(200,200);
-		table.setModel(model);
-		//table.setDefaultRenderer(Object.class, renderer);
-		//table.setDefaultRenderer(Object.class, new NonScrivibiliCellRenderer());
+		table = new JTable(model);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setRowHeight(40);
+		table.getTableHeader().setReorderingAllowed(false);
+		//table.setSize(200,200);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		table.setDefaultRenderer(Object.class, centerRenderer);
 		table.getTableHeader().setReorderingAllowed(false);
-		table.disable();
 
 		//Panel in cui inserire tabella
-		panelTabellaRis = new JPanel();
-		panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
-		panelTabellaRis.add(titleLabelTblRis);
+		panelTabellaRis = new JPanel(new BorderLayout());
+		//panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
+		//panelTabellaRis.add(titleLabelTblRis);
 		panelTabellaRis.setVisible(true);
-		panelTabellaRis.setBounds(1150,160,300,450);
-		panelTabellaRis.add(table);
-		panelTabellaRis.setBackground(Color.CYAN);
-		//panelTabellaRis.setBackground(new Color(123, 50, 250));
-		table.setVisible(true);
-
+		panelTabellaRis.setBounds(1150,160,301,450);
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelTabellaRis.add(scrollPane, BorderLayout.CENTER);
 		panelTabellaRis.setVisible(true);
-		panelTabellaRis.setBackground(Color.BLACK);
-		panelTabellaRis.setSize(400,200);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setVisible(true);
+		TableColumn column;
+
+		column = table.getColumnModel().getColumn(0);
+		column.setPreferredWidth(150); // Imposta la larghezza desiderata per la colonna
+		column.setResizable(false);
+		column = table.getColumnModel().getColumn(1);
+		column.setPreferredWidth(149); // Imposta la larghezza desiderata per la colonna
+		column.setResizable(false);
+
 
 		//======================================================================================================
 		// JLABEL PER INSERIMENTO PAROLA DA CERCARE
