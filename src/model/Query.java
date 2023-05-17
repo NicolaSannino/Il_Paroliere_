@@ -37,7 +37,7 @@ public class Query {
 
     public String[][] getQuerySelectPartite() throws SQLException {
         int codice=0;
-        DBConnection c=new DBConnection();
+        DBConnectionMariaDB c=new DBConnectionMariaDB();
         String query="SELECT * FROM partite";
         ResultSet s= c.QuerySelect(c.getC(),query,codice);
         int i=0;
@@ -50,9 +50,9 @@ public class Query {
             parole_trovate=s.getString("parole_trovate");
             diff=s.getString("difficolta");
             dati[0][0]=numero;
-            dati[0][1]=numero;
-            dati[0][2]=numero;
-            dati[0][3]=numero;
+            dati[0][1]=punteggio;
+            dati[0][2]=tempo;
+            dati[0][3]=parole_trovate;
             dati[0][4]=diff;
             int j=1;
             while(s.next()){

@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class HomePage extends JFrame implements ActionListener {
 
@@ -139,7 +140,11 @@ public class HomePage extends JFrame implements ActionListener {
         }
 
         if(e.getSource() == btnStatistiche){
-            PageStatistiche pagStat = new PageStatistiche();
+            try {
+                PageStatistiche pagStat = new PageStatistiche();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             this.dispose();
         }
 

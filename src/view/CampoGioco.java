@@ -176,7 +176,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		model = new DefaultTableModel();
 		model.addColumn("Parola");
 		model.addColumn("Punteggio");
-		model.addRow(new Object[]{"Parola", "Punteggio"});
+		//model.addRow(new Object[]{"Parola", "Punteggio"});
 
 		//Creazione dell'etichetta con il titolo della tabella
 		JLabel titleLabelTblRis = new JLabel("Statistiche Partita");
@@ -191,6 +191,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		table.setDefaultRenderer(Object.class, centerRenderer);
+		table.getTableHeader().setReorderingAllowed(false);
 		table.disable();
 
 		//Panel in cui inserire tabella
