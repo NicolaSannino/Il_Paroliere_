@@ -344,6 +344,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(panelTabellaRis);
 		this.add(NuovaPartita);
 
+		ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
+		this.setIconImage(icon.getImage());
+
 		this.setLayout(null);
 		this.setResizable(false);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
