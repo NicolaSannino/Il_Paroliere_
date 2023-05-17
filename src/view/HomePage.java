@@ -1,4 +1,5 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 
 public class HomePage extends JFrame implements ActionListener {
 
-    JButton btnOpenGioco, btnStatistiche;
+    RoundedButton btnOpenGioco, btnStatistiche;
 
     private JComboBox<String> selectBox;
     private JPanel panelComboBox, ContBtn;
@@ -17,7 +18,7 @@ public class HomePage extends JFrame implements ActionListener {
 
     public HomePage(){
 
-        this.setTitle("HomePage Il Paroliere");
+        this.setTitle("HomePage il Paroliere");
         this.setSize(1100, 700);
 
         //======================================================================================================
@@ -60,27 +61,30 @@ public class HomePage extends JFrame implements ActionListener {
         // BOTTONI PER AVVIARE PARTITA O PAGINA STATISTICHE
         //======================================================================================================
 
-        ContBtn = new JPanel();
-
-        btnOpenGioco = new JButton();
-        btnOpenGioco.setFocusable(false);
-        btnOpenGioco.addActionListener(this);
-        btnOpenGioco.setText("Gioca");
+        btnOpenGioco = new RoundedButton("GIOCA");
         btnOpenGioco.setBounds(0,0,200,50);
+        btnOpenGioco.addActionListener(this);
+        btnOpenGioco.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnOpenGioco.setBackground(Color.BLACK);
+        btnOpenGioco.setForeground(Color.white);
+        btnOpenGioco.setBorder(null);
 
-        btnStatistiche = new JButton();
-        btnStatistiche.setFocusable(false);
-        btnStatistiche.addActionListener(this);
-        btnStatistiche.setText("Statistiche");
+        btnStatistiche = new RoundedButton("STATISTICHE");
         btnStatistiche.setBounds(250,0,200,50);
+        btnStatistiche.addActionListener(this);
+        btnStatistiche.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnStatistiche.setBackground(Color.BLACK);
+        btnStatistiche.setForeground(Color.white);
+        btnStatistiche.setBorder(null);
 
+        ContBtn = new JPanel();
+        ContBtn.setBackground(new Color(123, 50, 250));
+        ContBtn.setSize(450,50);
+        ContBtn.setLayout(null);
+        this.centerComponent(this, ContBtn, 500);
         ContBtn.add(btnOpenGioco);
         ContBtn.add(btnStatistiche);
         ContBtn.setVisible(true);
-        ContBtn.setSize(450,50);
-        ContBtn.setBackground(new Color(123, 50, 250));
-        ContBtn.setLayout(null);
-        this.centerComponent(this, ContBtn, 500);
 
         //======================================================================================================
         // IMPOSTAZIONI FRAME
@@ -127,6 +131,7 @@ public class HomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnOpenGioco){
+
             if(selectedOption.equals("Facile")){
                 CampoGioco newPage = new CampoGioco(6);
             }
@@ -143,6 +148,7 @@ public class HomePage extends JFrame implements ActionListener {
         }
 
         if(e.getSource() == btnStatistiche){
+
             try {
                 PageStatistiche pagStat = new PageStatistiche();
             } catch (SQLException ex) {

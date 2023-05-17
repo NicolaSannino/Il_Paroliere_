@@ -1,4 +1,5 @@
 package view;
+
 import model.DBConnectionMariaDB;
 import model.Query;
 
@@ -12,7 +13,10 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class PageStatistiche extends JFrame implements ActionListener {
-    JButton btnExit;
+
+    RoundedButton btnExit, btnOrderTime, btnOrderDiff, btnOrderPoint;
+    JPanel panelContBtnStats;
+
     DefaultTableModel model;
     JTable table;
 
@@ -38,15 +42,50 @@ public class PageStatistiche extends JFrame implements ActionListener {
         this.centerComponent(this, labelTitolo, 20);
 
         //======================================================================================================
-        // CREAZIONE BOTTONE TORNA HOMEPAGE
+        // CREAZIONE BOTTONI ORDINAMENTO E TORNA HOMEPAGE
         //======================================================================================================
 
-        btnExit = new JButton();
-        btnExit.setText("HOME PAGE");
+        btnOrderPoint = new RoundedButton("PUNTEGGIO");
+        btnOrderPoint.setBounds(250, 0, 200, 60);
+        btnOrderPoint.addActionListener(this);
+        btnOrderPoint.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnOrderPoint.setBackground(Color.BLACK);
+        btnOrderPoint.setForeground(Color.white);
+        btnOrderPoint.setBorder(null);
+
+        btnOrderTime = new RoundedButton("TEMPO");
+        btnOrderTime.setBounds(0, 0, 200, 60);
+        btnOrderTime.addActionListener(this);
+        btnOrderTime.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnOrderTime.setBackground(Color.BLACK);
+        btnOrderTime.setForeground(Color.white);
+        btnOrderTime.setBorder(null);
+
+        btnOrderDiff = new RoundedButton("DIFFICOLATA");
+        btnOrderDiff.setBounds(500, 0, 200, 60);
+        btnOrderDiff.addActionListener(this);
+        btnOrderDiff.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnOrderDiff.setBackground(Color.BLACK);
+        btnOrderDiff.setForeground(Color.white);
+        btnOrderDiff.setBorder(null);
+
+        panelContBtnStats = new JPanel();
+        panelContBtnStats.setBackground(new Color(123, 50, 250));
+        panelContBtnStats.setSize(700, 60);
+        panelContBtnStats.setLayout(null);
+        panelContBtnStats.add(btnOrderPoint);
+        panelContBtnStats.add(btnOrderTime);
+        panelContBtnStats.add(btnOrderDiff);
+        centerComponent(this, panelContBtnStats, 150);
+
+        btnExit = new RoundedButton("HOME PAGE");
+        btnExit.setSize(200, 60);
         btnExit.addActionListener(this);
-        btnExit.setBounds(70, 35, 150, 40);
-
-
+        btnExit.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnExit.setBackground(Color.BLACK);
+        btnExit.setForeground(Color.white);
+        btnExit.setBorder(null);
+        centerComponent(this, btnExit, 550);
 
         //======================================================================================================
         // CREAZIONE TABELLA STATISTICHE
@@ -72,6 +111,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
             for (int i = 0; i < lunghezza(risultati); i++) {
                 model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4]});
             }
+
             // Creazione della tabella
             JTable table = new JTable(model);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -96,21 +136,19 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.setBackground(Color.BLACK);
             panel.setSize(400,200);
 
-            centerComponent(this,panel,250);
-
-
-            this.add(panel);
-
+            centerComponent(this, panel, 300);
 
             //======================================================================================================
             // IMPOSTAZIONI FRAME
             //======================================================================================================
 
-            this.add(labelTitolo);
-            this.add(btnExit);
-
             ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
             this.setIconImage(icon.getImage());
+
+            this.add(panel);
+            this.add(labelTitolo);
+            this.add(panelContBtnStats);
+            this.add(btnExit);
 
             this.setLayout(null);
             this.setResizable(false);
@@ -151,8 +189,30 @@ public class PageStatistiche extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == btnExit){
+
             HomePage pageHome = new HomePage();
             this.dispose();
+        }
+
+        if(e.getSource() == btnOrderTime){
+
+            btnOrderTime.setBackground(Color.GRAY);
+            btnOrderDiff.setBackground(Color.BLACK);
+            btnOrderPoint.setBackground(Color.BLACK);
+        }
+
+        if(e.getSource() == btnOrderDiff){
+
+            btnOrderDiff.setBackground(Color.GRAY);
+            btnOrderTime.setBackground(Color.BLACK);
+            btnOrderPoint.setBackground(Color.BLACK);
+        }
+
+        if(e.getSource() == btnOrderPoint){
+
+            btnOrderPoint.setBackground(Color.GRAY);
+            btnOrderTime.setBackground(Color.BLACK);
+            btnOrderDiff.setBackground(Color.BLACK);
         }
     }
 }

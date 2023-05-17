@@ -1,4 +1,5 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Dimension;
@@ -25,6 +26,8 @@ import javax.swing.table.TableColumn;
 
 import controller.dailettera;
 
+import view.RoundedButton;
+
 public class CampoGioco extends JFrame implements ActionListener{
 
 	private int difficolta = 6;
@@ -44,14 +47,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	JButton[][] buttons = new JButton[difficolta][difficolta];
 
-	JToggleButton toggleButton=new JToggleButton("Bottoni");
+	JToggleButton toggleButton = new JToggleButton("Bottoni");
 
 	private char[][] tabella = new char[difficolta][difficolta];
 	private JLabel Testo, timeLabel, ContBtnTabella;
 	private JTextField testo;
-	private JButton Tabella, Invio, Annulla, Termina, NuovaPartita;
+	private RoundedButton Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn;
 	private Timer timer;
+	RoundedButton Tabella;
 
 	int minutes = 10;
 	int seconds = 480;
@@ -93,8 +97,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 		toggleButton.setForeground(Color.GRAY);
 		toggleButton.setPreferredSize(new Dimension(80, 40));
 		toggleButton.setMargin(new Insets(0, 10, 0, 10));
-		toggleButton.setBounds(400,300,80,25);
 		toggleButton.setVisible(true);
+
+		if(difficolta == 4){
+			toggleButton.setBounds(400,300,100,30);
+		}else if(difficolta == 5){
+			toggleButton.setBounds(380,310,100,30);
+		} else if (difficolta == 6) {
+			toggleButton.setBounds(360,340,100,30);
+		}
 
 		//======================================================================================================
 		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
@@ -111,8 +122,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 			for(int j = 1;j < difficolta+1; j++){
 				Random rand = new Random();
 				int num;
-				num=rand.nextInt(100000);
-				Tabella = new JButton(""+(char)dailettera.controllo(num));
+				num = rand.nextInt(100000);
+				Tabella = new RoundedButton(""+(char)dailettera.controllo(num));
+				Tabella.setBorder(null);
 				ContBtnTabella = new JLabel();
 
 				tabella[i-1][j-1] = (char)dailettera.controllo(num);
@@ -178,7 +190,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		model.addColumn("Parola");
 		model.addColumn("Punteggio");
 
-
 		// Creazione della tabella
 		table = new JTable(model);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -195,7 +206,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
 		//panelTabellaRis.add(titleLabelTblRis);
 		panelTabellaRis.setVisible(true);
+
 		panelTabellaRis.setBounds(1150,160,301,450);
+
+		if(difficolta == 4){
+			panelTabellaRis.setBounds(1150,160,301,450);
+		}else if(difficolta == 5){
+			panelTabellaRis.setBounds(1150,140,301,450);
+		} else if (difficolta == 6) {
+			panelTabellaRis.setBounds(1150,130,301,450);
+		}
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelTabellaRis.add(scrollPane, BorderLayout.CENTER);
 		panelTabellaRis.setVisible(true);
@@ -209,7 +230,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		column = table.getColumnModel().getColumn(1);
 		column.setPreferredWidth(149); // Imposta la larghezza desiderata per la colonna
 		column.setResizable(false);
-
 
 		//======================================================================================================
 		// JLABEL PER INSERIMENTO PAROLA DA CERCARE
@@ -235,12 +255,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(testo);
 		testo.setVisible(false);
 
-		Font fontA = new Font ("Book Antiqua", Font. BOLD, 15);
+		Font fontA = new Font ("MV Boli", Font. BOLD, 20);
 
 		Testo.setBorder(border);
 		testo.setBorder(border);
-		Testo.setSize(230,30);
-		testo.setSize(230,30);
+		Testo.setSize(280,35);
+		testo.setSize(280,35);
 		Testo.setFont(fontA);
 		testo.setFont(fontA);
 		Testo.setForeground(Color.BLACK);
@@ -255,20 +275,25 @@ public class CampoGioco extends JFrame implements ActionListener{
 			this.centerComponent(this, testo, 550);
 		}
 
-
 		//======================================================================================================
 		// BOTTONI PER CERCARE O ANNULARE LA PAROLA INSERITA E TERMINA PARTITA
 		//======================================================================================================
 
-		Invio = new JButton();
-		Invio.setText("Cerca Parola");
-		Invio.addActionListener(this);
+		Invio = new RoundedButton("Cerca Parola");
 		Invio.setBounds(0,0,200,50);
+		Invio.addActionListener(this);
+		Invio.setFont(new Font("MV Boli", Font.BOLD, 20));
+		Invio.setBackground(Color.BLACK);
+		Invio.setForeground(Color.white);
+		Invio.setBorder(null);
 
-		Annulla = new JButton();
-		Annulla.setText("Annulla Parola");
-		Annulla.addActionListener(this);
+		Annulla = new RoundedButton("Annulla Parola");
 		Annulla.setBounds(250,0,200,50);
+		Annulla.addActionListener(this);
+		Annulla.setFont(new Font("MV Boli", Font.BOLD, 20));
+		Annulla.setBackground(Color.BLACK);
+		Annulla.setForeground(Color.white);
+		Annulla.setBorder(null);
 
 		ContBtn.add(Invio);
 		ContBtn.add(Annulla);
@@ -278,15 +303,21 @@ public class CampoGioco extends JFrame implements ActionListener{
 		ContBtn.setLayout(null);
 		this.centerComponent(this, ContBtn, 700);
 
-		Termina = new JButton();
-		Termina.setText("Termina Partita");
+		Termina = new RoundedButton("Termina Partita");
+		Termina.setBounds(1270, 35, 170, 50);
 		Termina.addActionListener(this);
-		Termina.setBounds(1270, 40, 170, 40);
+		Termina.setFont(new Font("MV Boli", Font.BOLD, 17));
+		Termina.setBackground(Color.BLACK);
+		Termina.setForeground(Color.white);
+		Termina.setBorder(null);
 
-		NuovaPartita = new JButton();
-		NuovaPartita.setText("Nuova Partita");
-		NuovaPartita.addActionListener(this);
+		NuovaPartita = new RoundedButton("Nuova Partita");
 		NuovaPartita.setBounds(30, 700, 170, 50);
+		NuovaPartita.addActionListener(this);
+		NuovaPartita.setFont(new Font("MV Boli", Font.BOLD, 17));
+		NuovaPartita.setBackground(Color.BLACK);
+		NuovaPartita.setForeground(Color.white);
+		NuovaPartita.setBorder(null);
 
 		//======================================================================================================
 		// TIMER DELLA PARTITA
@@ -350,6 +381,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.setLayout(null);
 		this.setResizable(false);
 		this.getContentPane().setBackground(new Color(123, 50, 250));
+		//this.getContentPane().setBackground(Color.darkGray);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		centerFrame(this);
@@ -621,6 +653,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for (int i = 0; i < difficolta; i++) {
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
+				buttons[i][j].setBorder(null);
 			}
 		}
 		// Impostazione della cliccabilità dei bottoni adiacenti alla cella selezionata a false
@@ -692,7 +725,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 		}
 
-
 	}
 
 	public boolean ifBottoneGiaCliccato(JButton b) {
@@ -712,6 +744,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for (int i = 0; i < difficolta; i++) {
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
+				buttons[i][j].setBorder(null);
 			}
 		}
 	}
@@ -720,6 +753,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for (int i = 0; i < difficolta; i++) {
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(true);
+				buttons[i][j].setBorder(null);
 			}
 		}
 	}
