@@ -36,6 +36,130 @@ public class Query {
         return null;
     }
 
+    public String[][] getQuerySelectPartiteDifficolta() throws SQLException {
+        int codice = 0;
+        DBConnectionMariaDB c = new DBConnectionMariaDB();
+        String query = "SELECT * FROM partite ORDER BY FIELD(difficolta, 'Facile', 'Medio', 'Difficile') ASC";
+        ResultSet s = c.QuerySelect(c.getC(), query, codice);
+        String numero, punteggio, tempo, parole_trovate, diff, nome_utenti;
+        if (s != null) {
+            String[][] dati = new String[100][6];
+            numero = s.getString("numero");
+            punteggio = s.getString("punteggio");
+            tempo = s.getString("tempo");
+            parole_trovate = s.getString("parole_trovate");
+            diff = s.getString("difficolta");
+            nome_utenti = s.getString("nome_utenti");
+            dati[0][0] = numero;
+            dati[0][1] = punteggio;
+            dati[0][2] = tempo;
+            dati[0][3] = parole_trovate;
+            dati[0][4] = diff;
+            dati[0][5] = nome_utenti;
+            int j = 1;
+            while (s.next()) {
+                numero = s.getString("numero");
+                punteggio = s.getString("punteggio");
+                tempo = s.getString("tempo");
+                parole_trovate = s.getString("parole_trovate");
+                diff = s.getString("difficolta");
+                nome_utenti = s.getString("nome_utenti");
+                dati[j][0] = numero;
+                dati[j][1] = punteggio;
+                dati[j][2] = tempo;
+                dati[j][3] = parole_trovate;
+                dati[j][4] = diff;
+                dati[j][5] = nome_utenti;
+                j++;
+            }
+            return dati;
+        }
+        return null;
+    }
+
+    public String[][] getQuerySelectPartitePunteggio() throws SQLException {
+        int codice = 0;
+        DBConnectionMariaDB c = new DBConnectionMariaDB();
+        String query = "SELECT * FROM partite ORDER BY punteggio DESC";
+        ResultSet s = c.QuerySelect(c.getC(), query, codice);
+        String numero, punteggio, tempo, parole_trovate, diff, nome_utenti;
+        if (s != null) {
+            String[][] dati = new String[100][6];
+            numero = s.getString("numero");
+            punteggio = s.getString("punteggio");
+            tempo = s.getString("tempo");
+            parole_trovate = s.getString("parole_trovate");
+            diff = s.getString("difficolta");
+            nome_utenti = s.getString("nome_utenti");
+            dati[0][0] = numero;
+            dati[0][1] = punteggio;
+            dati[0][2] = tempo;
+            dati[0][3] = parole_trovate;
+            dati[0][4] = diff;
+            dati[0][5] = nome_utenti;
+            int j = 1;
+            while (s.next()) {
+                numero = s.getString("numero");
+                punteggio = s.getString("punteggio");
+                tempo = s.getString("tempo");
+                parole_trovate = s.getString("parole_trovate");
+                diff = s.getString("difficolta");
+                nome_utenti = s.getString("nome_utenti");
+                dati[j][0] = numero;
+                dati[j][1] = punteggio;
+                dati[j][2] = tempo;
+                dati[j][3] = parole_trovate;
+                dati[j][4] = diff;
+                dati[j][5] = nome_utenti;
+                j++;
+            }
+            return dati;
+        }
+        return null;
+    }
+
+    public String[][] getQuerySelectPartiteTempo() throws SQLException {
+        int codice = 0;
+        DBConnectionMariaDB c = new DBConnectionMariaDB();
+        String query = "SELECT * FROM partite ORDER BY tempo";
+        ResultSet s = c.QuerySelect(c.getC(), query, codice);
+        String numero, punteggio, tempo, parole_trovate, diff, nome_utenti;
+        if (s != null) {
+            String[][] dati = new String[100][6];
+            numero = s.getString("numero");
+            punteggio = s.getString("punteggio");
+            tempo = s.getString("tempo");
+            parole_trovate = s.getString("parole_trovate");
+            diff = s.getString("difficolta");
+            nome_utenti = s.getString("nome_utenti");
+            dati[0][0] = numero;
+            dati[0][1] = punteggio;
+            dati[0][2] = tempo;
+            dati[0][3] = parole_trovate;
+            dati[0][4] = diff;
+            dati[0][5] = nome_utenti;
+            int j = 1;
+            while (s.next()) {
+                numero = s.getString("numero");
+                punteggio = s.getString("punteggio");
+                tempo = s.getString("tempo");
+                parole_trovate = s.getString("parole_trovate");
+                diff = s.getString("difficolta");
+                nome_utenti = s.getString("nome_utenti");
+                dati[j][0] = numero;
+                dati[j][1] = punteggio;
+                dati[j][2] = tempo;
+                dati[j][3] = parole_trovate;
+                dati[j][4] = diff;
+                dati[j][5] = nome_utenti;
+                j++;
+            }
+            return dati;
+        }
+       return null;
+    }
+
+
     public String[][] getQuerySelectPartite() throws SQLException {
         int codice=0;
         DBConnectionMariaDB c=new DBConnectionMariaDB();
