@@ -131,13 +131,14 @@ public class PageStatistiche extends JFrame implements ActionListener {
             for (int i = 0; i < table.getColumnCount(); i++) {
                 column = table.getColumnModel().getColumn(i);
                 column.setResizable(false); // Rendi la colonna non ridimensionabile
+                column.setPreferredWidth(100); // Imposta la larghezza desiderata per la colonna
             }
 
             scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
-            panel.setSize(500, 200);
+            panel.setSize(618, 200);
 
             centerComponent(this, panel, 300);
 

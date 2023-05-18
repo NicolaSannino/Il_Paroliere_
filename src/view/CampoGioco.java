@@ -68,11 +68,18 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	public CampoGioco(int dim,String nome){
 
+		this.setTitle("Campo da Gioco");
+		this.setSize(1500, 800);
 
+		difficolta = dim;
+
+		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
+		Border border2 = BorderFactory.createLineBorder(Color.WHITE	, 3); //Bordo dei btn della griglia
 
 		//======================================================================================================
 		// CREAZIONE LABEL UTENTE
 		//======================================================================================================
+
 		nome_utenti=nome;
 		Utente=new JLabel(nome_utenti);
 		Utente.setFont(new Font("MV Boli", Font.BOLD, 35));
@@ -81,7 +88,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//======================================================================================================
 		// CREAZIONE LABEL PUNTEGGIO FINALE
 		//======================================================================================================
-		//String.valueOf(totPunteggio)
+
 		Punteggio = new JLabel();
 		Punteggio.setText(String.valueOf(totPunteggio));
 		Punteggio.setFont(new Font("MV Boli", Font.BOLD, 35));
@@ -91,17 +98,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Punteggio.setHorizontalAlignment(Punteggio.CENTER);
 		Punteggio.setVerticalAlignment(Punteggio.CENTER);
 		Punteggio.setForeground(Color.WHITE);
-
-
-
-
-		this.setTitle("Campo da Gioco");
-		this.setSize(1500, 800);
-
-		difficolta = dim;
-
-		Border border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield
-		Border border2 = BorderFactory.createLineBorder(Color.WHITE	, 3); //Bordo dei btn della griglia
 
 		//======================================================================================================
 		// TITOLO CAMPO DA GIOCO
@@ -445,13 +441,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean trovato=false;
+		boolean trovato = false;
 		String azione = e.getActionCommand();
 
 		if((testo.getText().equals("") || testo.getText().equals("Inserisci lettere")&& (Testo.getText().equals("Inserisci lettere")||Testo.getText().equals("")))){
-			buttonTesto=true;
+			buttonTesto = true;
 		}else{
-			buttonTesto=false;
+			buttonTesto = false;
 		}
 
 		if(azione.equals("Bottoni") || azione.equals("Tastiera")){
@@ -473,6 +469,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 		}else{
 			JButton button = (JButton) e.getSource();
+			button.setBackground(Color.WHITE);
+			button.setForeground(Color.BLACK);
 			buttonsclick.add(button);
 
 			for (int i = 97; i < 123; i++) {
@@ -495,11 +493,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 			}
 
-
 			if(azione.equals("Annulla Parola")){
 				//System.out.println(difficolta);
+
+				button.setBackground(Color.BLACK);
+				button.setForeground(Color.WHITE);
+
 				buttonTesto=true;
 				buttonsclick.clear();
+
 				if(toggleButton.isSelected()){
 					testo.setText("Inserisci lettere");
 					Testo.setText("Inserisci lettere");
@@ -513,6 +515,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 
 			if (azione.equals("Cerca Parola")) {
+
+				button.setBackground(Color.BLACK);
+				button.setForeground(Color.WHITE);
+
 				System.out.println(Testo.getText());
 				DBConnectionMariaDB conn = new DBConnectionMariaDB();
 				Query q = new Query();
@@ -689,6 +695,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 		for (int i = 0; i < difficolta; i++) {
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
+				if (ifBottoneGiaCliccato(buttons[i][j])){
+					buttons[i][j].setBackground(Color.WHITE);
+					buttons[i][j].setForeground(Color.BLACK);
+				}else{
+					buttons[i][j].setBackground(Color.BLACK);
+					buttons[i][j].setForeground(Color.WHITE);
+				}
 				buttons[i][j].setBorder(null);
 			}
 		}
@@ -696,19 +709,27 @@ public class CampoGioco extends JFrame implements ActionListener{
 		if (row > 0 ) {
 			if(ifBottoneGiaCliccato(buttons[row - 1][col])==false) {
 				buttons[row - 1][col].setEnabled(true); // Cellula sopra
+				buttons[row - 1][col].setBackground(Color.GREEN);
+				buttons[row - 1][col].setForeground(Color.BLACK);
 			}
 
 			if(col>0){
 				if(col < difficolta-1){
 					if(ifBottoneGiaCliccato(buttons[row -1][col +1 ])==false){
 						buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row - 1][col + 1].setBackground(Color.GREEN);
+						buttons[row - 1][col + 1].setForeground(Color.BLACK);
 					}
 					if(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){
 						buttons[row - 1][col - 1].setEnabled(true); // Cellula sopra
+						buttons[row - 1][col - 1].setBackground(Color.GREEN);
+						buttons[row - 1][col - 1].setForeground(Color.BLACK);
 					}
 				}else{
 					if(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){
 						buttons[row - 1][col - 1].setEnabled(true); // Cellula sopra
+						buttons[row - 1][col - 1].setBackground(Color.GREEN);
+						buttons[row - 1][col - 1].setForeground(Color.BLACK);
 					}
 				}
 			}else{
@@ -716,9 +737,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
 						buttons[row][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row][col + 1].setBackground(Color.GREEN);
+						buttons[row][col + 1].setForeground(Color.BLACK);
 					}
 					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
 						buttons[row-1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row-1][col + 1].setBackground(Color.GREEN);
+						buttons[row-1][col + 1].setForeground(Color.BLACK);
 					}
 				}
 
@@ -728,27 +753,39 @@ public class CampoGioco extends JFrame implements ActionListener{
 		if (row < difficolta-1) {
 			if(ifBottoneGiaCliccato(buttons[row + 1][col])==false){
 				buttons[row + 1][col].setEnabled(true); // Cellula sotto
+				buttons[row + 1][col].setBackground(Color.GREEN);
+				buttons[row + 1][col].setForeground(Color.BLACK);
 			}
 
 			if(col>0){
 				if(col < difficolta-1){
 					if(ifBottoneGiaCliccato(buttons[row +1][col +1 ])==false){
 						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col + 1].setBackground(Color.GREEN);
+						buttons[row + 1][col + 1].setForeground(Color.BLACK);
 					}
 					if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
 						buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col - 1].setBackground(Color.GREEN);
+						buttons[row + 1][col - 1].setForeground(Color.BLACK);
 					}
 				}else{
 					if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
 						buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col - 1].setBackground(Color.GREEN);
+						buttons[row + 1][col - 1].setForeground(Color.BLACK);
 					}
 				}
 			}else{
 				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
 					buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+					buttons[row + 1][col + 1].setBackground(Color.GREEN);
+					buttons[row + 1][col + 1].setForeground(Color.BLACK);
 				}
 				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
 					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
+					buttons[row - 1][col + 1].setBackground(Color.GREEN);
+					buttons[row - 1][col + 1].setForeground(Color.BLACK);
 				}
 			}
 		}
@@ -756,11 +793,15 @@ public class CampoGioco extends JFrame implements ActionListener{
 		if (col > 0) {
 			if(ifBottoneGiaCliccato(buttons[row][col - 1])==false){
 				buttons[row][col - 1].setEnabled(true); // Cellula a sinistra
+				buttons[row][col - 1].setBackground(Color.GREEN);
+				buttons[row][col - 1].setForeground(Color.BLACK);
 			}
 		}
 		if (col < difficolta-1) {
 			if(ifBottoneGiaCliccato(buttons[row][col + 1])==false){
 				buttons[row][col + 1].setEnabled(true); // Cellula a destra
+				buttons[row][col + 1].setBackground(Color.GREEN);
+				buttons[row][col + 1].setForeground(Color.BLACK);
 			}
 		}
 
@@ -784,6 +825,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(false);
 				buttons[i][j].setBorder(null);
+				buttons[i][j].setBackground(Color.WHITE);
+				buttons[i][j].setForeground(Color.BLACK);
 			}
 		}
 	}
@@ -793,6 +836,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 			for (int j = 0; j < difficolta; j++) {
 				buttons[i][j].setEnabled(true);
 				buttons[i][j].setBorder(null);
+				buttons[i][j].setBackground(Color.BLACK);
+				buttons[i][j].setForeground(Color.WHITE);
 			}
 		}
 	}
