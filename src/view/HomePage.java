@@ -146,7 +146,6 @@ public class HomePage extends JFrame implements ActionListener {
         this.add(labelTitolo);
         this.add(panelComboBox);
         this.add(ContBtn);
-        //this.add(InsNome);
 
         this.setLayout(null);
         this.setResizable(false);

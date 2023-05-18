@@ -238,14 +238,28 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// JLABEL PER INSERIMENTO PAROLA DA CERCARE
 		//======================================================================================================
 
+		Font fontA = new Font ("MV Boli", Font.BOLD, 20);
+
 		Testo = new JLabel("Inserisci lettere");
-		testo= new JTextField("Inserisci lettere");
+		testo = new JTextField("Inserisci lettere");
+		Testo.setOpaque(true);
+		Testo.setBackground(Color.BLACK);
+		Testo.setForeground(Color.WHITE);
+		testo.setBackground(Color.BLACK);
+		testo.setForeground(Color.WHITE);
+		Testo.setFont(fontA);
+		testo.setFont(fontA);
+		Testo.setBorder(border);
+		testo.setBorder(border);
+		Testo.setSize(280,35);
+		testo.setSize(280,35);
+
 		testo.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 				if (testo.getText().equals("Inserisci lettere")) {
 					testo.setText("");
 					buttonTesto = false;
-					testo.setForeground(Color.BLACK);
+					testo.setForeground(Color.WHITE);
 				}
 			}
 
@@ -254,21 +268,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 		});
 
-		this.add(Testo);
-		this.add(testo);
 		testo.setVisible(false);
-
-		Font fontA = new Font ("MV Boli", Font. BOLD, 20);
-
-		Testo.setBorder(border);
-		testo.setBorder(border);
-		Testo.setSize(280,35);
-		testo.setSize(280,35);
-		Testo.setFont(fontA);
-		testo.setFont(fontA);
-		Testo.setForeground(Color.BLACK);
-		testo.setForeground(Color.BLACK);
-		testo.setOpaque(false);
 
 		if(difficolta == 6){
 			this.centerComponent(this, Testo, 620);
@@ -377,6 +377,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(toggleButton);
 		this.add(panelTabellaRis);
 		this.add(NuovaPartita);
+		this.add(Testo);
+		this.add(testo);
 
 		ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
 		this.setIconImage(icon.getImage());
