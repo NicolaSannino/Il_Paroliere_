@@ -83,7 +83,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		nome_utenti=nome;
 		Utente=new JLabel(nome_utenti);
 		Utente.setFont(new Font("MV Boli", Font.BOLD, 35));
-		Utente.setBounds(30, 30, 200,30);
+		Utente.setBounds(30, 30, 200,40);
 
 		//======================================================================================================
 		// CREAZIONE LABEL PUNTEGGIO FINALE
