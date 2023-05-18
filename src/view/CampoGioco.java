@@ -35,6 +35,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	int numParTrovate = 0;
 	int totPunteggio = 0;
 	int punteggio;
+	String nome_utenti;
 
 	boolean parolaEsistente = false;
 	Vector<String> paroleTrovate = new Vector(0,1);
@@ -63,7 +64,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	boolean buttonTesto = true;
 
-	public CampoGioco(int dim){
+	public CampoGioco(int dim,String nome){
+
+		nome_utenti=nome;
 
 		this.setTitle("Campo da Gioco");
 		this.setSize(1500, 800);
@@ -352,7 +355,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 						if(Integer.compare(difficolta,4)==0){
 							dif1="Difficile";
 						}
-						q2.getInsertPartita(totPunteggio,"08:00:00",dif1,numParTrovate,connTermine1);
+						q2.getInsertPartita(totPunteggio,"08:00:00",dif1,nome_utenti,numParTrovate,connTermine1);
 						fine = true;
 						timer.stop();
 						CampoGioco.this.dispose();
@@ -544,6 +547,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			DBConnectionMariaDB connTermine = new DBConnectionMariaDB();
 			Query q1 = new Query();
 
+
 			int totSec=480-seconds;
 
 			int totOra=totSec / 3600;
@@ -570,14 +574,14 @@ public class CampoGioco extends JFrame implements ActionListener{
 			System.out.println(totPunteggio);
 			System.out.println(numParTrovate);
 
-			q1.getInsertPartita(totPunteggio,tempo,dif,numParTrovate,connTermine);
+			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
 
 			HomePage newPage = new HomePage();
 			this.dispose();
 		}
 
 		if(azione.equals("Nuova Partita")){
-			CampoGioco newPage = new CampoGioco(difficolta);
+			CampoGioco newPage = new CampoGioco(difficolta,nome_utenti);
 			this.dispose();
 		}
 
@@ -710,6 +714,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}else{
 				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
 					buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+				}
+				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
 				}
 			}
 		}

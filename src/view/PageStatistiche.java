@@ -61,7 +61,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderTime.setForeground(Color.white);
         btnOrderTime.setBorder(null);
 
-        btnOrderDiff = new RoundedButton("DIFFICOLATA");
+        btnOrderDiff = new RoundedButton("DIFFICOLTÀ");
         btnOrderDiff.setBounds(500, 0, 200, 60);
         btnOrderDiff.addActionListener(this);
         btnOrderDiff.setFont(new Font("MV Boli", Font.BOLD, 15));
@@ -100,6 +100,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         model.addColumn("Tempo");
         model.addColumn("Parole Trovate");
         model.addColumn("Difficoltà");
+        model.addColumn("Nome Utente");
 
         // Aggiungi dati di esempio
 
@@ -109,7 +110,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         String[][] risultati = q.getQuerySelectPartite();
         if(risultati[0][0] != null){
             for (int i = 0; i < lunghezza(risultati); i++) {
-                model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4]});
+                model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
             }
 
             // Creazione della tabella
@@ -134,7 +135,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
-            panel.setSize(400,200);
+            panel.setSize(500,200);
 
             centerComponent(this, panel, 300);
 

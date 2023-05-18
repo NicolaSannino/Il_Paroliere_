@@ -187,15 +187,15 @@ public class HomePage extends JFrame implements ActionListener {
                 ErrorNome.setVisible(true);
             }else{
                 if(selectedOption.equals("Facile")){
-                    CampoGioco newPage = new CampoGioco(6);
+                    CampoGioco newPage = new CampoGioco(6,InsNome.getText());
                 }
 
                 if(selectedOption.equals("Medio")){
-                    CampoGioco newPage = new CampoGioco(5);
+                    CampoGioco newPage = new CampoGioco(5,InsNome.getText());
                 }
 
                 if(selectedOption.equals("Difficile")){
-                    CampoGioco newPage = new CampoGioco(4);
+                    CampoGioco newPage = new CampoGioco(4,InsNome.getText());
                 }
 
                 this.dispose();
