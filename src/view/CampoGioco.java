@@ -545,6 +545,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 							model.addRow(new Object[]{t, punteggio});
 							table.setModel(model);
 							totPunteggio=totPunteggio+punteggio;
+							Punteggio.setText(String.valueOf(totPunteggio));
 							numParTrovate++;
 
 						}else{
