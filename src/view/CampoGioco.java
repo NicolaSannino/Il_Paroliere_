@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
+import java.awt.geom.RoundRectangle2D;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,7 +53,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	JToggleButton toggleButton = new JToggleButton("Bottoni");
 
 	private char[][] tabella = new char[difficolta][difficolta];
-	private JLabel Testo, timeLabel, ContBtnTabella;
+	private JLabel Testo, timeLabel, ContBtnTabella, Utente,Punteggio;
 	private JTextField testo;
 	private RoundedButton Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn;
@@ -66,7 +68,32 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	public CampoGioco(int dim,String nome){
 
+
+
+		//======================================================================================================
+		// CREAZIONE LABEL UTENTE
+		//======================================================================================================
 		nome_utenti=nome;
+		Utente=new JLabel(nome_utenti);
+		Utente.setFont(new Font("MV Boli", Font.BOLD, 35));
+		Utente.setBounds(30, 30, 200,30);
+
+		//======================================================================================================
+		// CREAZIONE LABEL PUNTEGGIO FINALE
+		//======================================================================================================
+		//String.valueOf(totPunteggio)
+		Punteggio = new JLabel();
+		Punteggio.setText(String.valueOf(totPunteggio));
+		Punteggio.setFont(new Font("MV Boli", Font.BOLD, 35));
+		Punteggio.setOpaque(true); // Imposta la proprietà opaca su true per rendere visibile il colore di sfondo
+		Punteggio.setBackground(Color.BLACK);
+		Punteggio.setBounds(1150, 600, 301,60);
+		Punteggio.setHorizontalAlignment(Punteggio.CENTER);
+		Punteggio.setVerticalAlignment(Punteggio.CENTER);
+		Punteggio.setForeground(Color.WHITE);
+
+
+
 
 		this.setTitle("Campo da Gioco");
 		this.setSize(1500, 800);
@@ -328,7 +355,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		timeLabel = new JLabel("00:00");
 		timeLabel.setFont(new Font("MV Boli", Font.BOLD, 35));
-		timeLabel.setBounds(30, 30, 200,40);
+		timeLabel.setBounds(200, 30, 200,40);
 
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -369,6 +396,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// IMPOSTAZIONI FRAME
 		//======================================================================================================
 
+		this.add(Punteggio);
+		this.add(Utente);
 		this.add(labelTitolo);
 		this.add(GrigliaGioco);
 		this.add(ContBtn);
