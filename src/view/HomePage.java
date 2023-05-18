@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ public class HomePage extends JFrame implements ActionListener {
     private JComboBox<String> selectBox;
     private JPanel panelComboBox, ContBtn;
     private JLabel titoloSelectBox;
+    private JTextField InsNome;
 
     String selectedOption = "Facile";
 
@@ -20,6 +22,9 @@ public class HomePage extends JFrame implements ActionListener {
 
         this.setTitle("HomePage il Paroliere");
         this.setSize(1100, 700);
+
+        Border bordo1 = BorderFactory.createLineBorder(Color.black, 3);
+        Font fontA = new Font ("MV Boli", Font. BOLD, 20);
 
         //======================================================================================================
         // TITOLO FRAME
@@ -38,7 +43,7 @@ public class HomePage extends JFrame implements ActionListener {
         this.centerComponent(this,labelTitolo, 20);
 
         //======================================================================================================
-        // CREAZIONE SELECT BOX DIFFICOLTA
+        // CREAZIONE SELECT BOX DIFFICOLTA E INSERIMENTO NOME UTENTE
         //======================================================================================================
 
         String[] options = {"Facile", "Medio", "Difficile"};
@@ -48,6 +53,15 @@ public class HomePage extends JFrame implements ActionListener {
         titoloSelectBox = new JLabel();
         titoloSelectBox.setText("Seleziona la difficoltà");
         titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 25));
+
+        InsNome = new JTextField("Nome Utente");
+        InsNome.setBorder(bordo1);
+        InsNome.setSize(250,30);
+        InsNome.setFont(fontA);
+        InsNome.setForeground(Color.BLACK);
+        InsNome.setOpaque(false);
+        InsNome.setVisible(true);
+        centerComponent(this, InsNome, 350);
 
         panelComboBox = new JPanel();
         panelComboBox.setSize(300, 100);
@@ -90,12 +104,13 @@ public class HomePage extends JFrame implements ActionListener {
         // IMPOSTAZIONI FRAME
         //======================================================================================================
 
+        ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
+        this.setIconImage(icon.getImage());
+
         this.add(labelTitolo);
         this.add(panelComboBox);
         this.add(ContBtn);
-
-        ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
-        this.setIconImage(icon.getImage());
+        this.add(InsNome);
 
         this.setLayout(null);
         this.setResizable(false);

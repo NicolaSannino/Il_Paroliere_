@@ -62,9 +62,9 @@ public class Query {
                 parole_trovate=s.getString("parole_trovate");
                 diff=s.getString("difficolta");
                 dati[j][0]=numero;
-                dati[j][1]=punteggio;
-                dati[j][2]=tempo;
-                dati[j][3]=parole_trovate;
+                dati[j][1]=numero;
+                dati[j][2]=numero;
+                dati[j][3]=numero;
                 dati[j][4]=diff;
                 j++;
             }
