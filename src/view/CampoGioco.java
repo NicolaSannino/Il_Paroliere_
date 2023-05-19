@@ -83,7 +83,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// CREAZIONE LABEL UTENTE
 		//======================================================================================================
 
-		nome_utenti=nome;
+		nome_utenti = nome;
 		Utente=new JLabel(nome_utenti);
 		Utente.setFont(new Font("MV Boli", Font.BOLD, 35));
 		Utente.setBounds(30, 30, 200,40);
@@ -123,11 +123,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		CentraOggetti c = new CentraOggetti();
 		toggleButton.addActionListener(this);
-		toggleButton.setBackground(Color.WHITE);
-		toggleButton.setForeground(Color.GRAY);
 		toggleButton.setPreferredSize(new Dimension(80, 40));
 		toggleButton.setMargin(new Insets(0, 10, 0, 10));
 		toggleButton.setVisible(true);
+		toggleButton.setFont(font1);
+		toggleButton.setBackground(Color.BLACK);
+		toggleButton.setForeground(Color.WHITE);
 
 		if(difficolta == 4){
 			toggleButton.setBounds(400,300,100,30);
@@ -229,6 +230,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		table.setDefaultRenderer(Object.class, centerRenderer);
 		table.getTableHeader().setReorderingAllowed(false);
+		table.disable();
 
 		//Grafica tabella
 		table.setFont(font1);
@@ -464,6 +466,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 			if (toggleButton.isSelected() && buttonTesto) {
 				// se il pulsante è selezionato, eseguire queste azioni
 				toggleButton.setText("Tastiera");
+				toggleButton.setFont(font1);
+				toggleButton.setBackground(Color.BLACK);
+				toggleButton.setForeground(Color.WHITE);
 				testo.setVisible(true);
 				Testo.setVisible(false);
 				AzzeraBottoni();
@@ -471,6 +476,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 				if(buttonTesto){
 					// se il pulsante non è selezionato, eseguire queste azioni
 					toggleButton.setText("Bottoni");
+					toggleButton.setFont(font1);
+					toggleButton.setBackground(Color.BLACK);
+					toggleButton.setForeground(Color.WHITE);
 					testo.setVisible(false);
 					Testo.setVisible(true);
 					SettaBottoni();

@@ -3,10 +3,7 @@ package view;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 
 public class HomePage extends JFrame implements ActionListener {
@@ -118,6 +115,7 @@ public class HomePage extends JFrame implements ActionListener {
         btnOpenGioco.setBackground(Color.BLACK);
         btnOpenGioco.setForeground(Color.white);
         btnOpenGioco.setBorder(null);
+        btnOpenGioco.addMouseListener(createMouseListener());
 
         btnStatistiche = new RoundedButton("STATISTICHE");
         btnStatistiche.setBounds(250,0,200,50);
@@ -126,6 +124,7 @@ public class HomePage extends JFrame implements ActionListener {
         btnStatistiche.setBackground(Color.BLACK);
         btnStatistiche.setForeground(Color.white);
         btnStatistiche.setBorder(null);
+        btnStatistiche.addMouseListener(createMouseListener());
 
         ContBtn = new JPanel();
         ContBtn.setBackground(new Color(123, 50, 250));
@@ -175,6 +174,22 @@ public class HomePage extends JFrame implements ActionListener {
         Dimension frameSize = f.getSize ();
         f.setLocation ((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2 - 30);
+    }
+
+    private MouseAdapter createMouseListener() {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JButton button = (JButton) e.getSource();
+                button.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JButton button = (JButton) e.getSource();
+                button.setBackground(Color.BLACK);
+            }
+        };
     }
 
     @Override
