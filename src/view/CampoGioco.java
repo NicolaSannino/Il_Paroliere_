@@ -142,6 +142,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
 		//======================================================================================================
 
+
 		GrigliaGioco = new JPanel();
 		ContBtn = new JPanel();
 		GrigliaGioco.setLayout(new GridLayout(difficolta, difficolta, 0, 0));
@@ -277,6 +278,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		Testo = new JLabel("Inserisci lettere");
 		testo = new JTextField("Inserisci lettere");
+		testo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					// Codice per cliccare il bottone
+					Invio.doClick();
+					testo.getParent().requestFocus();
+				}
+			}
+		});
 		Testo.setOpaque(true);
 		Testo.setBackground(Color.BLACK);
 		Testo.setForeground(Color.WHITE);
@@ -784,14 +795,63 @@ public class CampoGioco extends JFrame implements ActionListener{
 						buttons[row][col + 1].setForeground(Color.BLACK);
 					}
 					if(ifBottoneGiaCliccato(buttons[row -1][col + 1 ])==false){
+						System.out.println("ciao");
 						buttons[row-1][col + 1].setEnabled(true); // Cellula sopra
 						buttons[row-1][col + 1].setBackground(Color.GREEN);
 						buttons[row-1][col + 1].setForeground(Color.BLACK);
+					}
+
+					if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+						System.out.println("ciao");
+						buttons[row+1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row+1][col + 1].setBackground(Color.GREEN);
+						buttons[row+1][col + 1].setForeground(Color.BLACK);
 					}
 				}
 
 			}
 
+		}else{
+			if(col < difficolta-1){
+
+				if(col == 0 ){
+					if(ifBottoneGiaCliccato(buttons[row][col +1 ])==false){
+						buttons[row][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row][col + 1].setBackground(Color.GREEN);
+						buttons[row][col + 1].setForeground(Color.BLACK);
+					}
+					if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col + 1].setBackground(Color.GREEN);
+						buttons[row + 1][col + 1].setForeground(Color.BLACK);
+					}
+
+					if(ifBottoneGiaCliccato(buttons[row +1][col])==false){
+						buttons[row + 1][col].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col].setBackground(Color.GREEN);
+						buttons[row + 1][col].setForeground(Color.BLACK);
+					}
+
+
+				}else{
+					if(ifBottoneGiaCliccato(buttons[row +1][col +1 ])==false){
+						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col + 1].setBackground(Color.GREEN);
+						buttons[row + 1][col + 1].setForeground(Color.BLACK);
+					}
+					if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
+						buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col - 1].setBackground(Color.GREEN);
+						buttons[row + 1][col - 1].setForeground(Color.BLACK);
+					}
+				}
+			}else{
+				if(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){
+					buttons[row + 1][col - 1].setEnabled(true); // Cellula sopra
+					buttons[row + 1][col - 1].setBackground(Color.GREEN);
+					buttons[row + 1][col - 1].setForeground(Color.BLACK);
+				}
+			}
 		}
 		if (row < difficolta-1) {
 			if(ifBottoneGiaCliccato(buttons[row + 1][col])==false){
@@ -820,15 +880,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 					}
 				}
 			}else{
-				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
-					buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
-					buttons[row + 1][col + 1].setBackground(Color.GREEN);
-					buttons[row + 1][col + 1].setForeground(Color.BLACK);
-				}
-				if(ifBottoneGiaCliccato(buttons[row - 1][col + 1 ])==false){
-					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
-					buttons[row - 1][col + 1].setBackground(Color.GREEN);
-					buttons[row - 1][col + 1].setForeground(Color.BLACK);
+				if(col!=0){
+					if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+						buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row + 1][col + 1].setBackground(Color.GREEN);
+						buttons[row + 1][col + 1].setForeground(Color.BLACK);
+					}
+					if(ifBottoneGiaCliccato(buttons[row - 1][col + 1 ])==false){
+						buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
+						buttons[row - 1][col + 1].setBackground(Color.GREEN);
+						buttons[row - 1][col + 1].setForeground(Color.BLACK);
+					}
 				}
 			}
 		}

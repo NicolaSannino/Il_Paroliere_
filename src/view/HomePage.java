@@ -74,6 +74,16 @@ public class HomePage extends JFrame implements ActionListener {
         ErrorNome.setVisible(false);
 
         InsNome = new JTextField("Nome Utente");
+        InsNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    // Codice per cliccare il bottone
+                    btnOpenGioco.doClick();
+                    //InsNome.getParent().requestFocus();
+                }
+            }
+        });
         InsNome.setBounds(175,220,250,30);
         InsNome.setFont(fontA);
         InsNome.setBackground(Color.BLACK);
