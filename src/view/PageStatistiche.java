@@ -10,6 +10,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 public class PageStatistiche extends JFrame implements ActionListener {
@@ -23,7 +25,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
     JPanel panel;
 
     Font font1 = new Font("MV Boli", Font.BOLD, 15);
-    Color colore1 = Color.BLACK;
+    Color coloreBtnPrima, ColorbtnOrderPoint, ColorbtnOrderTime, ColorbtnOrderDiff;
 
     public PageStatistiche() throws SQLException {
 
@@ -56,6 +58,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderPoint.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnOrderPoint.setBackground(Color.BLACK);
         btnOrderPoint.setForeground(Color.white);
+        coloreBtnPrima = btnOrderPoint.getBackground();
+        btnOrderPoint.addMouseListener(createMouseListener(coloreBtnPrima));
         btnOrderPoint.setBorder(null);
 
         btnOrderTime = new RoundedButton("TEMPO");
@@ -64,6 +68,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderTime.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnOrderTime.setBackground(Color.BLACK);
         btnOrderTime.setForeground(Color.white);
+        coloreBtnPrima = btnOrderTime.getBackground();
+        btnOrderTime.addMouseListener(createMouseListener(coloreBtnPrima));
         btnOrderTime.setBorder(null);
 
         btnOrderDiff = new RoundedButton("DIFFICOLTÀ");
@@ -72,6 +78,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderDiff.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnOrderDiff.setBackground(Color.BLACK);
         btnOrderDiff.setForeground(Color.white);
+        coloreBtnPrima = btnOrderDiff.getBackground();
+        btnOrderDiff.addMouseListener(createMouseListener(coloreBtnPrima));
         btnOrderDiff.setBorder(null);
 
         panelContBtnStats = new JPanel();
@@ -89,6 +97,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnExit.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.white);
+        coloreBtnPrima = btnExit.getBackground();
+        btnExit.addMouseListener(createMouseListener(coloreBtnPrima));
         btnExit.setBorder(null);
         centerComponent(this, btnExit, 570);
 
@@ -196,6 +206,22 @@ public class PageStatistiche extends JFrame implements ActionListener {
         return i;
     }
 
+    private MouseAdapter createMouseListener(Color c) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JButton button = (JButton) e.getSource();
+                button.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JButton button = (JButton) e.getSource();
+                button.setBackground(c);
+            }
+        };
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -210,6 +236,14 @@ public class PageStatistiche extends JFrame implements ActionListener {
             btnOrderTime.setBackground(Color.GRAY);
             btnOrderDiff.setBackground(Color.BLACK);
             btnOrderPoint.setBackground(Color.BLACK);
+
+            ColorbtnOrderTime = btnOrderTime.getBackground();
+            ColorbtnOrderDiff = btnOrderDiff.getBackground();
+            ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
 
             System.out.println(table.getRowCount());
 
@@ -299,6 +333,14 @@ public class PageStatistiche extends JFrame implements ActionListener {
             btnOrderDiff.setBackground(Color.GRAY);
             btnOrderTime.setBackground(Color.BLACK);
             btnOrderPoint.setBackground(Color.BLACK);
+
+            ColorbtnOrderTime = btnOrderTime.getBackground();
+            ColorbtnOrderDiff = btnOrderDiff.getBackground();
+            ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
         }
 
         if (e.getSource() == btnOrderPoint) {
@@ -344,6 +386,14 @@ public class PageStatistiche extends JFrame implements ActionListener {
             btnOrderPoint.setBackground(Color.GRAY);
             btnOrderTime.setBackground(Color.BLACK);
             btnOrderDiff.setBackground(Color.BLACK);
+
+            ColorbtnOrderTime = btnOrderTime.getBackground();
+            ColorbtnOrderDiff = btnOrderDiff.getBackground();
+            ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
         }
     }
 

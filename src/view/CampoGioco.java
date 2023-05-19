@@ -67,7 +67,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	boolean buttonTesto = true;
 
 	Font font1 = new Font("MV Boli", Font.BOLD, 15);
-	Color colore1 = Color.BLACK;
+	Color coloreBtnPrima;
 
 	public CampoGioco(int dim,String nome){
 
@@ -163,6 +163,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 				Tabella.setName("Btn"+a);
 				Tabella.addActionListener(this);
 
+				Tabella.setBackground(Color.BLACK);
+				Tabella.setForeground(Color.WHITE);
+
 				ContBtnTabella.setSize(75,75);
 				ContBtnTabella.setLayout(null);
 				ContBtnTabella.setBorder(border2);
@@ -176,9 +179,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 				ContBtnTabella.add(Tabella);
 
 				Tabella.setBounds(x, y, 55, 55);
-				Tabella.setBackground(Color.BLACK);
 				Tabella.setFont(new Font("MV Boli", Font.BOLD, 20));
-				Tabella.setForeground(Color.WHITE);
 
 				GrigliaGioco.add(ContBtnTabella);
 
@@ -322,6 +323,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Invio.setFont(new Font("MV Boli", Font.BOLD, 20));
 		Invio.setBackground(Color.BLACK);
 		Invio.setForeground(Color.white);
+		coloreBtnPrima = Invio.getBackground();
+		Invio.addMouseListener(createMouseListener(coloreBtnPrima));
 		Invio.setBorder(null);
 
 		Annulla = new RoundedButton("Annulla Parola");
@@ -330,6 +333,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Annulla.setFont(new Font("MV Boli", Font.BOLD, 20));
 		Annulla.setBackground(Color.BLACK);
 		Annulla.setForeground(Color.white);
+		coloreBtnPrima = Annulla.getBackground();
+		Annulla.addMouseListener(createMouseListener(coloreBtnPrima));
 		Annulla.setBorder(null);
 
 		ContBtn.add(Invio);
@@ -343,17 +348,23 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Termina = new RoundedButton("Termina Partita");
 		Termina.setBounds(1270, 35, 170, 50);
 		Termina.addActionListener(this);
+		Termina.addMouseListener(createMouseListener(coloreBtnPrima));
 		Termina.setFont(new Font("MV Boli", Font.BOLD, 17));
 		Termina.setBackground(Color.BLACK);
 		Termina.setForeground(Color.white);
+		coloreBtnPrima = Termina.getBackground();
+		Termina.addMouseListener(createMouseListener(coloreBtnPrima));
 		Termina.setBorder(null);
 
 		NuovaPartita = new RoundedButton("Nuova Partita");
 		NuovaPartita.setBounds(30, 700, 170, 50);
 		NuovaPartita.addActionListener(this);
+		NuovaPartita.addMouseListener(createMouseListener(coloreBtnPrima));
 		NuovaPartita.setFont(new Font("MV Boli", Font.BOLD, 17));
 		NuovaPartita.setBackground(Color.BLACK);
 		NuovaPartita.setForeground(Color.white);
+		coloreBtnPrima = NuovaPartita.getBackground();
+		NuovaPartita.addMouseListener(createMouseListener(coloreBtnPrima));
 		NuovaPartita.setBorder(null);
 
 		//======================================================================================================
@@ -444,6 +455,22 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Dimension frameSize = f.getSize ();
 		f.setLocation ((screenSize.width - frameSize.width) / 2,
 				(screenSize.height - frameSize.height) / 2 - 20);
+	}
+
+	private MouseAdapter createMouseListener(Color c) {
+		return new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JButton button = (JButton) e.getSource();
+				button.setBackground(Color.GRAY);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JButton button = (JButton) e.getSource();
+				button.setBackground(c);
+			}
+		};
 	}
 
 	//======================================================================================================

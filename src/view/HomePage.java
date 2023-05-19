@@ -17,6 +17,8 @@ public class HomePage extends JFrame implements ActionListener {
 
     String selectedOption = "Facile";
 
+    Color coloreBtnPrima;
+
     public HomePage(){
 
         this.setTitle("HomePage il Paroliere");
@@ -114,8 +116,9 @@ public class HomePage extends JFrame implements ActionListener {
         btnOpenGioco.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnOpenGioco.setBackground(Color.BLACK);
         btnOpenGioco.setForeground(Color.white);
+        coloreBtnPrima = btnOpenGioco.getBackground();
+        btnOpenGioco.addMouseListener(createMouseListener(coloreBtnPrima));
         btnOpenGioco.setBorder(null);
-        btnOpenGioco.addMouseListener(createMouseListener());
 
         btnStatistiche = new RoundedButton("STATISTICHE");
         btnStatistiche.setBounds(250,0,200,50);
@@ -123,8 +126,9 @@ public class HomePage extends JFrame implements ActionListener {
         btnStatistiche.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnStatistiche.setBackground(Color.BLACK);
         btnStatistiche.setForeground(Color.white);
+        coloreBtnPrima = btnStatistiche.getBackground();
+        btnStatistiche.addMouseListener(createMouseListener(coloreBtnPrima));
         btnStatistiche.setBorder(null);
-        btnStatistiche.addMouseListener(createMouseListener());
 
         ContBtn = new JPanel();
         ContBtn.setBackground(new Color(123, 50, 250));
@@ -176,7 +180,7 @@ public class HomePage extends JFrame implements ActionListener {
                 (screenSize.height - frameSize.height) / 2 - 30);
     }
 
-    private MouseAdapter createMouseListener() {
+    private MouseAdapter createMouseListener(Color c) {
         return new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -187,7 +191,7 @@ public class HomePage extends JFrame implements ActionListener {
             @Override
             public void mouseExited(MouseEvent e) {
                 JButton button = (JButton) e.getSource();
-                button.setBackground(Color.BLACK);
+                button.setBackground(c);
             }
         };
     }
