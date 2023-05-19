@@ -22,6 +22,9 @@ public class PageStatistiche extends JFrame implements ActionListener {
     JScrollPane scrollPane;
     JPanel panel;
 
+    Font font1 = new Font("MV Boli", Font.BOLD, 15);
+    Color colore1 = Color.BLACK;
+
     public PageStatistiche() throws SQLException {
 
         this.setTitle("Pagina Statistiche");
@@ -34,7 +37,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         JLabel labelTitolo = new JLabel();
         labelTitolo.setText("Pagina Statistiche Paroliere");
         labelTitolo.setForeground(new Color(0, 0, 0));
-        labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
+        labelTitolo.setFont(new Font("Arial Bold Italic", Font.PLAIN, 40));
 
         labelTitolo.setBackground(new Color(123, 50, 250));
         labelTitolo.setOpaque(true);
@@ -87,7 +90,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.white);
         btnExit.setBorder(null);
-        centerComponent(this, btnExit, 550);
+        centerComponent(this, btnExit, 570);
 
         //======================================================================================================
         // CREAZIONE TABELLA STATISTICHE
@@ -118,7 +121,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
             // Creazione della tabella
             table = new JTable(model);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            table.setRowHeight(40);
+            table.setRowHeight(50);
 
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -126,21 +129,26 @@ public class PageStatistiche extends JFrame implements ActionListener {
             table.getTableHeader().setReorderingAllowed(false);
             table.disable();
 
+            //Grafica tabella
+            table.setFont(font1);
+            table.setBackground(Color.CYAN);
+            table.setForeground(Color.BLACK);
+            table.getTableHeader().setFont(font1);
+
             // Rendi le colonne non ridimensionabili
             TableColumn column;
             for (int i = 0; i < table.getColumnCount(); i++) {
                 column = table.getColumnModel().getColumn(i);
                 column.setResizable(false); // Rendi la colonna non ridimensionabile
-                column.setPreferredWidth(100); // Imposta la larghezza desiderata per la colonna
+                column.setPreferredWidth(125); // Imposta la larghezza desiderata per la colonna
             }
 
             scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
-            panel.setBackground(Color.BLACK);
-            panel.setSize(618, 200);
+            panel.setSize(768, 230);
 
-            centerComponent(this, panel, 300);
+            centerComponent(this, panel, 280);
 
             //======================================================================================================
             // IMPOSTAZIONI FRAME
@@ -360,7 +368,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
             // Creazione della tabella
             table = new JTable(model);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            table.setRowHeight(40);
+            table.setRowHeight(50);
 
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -368,18 +376,25 @@ public class PageStatistiche extends JFrame implements ActionListener {
             table.getTableHeader().setReorderingAllowed(false);
             table.disable();
 
+            //Grafica Tabella
+            table.setFont(font1);
+            table.setBackground(Color.CYAN);
+            table.setForeground(Color.BLACK);
+            table.getTableHeader().setFont(font1);
+
             // Rendi le colonne non ridimensionabili
             TableColumn column;
             for (int i = 0; i < table.getColumnCount(); i++) {
                 column = table.getColumnModel().getColumn(i);
                 column.setResizable(false); // Rendi la colonna non ridimensionabile
+                column.setPreferredWidth(125);
             }
 
             scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
-            panel.setSize(500, 200);
+            panel.setSize(768, 230);
 
         }
     }

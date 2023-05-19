@@ -66,6 +66,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	boolean buttonTesto = true;
 
+	Font font1 = new Font("MV Boli", Font.BOLD, 15);
+	Color colore1 = Color.BLACK;
+
 	public CampoGioco(int dim,String nome){
 
 		this.setTitle("Campo da Gioco");
@@ -106,11 +109,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		JLabel labelTitolo = new JLabel();
 		labelTitolo.setText("Campo Da Gioco Paroliere");
 		labelTitolo.setForeground(new Color(0, 0, 0));
-		labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
+		labelTitolo.setFont(new Font("Arial Bold Italic", Font.BOLD, 40));
 
 		labelTitolo.setBackground(new Color(123, 50, 250));
 		labelTitolo.setOpaque(true);
-		labelTitolo.setSize(500, 70);
+		labelTitolo.setSize(600, 70);
+		labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
 		this.centerComponent(this, labelTitolo, 20);
 
 		//======================================================================================================
@@ -221,11 +225,16 @@ public class CampoGioco extends JFrame implements ActionListener{
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setRowHeight(40);
 		table.getTableHeader().setReorderingAllowed(false);
-		//table.setSize(200,200);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		table.setDefaultRenderer(Object.class, centerRenderer);
 		table.getTableHeader().setReorderingAllowed(false);
+
+		//Grafica tabella
+		table.setFont(font1);
+		table.setBackground(Color.CYAN);
+		table.setForeground(Color.BLACK);
+		table.getTableHeader().setFont(font1);
 
 		//Panel in cui inserire tabella
 		panelTabellaRis = new JPanel(new BorderLayout());
@@ -251,7 +260,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		TableColumn column;
 
 		column = table.getColumnModel().getColumn(0);
-		column.setPreferredWidth(150); // Imposta la larghezza desiderata per la colonna
+		column.setPreferredWidth(149); // Imposta la larghezza desiderata per la colonna
 		column.setResizable(false);
 		column = table.getColumnModel().getColumn(1);
 		column.setPreferredWidth(149); // Imposta la larghezza desiderata per la colonna

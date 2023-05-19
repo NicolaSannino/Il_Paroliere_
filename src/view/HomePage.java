@@ -36,7 +36,7 @@ public class HomePage extends JFrame implements ActionListener {
         JLabel labelTitolo = new JLabel();
         labelTitolo.setText("Homepage Paroliere");
         labelTitolo.setForeground(new Color(0, 0, 0));
-        labelTitolo.setFont(new Font("MV Boli", Font.PLAIN, 40));
+        labelTitolo.setFont(new Font("Arial Bold Italic", Font.BOLD, 40));
 
         labelTitolo.setBackground(new Color(123, 50, 250));
         labelTitolo.setOpaque(true);

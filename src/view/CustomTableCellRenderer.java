@@ -6,8 +6,11 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class CustomTableCellRenderer extends DefaultTableCellRenderer {
-    private Font font;
-    private Color foregroundColor;
+    //private Font font;
+    //private Color foregroundColor;
+
+    private Font font = new Font("MV Boli", Font.BOLD, 15);
+    private Color foregroundColor = Color.BLACK;
 
     public CustomTableCellRenderer(Font font, Color foregroundColor) {
         super();
