@@ -743,13 +743,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 			}else{
 				if(row<difficolta){
-
 					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
 						buttons[row][col + 1].setEnabled(true); // Cellula sopra
 						buttons[row][col + 1].setBackground(Color.GREEN);
 						buttons[row][col + 1].setForeground(Color.BLACK);
 					}
-					if(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){
+					if(ifBottoneGiaCliccato(buttons[row -1][col + 1 ])==false){
 						buttons[row-1][col + 1].setEnabled(true); // Cellula sopra
 						buttons[row-1][col + 1].setBackground(Color.GREEN);
 						buttons[row-1][col + 1].setForeground(Color.BLACK);
@@ -791,7 +790,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					buttons[row + 1][col + 1].setBackground(Color.GREEN);
 					buttons[row + 1][col + 1].setForeground(Color.BLACK);
 				}
-				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+				if(ifBottoneGiaCliccato(buttons[row - 1][col + 1 ])==false){
 					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
 					buttons[row - 1][col + 1].setBackground(Color.GREEN);
 					buttons[row - 1][col + 1].setForeground(Color.BLACK);
