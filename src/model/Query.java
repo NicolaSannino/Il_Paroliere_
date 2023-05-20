@@ -202,6 +202,32 @@ public class Query {
         return null;
     }
 
+    public String[] getQuerySelectPartiteParole(String num) throws SQLException {
+        int codice=0;
+        DBConnectionMariaDB c=new DBConnectionMariaDB();
+        String query="SELECT * FROM parolePartite WHERE numPartita='"+num+"';";
+        ResultSet s= c.QuerySelect(c.getC(),query,codice);
+        String parola;
+        if(s!=null) {
+            String[] dati=new String[100];
+            parola=s.getString("parola");
+            dati[0]=parola;
+            int j=1;
+            while(s.next()){
+                parola=s.getString("parola");
+                dati[j]=parola;
+                j++;
+            }
+            return dati;
+        }
+        return null;
+    }
+
+    public boolean getInsertPartitaParole(int id,String parola,DBConnectionMariaDB conn){
+        String querySelect="INSERT INTO parolePartite (numPartita,parola) VALUES("+id+",'"+parola+"')";
+        return conn.QueryGenerica(conn.getC(),querySelect);
+    }
+
     public boolean getInsertPartita(int punteggio,String tempo,String diff,String nome_utenti,int parole,DBConnectionMariaDB conn){
         String querySelect="INSERT INTO partite (punteggio,tempo,parole_trovate,difficolta,nome_utenti) VALUES("+punteggio+",'"+tempo+"',"+parole+",'"+diff+"','"+nome_utenti+"')";
         return conn.QueryGenerica(conn.getC(),querySelect);

@@ -4,28 +4,36 @@ import model.DBConnectionMariaDB;
 import model.Query;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class PageStatistiche extends JFrame implements ActionListener {
 
-    RoundedButton btnExit, btnOrderTime, btnOrderDiff, btnOrderPoint;
+    RoundedButton btnExit, btnOrderTime, btnOrderDiff, btnOrderPoint,btnInvia;
     JPanel panelContBtnStats;
 
     DefaultTableModel model;
     JTable table;
-    JScrollPane scrollPane;
-    JPanel panel;
+    JTextField testo;
+    JScrollPane scrollPane,scrollPane1;
+    JPanel panel,panelCercaParole;
 
     Font font1 = new Font("MV Boli", Font.BOLD, 15);
     Color coloreBtnPrima, ColorbtnOrderPoint, ColorbtnOrderTime, ColorbtnOrderDiff;
+    Font fontA = new Font ("MV Boli", Font.BOLD, 20);
+    Font fontB = new Font ("MV Boli", Font.BOLD, 15);
+    Border bordo2 = BorderFactory.createLineBorder(Color.black, 3);
+    JLabel titoloSelectBox;
+    ScrollableComboBoxExample.ScrollableComboBox<String> comboBox;
+    private JComboBox<String> selectBox;
 
     public PageStatistiche() throws SQLException {
 
@@ -108,76 +116,177 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         panel = new JPanel(new BorderLayout());
 
-        // Creazione campi del modello dati della tabella
-        model = new DefaultTableModel();
-        model.addColumn("Partita");
-        model.addColumn("Punteggio");
-        model.addColumn("Tempo");
-        model.addColumn("Parole Trovate");
-        model.addColumn("Difficoltà");
-        model.addColumn("Nome Utente");
+        panelCercaParole = new JPanel(null);
+        panelCercaParole.setVisible(true);
+        panelCercaParole.setBounds(600,250,300,300);
+        this.add(panelCercaParole);
+        panelCercaParole.setBackground(Color.black);
 
-        // Aggiungi dati di esempio
+        btnInvia = new RoundedButton("Invia");
+        btnInvia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedWord = (String) comboBox.getSelectedItem();
+                System.out.println(selectedWord);
+                Container parent = table.getParent();
+                Container parent2=parent.getParent();
+                Container parent3=parent2.getParent();
+
+                if (parent != null) {
+                    parent.remove(table);
+                    parent.revalidate();
+                    parent.repaint();
+                    if(parent2!=null){
+                        parent2.remove(parent);
+                        parent.revalidate();
+                        parent.repaint();
+                        if(parent3!=null){
+                            parent3.remove(parent2);
+                            parent3.revalidate();
+                            parent3.repaint();
+                        }
+                    }
+                }
+
+                //Connessione al database e query per ottenere i dati
+
+                DBConnectionMariaDB c = new DBConnectionMariaDB();
+                Query q = new Query();
+
+                String[] risultati1;
+                try {
+                    risultati1 = q.getQuerySelectPartiteParole(selectedWord);
+
+                /*
+                for(int i=0;i<lunghezza(risultati);i++){
+                    for (int j=0;j<4;j++){
+                        System.out.println(risultati[i][j]);
+                    }
+                }
+                */
+                    RiempiTabella(risultati1);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        });
+        btnInvia.setFont(new Font("MV Boli", Font.BOLD, 15));
+        btnInvia.setBackground(Color.WHITE);
+        btnInvia.setForeground(Color.BLUE);
+        btnInvia.setSize(150,40);
+        centerIntoPanel(panelCercaParole, btnInvia, 240);
+        coloreBtnPrima = btnInvia.getBackground();
+        btnInvia.addMouseListener(createMouseListener(coloreBtnPrima));
+        btnInvia.setBorder(null);
+        //scrollPane1=new JScrollPane();
+        panelCercaParole.add(btnInvia);
+
+        titoloSelectBox = new JLabel();
+        titoloSelectBox.setText("Seleziona La Difficolta");
+        titoloSelectBox.setHorizontalAlignment(JLabel.CENTER);
+        titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 15));
+        titoloSelectBox.setBounds(150,90,300,30);
+        panelCercaParole.add(titoloSelectBox);
 
         DBConnectionMariaDB c = new DBConnectionMariaDB();
         Query q = new Query();
 
-        String[][] risultati = q.getQuerySelectPartite();
-        if (risultati[0][0] != null) {
-            for (int i = 0; i < lunghezza(risultati); i++) {
-                model.addRow(new Object[]{risultati[i][0], risultati[i][1], risultati[i][2], risultati[i][3], risultati[i][4], risultati[i][5]});
+
+        String[][] s=q.getQuerySelectPartite();
+        // Crea un array di opzioni per la ComboBox
+        if(s!=null){
+            String[] options= new String[lunghezza(s)];
+            for(int i=0;i<lunghezza(s);i++){
+                options[i]=s[i][0];
             }
+            // Crea una ComboBox personalizzata scrollable
+            comboBox = new ScrollableComboBoxExample.ScrollableComboBox<>(options);
+            //String selectedText = comboBox.getSelectedItem().toString();
 
-            // Creazione della tabella
-            table = new JTable(model);
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            table.setRowHeight(50);
+            JPanel p=new JPanel();
+            //comboBox.setSize(800,30);
 
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-            table.setDefaultRenderer(Object.class, centerRenderer);
-            table.getTableHeader().setReorderingAllowed(false);
-            table.disable();
+            comboBox.setBackground(Color.BLACK);
+            comboBox.setForeground(Color.BLACK);
+            //comboBox.getButton().setSize(220,40);
+            //centerComponent(panelCercaParole,comboBox.getPopupMenu(),120);
 
-            //Grafica tabella
-            table.setFont(font1);
-            table.setBackground(Color.CYAN);
-            table.setForeground(Color.BLACK);
-            table.getTableHeader().setFont(font1);
+            p.add(comboBox);
+            panelCercaParole.add(p);
+            p.setBounds(90,100,120,40);
+            //p.setOpaque(false);
 
-            // Rendi le colonne non ridimensionabili
-            TableColumn column;
-            for (int i = 0; i < table.getColumnCount(); i++) {
-                column = table.getColumnModel().getColumn(i);
-                column.setResizable(false); // Rendi la colonna non ridimensionabile
-                column.setPreferredWidth(125); // Imposta la larghezza desiderata per la colonna
+            // Creazione campi del modello dati della tabella
+            model = new DefaultTableModel();
+            model.addColumn("Partita");
+            model.addColumn("Punteggio");
+            model.addColumn("Tempo");
+            model.addColumn("Parole Trovate");
+            model.addColumn("Difficoltà");
+            model.addColumn("Nome Utente");
+
+            // Aggiungi dati di esempio
+
+            Query q2 = new Query();
+
+            String[][] risultati = q2.getQuerySelectPartite();
+            if (risultati[0][0] != null) {
+                for (int i = 0; i < lunghezza(risultati); i++) {
+                    model.addRow(new Object[]{risultati[i][0], risultati[i][1], risultati[i][2], risultati[i][3], risultati[i][4], risultati[i][5]});
+                }
+
+                // Creazione della tabella
+                table = new JTable(model);
+                table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                table.setRowHeight(50);
+
+                DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+                table.setDefaultRenderer(Object.class, centerRenderer);
+                table.getTableHeader().setReorderingAllowed(false);
+                table.disable();
+
+                //Grafica tabella
+                table.setFont(font1);
+                table.setBackground(Color.CYAN);
+                table.setForeground(Color.BLACK);
+                table.getTableHeader().setFont(font1);
+
+                // Rendi le colonne non ridimensionabili
+                TableColumn column;
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    column = table.getColumnModel().getColumn(i);
+                    column.setResizable(false); // Rendi la colonna non ridimensionabile
+                    column.setPreferredWidth(125); // Imposta la larghezza desiderata per la colonna
+                }
+
+                scrollPane = new JScrollPane(table);
+                panel.add(scrollPane, BorderLayout.CENTER);
+                panel.setVisible(true);
+                panel.setSize(768, 230);
+
+                centerComponent(this, panel, 280);
+
+                //======================================================================================================
+                // IMPOSTAZIONI FRAME
+                //======================================================================================================
+
+                ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
+                this.setIconImage(icon.getImage());
+
+                this.add(panel);
+                this.add(labelTitolo);
+                this.add(panelContBtnStats);
+                this.add(btnExit);
+
+                this.setLayout(null);
+                this.setResizable(false);
+                this.getContentPane().setBackground(new Color(123, 50, 250));
+                this.setVisible(true);
+                this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                centerFrame(this);
             }
-
-            scrollPane = new JScrollPane(table);
-            panel.add(scrollPane, BorderLayout.CENTER);
-            panel.setVisible(true);
-            panel.setSize(768, 230);
-
-            centerComponent(this, panel, 280);
-
-            //======================================================================================================
-            // IMPOSTAZIONI FRAME
-            //======================================================================================================
-
-            ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
-            this.setIconImage(icon.getImage());
-
-            this.add(panel);
-            this.add(labelTitolo);
-            this.add(panelContBtnStats);
-            this.add(btnExit);
-
-            this.setLayout(null);
-            this.setResizable(false);
-            this.getContentPane().setBackground(new Color(123, 50, 250));
-            this.setVisible(true);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            centerFrame(this);
         }
     }
 
@@ -185,6 +294,30 @@ public class PageStatistiche extends JFrame implements ActionListener {
         Dimension frameSize = f.getSize();
         Dimension componentSize = c.getSize();
         c.setLocation((frameSize.width - componentSize.width) / 2, y);
+    }
+
+    public void centerComponent(JPanel f, JPopupMenu c, int y) {
+        Dimension frameSize = f.getSize();
+        Dimension componentSize = c.getSize();
+        c.setLocation((frameSize.width - componentSize.width) / 2, y);
+    }
+
+    public void centerIntoPanel(JPanel p, JComponent c, int y) {
+        Dimension frameSize = p.getSize();
+        Dimension componentSize = c.getSize();
+        c.setLocation((frameSize.width - componentSize.width) / 2, y);
+    }
+
+    public void centerIntoPanel(JPanel p, JCheckBox combo, int y) {
+        Dimension frameSize = p.getSize();
+        Dimension componentSize = combo.getSize();
+        combo.setLocation((frameSize.width - componentSize.width) / 2, y);
+    }
+
+    public void centerIntoPanel(JPanel p, JScrollPane combo, int y) {
+        Dimension frameSize = p.getSize();
+        Dimension componentSize = combo.getSize();
+        combo.setLocation((frameSize.width - componentSize.width) / 2, y);
     }
 
     public static void centerFrame(Frame f) {
@@ -199,6 +332,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
         int i = 0;
         while (str[i][0] != null && trovato == false) {
             if (str[i][0] == null) {
+                trovato = true;
+            }
+            i++;
+        }
+        return i;
+    }
+
+    public int lunghezza(String[] str) {
+        boolean trovato = false;
+        int i = 0;
+        while (str[i] != null && trovato == false) {
+            if (str[i] == null) {
                 trovato = true;
             }
             i++;
@@ -246,47 +391,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
             btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
 
             System.out.println(table.getRowCount());
-
-            Container parent = table.getParent();
-            Container parent2=parent.getParent();
-            Container parent3=parent2.getParent();
-
-            if (parent != null) {
-                parent.remove(table);
-                parent.revalidate();
-                parent.repaint();
-                if(parent2!=null){
-                    parent2.remove(parent);
-                    parent.revalidate();
-                    parent.repaint();
-                    if(parent3!=null){
-                        parent3.remove(parent2);
-                        parent3.revalidate();
-                        parent3.repaint();
-                    }
-                }
-            }
-
-           //Connessione al database e query per ottenere i dati
-
-            DBConnectionMariaDB c = new DBConnectionMariaDB();
-            Query q = new Query();
-
-            String[][] risultati1;
-            try {
-                risultati1 = q.getQuerySelectPartiteTempo();
-                /*
-                for(int i=0;i<lunghezza(risultati);i++){
-                    for (int j=0;j<4;j++){
-                        System.out.println(risultati[i][j]);
-                    }
-                }
-                */
-                RiempiTabella(risultati1);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-
 
         }
 
@@ -407,12 +511,9 @@ public class PageStatistiche extends JFrame implements ActionListener {
         model.addColumn("Nome Utente");
 
         // Aggiungi dati di esempio
-
-        DBConnectionMariaDB c = new DBConnectionMariaDB();
-        Query q = new Query();
         if (risultati[0][0] != null) {
             for (int i = 0; i < lunghezza(risultati); i++) {
-                model.addRow(new Object[]{risultati[i][0], risultati[i][1], risultati[i][2], risultati[i][3], risultati[i][4], risultati[i][5]});
+                model.addRow(new Object[]{risultati[i][0], risultati[i][1],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
             }
 
             // Creazione della tabella
@@ -438,6 +539,51 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 column = table.getColumnModel().getColumn(i);
                 column.setResizable(false); // Rendi la colonna non ridimensionabile
                 column.setPreferredWidth(125);
+            }
+
+            scrollPane = new JScrollPane(table);
+            panel.add(scrollPane, BorderLayout.CENTER);
+            panel.setVisible(true);
+            panel.setBackground(Color.BLACK);
+            panel.setSize(768, 230);
+
+        }
+    }
+
+    public void RiempiTabella(String risultati[]) {
+        model = new DefaultTableModel();
+        model.addColumn("Parola");
+        model.addColumn("Punteggio");
+
+        // Aggiungi dati di esempio
+        if (risultati != null) {
+            for (int i = 0; i < lunghezza(risultati); i++) {
+                model.addRow(new Object[]{risultati[i], risultati[i],});
+            }
+
+            // Creazione della tabella
+            table = new JTable(model);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            table.setRowHeight(50);
+
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+            table.setDefaultRenderer(Object.class, centerRenderer);
+            table.getTableHeader().setReorderingAllowed(false);
+            table.disable();
+
+            //Grafica Tabella
+            table.setFont(font1);
+            table.setBackground(Color.CYAN);
+            table.setForeground(Color.BLACK);
+            table.getTableHeader().setFont(font1);
+
+            // Rendi le colonne non ridimensionabili
+            TableColumn column;
+            for (int i = 0; i < table.getColumnCount(); i++) {
+                column = table.getColumnModel().getColumn(i);
+                column.setResizable(false); // Rendi la colonna non ridimensionabile
+                column.setPreferredWidth(375);
             }
 
             scrollPane = new JScrollPane(table);

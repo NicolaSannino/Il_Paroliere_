@@ -714,10 +714,33 @@ public class CampoGioco extends JFrame implements ActionListener{
 			System.out.println(totPunteggio);
 			System.out.println(numParTrovate);
 
-			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
+			try {
+				int l;
+				int l1;
+				String[][] str=q1.getQuerySelectPartite();
+				if(str==null){
+					l1=1;
+					Iterator <String> i = paroleTrovate.iterator();
+					while(i.hasNext()){
+						String parola=i.next();
+						q1.getInsertPartitaParole(l1,parola,connTermine);
+					}
+				}else{
+					l=lunghezza(str);
+					l1=Integer.parseInt(str[l-1][0])+1;
+					q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
+					Iterator <String> i = paroleTrovate.iterator();
+					while(i.hasNext()){
+						String parola=i.next();
+						q1.getInsertPartitaParole(l1,parola,connTermine);
+					}
+				}
 
-			HomePage newPage = new HomePage();
+			} catch (SQLException ex) {
+				throw new RuntimeException(ex);
+			}
 			this.dispose();
+			HomePage newPage = new HomePage();
 		}
 
 		if(azione.equals("Nuova Partita")){
@@ -999,5 +1022,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	public void setDifficolta(int difficolta) {
 		this.difficolta = difficolta;
+	}
+
+	public int lunghezza(String[][] str) {
+		boolean trovato = false;
+		int i = 0;
+		while (str[i][0] != null && trovato == false) {
+			if (str[i][0] == null) {
+				trovato = true;
+			}
+			i++;
+		}
+		return i;
 	}
 }
