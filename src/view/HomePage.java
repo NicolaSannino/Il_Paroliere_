@@ -26,7 +26,8 @@ public class HomePage extends JFrame implements ActionListener {
 
         Border bordo1 = BorderFactory.createLineBorder(Color.black, 4);
         Border bordo2 = BorderFactory.createLineBorder(Color.black, 3);
-        Font fontA = new Font ("MV Boli", Font. BOLD, 20);
+        Font fontA = new Font ("MV Boli", Font.BOLD, 20);
+        Font fontB = new Font ("MV Boli", Font.BOLD, 15);
 
         //======================================================================================================
         // TITOLO FRAME
@@ -64,6 +65,12 @@ public class HomePage extends JFrame implements ActionListener {
         selectBox = new JComboBox<>(options);
         selectBox.addActionListener(this);
         selectBox.setBounds(200,120,200,30);
+        selectBox.setBackground(Color.BLACK);
+        selectBox.setForeground(Color.WHITE);
+        selectBox.setBorder(null);
+        selectBox.setFont(fontB);
+        selectBox.setOpaque(true);
+        selectBox.setSelectedIndex(0);
 
         ErrorNome = new JLabel();
         ErrorNome.setText("Inserisci Nome Utente");

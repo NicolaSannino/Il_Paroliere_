@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="onMouseHover a tutti i bottoni">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
@@ -143,8 +143,9 @@
       <workItem from="1684425476429" duration="4658000" />
       <workItem from="1684435311371" duration="82000" />
       <workItem from="1684486000559" duration="1578000" />
-      <workItem from="1684488116208" duration="3532000" />
-      <workItem from="1684512147510" duration="4551000" />
+      <workItem from="1684488116208" duration="4699000" />
+      <workItem from="1684511668902" duration="6029000" />
+      <workItem from="1684584248411" duration="3922000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -328,14 +329,28 @@
       <option name="project" value="LOCAL" />
       <updated>1684435371827</updated>
     </task>
-    <task id="LOCAL-00027" summary="Aggiustamento controllo bottoni paroliere">
-      <created>1684493222763</created>
+    <task id="LOCAL-00027" summary="sistemazione tabelle">
+      <created>1684492164542</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1684493222763</updated>
+      <updated>1684492164542</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="table disable">
+      <created>1684513573443</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1684513573443</updated>
+    </task>
+    <task id="LOCAL-00029" summary="onMouseHover a tutti i bottoni">
+      <created>1684516805626</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1684516805626</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,9 +380,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="nuova grafica 1" />
-    <MESSAGE value="implementazione matrice in campo gioco" />
-    <MESSAGE value="implementazione matrice in campo gioco 2" />
     <MESSAGE value="implementazione matrice in campo gioco 3" />
     <MESSAGE value="commit view" />
     <MESSAGE value="commit aggiornamento" />
@@ -389,8 +401,11 @@
     <MESSAGE value="aggiunta controlli jtextfield nome utente e sistemazione grafica home" />
     <MESSAGE value="sistemazione jtextfield e jlabel in campo gioco" />
     <MESSAGE value="Colori griglia" />
-    <MESSAGE value="Aggiustamento controllo bottoni paroliere" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiustamento controllo bottoni paroliere" />
+    <MESSAGE value="sistemazione tabelle" />
+    <MESSAGE value="table disaple" />
+    <MESSAGE value="table disable" />
+    <MESSAGE value="onMouseHover a tutti i bottoni" />
+    <option name="LAST_COMMIT_MESSAGE" value="onMouseHover a tutti i bottoni" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

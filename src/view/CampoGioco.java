@@ -21,6 +21,7 @@ import model.DBConnectionMariaDB;
 import model.Query;
 
 import javax.swing.JToggleButton;
+import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -129,6 +130,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 		toggleButton.setFont(font1);
 		toggleButton.setBackground(Color.BLACK);
 		toggleButton.setForeground(Color.WHITE);
+		toggleButton.setBorder(null);
+		toggleButton.setUI(new CustomButtonUI());
+
 
 		if(difficolta == 4){
 			toggleButton.setBounds(400,300,100,30);
@@ -468,6 +472,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 				(screenSize.height - frameSize.height) / 2 - 20);
 	}
 
+	//======================================================================================================
+	// METODO ONMOUSEHOVER DEI BOTTONI
+	//======================================================================================================
+
 	private MouseAdapter createMouseListener(Color c) {
 		return new MouseAdapter() {
 			@Override
@@ -482,6 +490,43 @@ public class CampoGioco extends JFrame implements ActionListener{
 				button.setBackground(c);
 			}
 		};
+	}
+
+	//======================================================================================================
+	// METODO PER GESTIRE COLORI DEL TOGGLE BUTTON
+	//======================================================================================================
+
+	private static class CustomButtonUI extends BasicButtonUI {
+		private Color defaultBackgroundColor = UIManager.getColor("Button.background");
+		private Color defaultForegroundColor = UIManager.getColor("Button.foreground");
+		private Color pressedBackgroundColor = Color.GRAY;
+		private Color pressedForegroundColor = Color.WHITE;
+
+		@Override
+		protected void paintButtonPressed(Graphics g, AbstractButton b) {
+			g.setColor(pressedBackgroundColor);
+			g.fillRect(0, 0, b.getWidth(), b.getHeight());
+		}
+
+		protected void paintButtonReleased(Graphics g, AbstractButton b) {
+			if (b.isSelected()) {
+				g.setColor(pressedBackgroundColor);
+				g.fillRect(0, 0, b.getWidth(), b.getHeight());
+			} else {
+				g.setColor(defaultBackgroundColor);
+				g.fillRect(0, 0, b.getWidth(), b.getHeight());
+			}
+		}
+
+		@Override
+		protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
+			if (b.isSelected()) {
+				g.setColor(pressedForegroundColor);
+			} else {
+				g.setColor(defaultForegroundColor);
+			}
+			super.paintText(g, b, textRect, text);
+		}
 	}
 
 	//======================================================================================================
@@ -507,6 +552,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 				toggleButton.setFont(font1);
 				toggleButton.setBackground(Color.BLACK);
 				toggleButton.setForeground(Color.WHITE);
+				toggleButton.setBorder(null);
 				testo.setVisible(true);
 				Testo.setVisible(false);
 				AzzeraBottoni();
@@ -517,6 +563,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					toggleButton.setFont(font1);
 					toggleButton.setBackground(Color.BLACK);
 					toggleButton.setForeground(Color.WHITE);
+					toggleButton.setBorder(null);
 					testo.setVisible(false);
 					Testo.setVisible(true);
 					SettaBottoni();
