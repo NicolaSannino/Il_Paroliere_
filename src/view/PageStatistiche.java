@@ -248,9 +248,11 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
                 //Grafica tabella
                 table.setFont(font1);
-                table.setBackground(Color.CYAN);
+                table.setBackground(Color.WHITE);
                 table.setForeground(Color.BLACK);
                 table.getTableHeader().setFont(font1);
+                table.getTableHeader().setBackground(Color.BLACK);
+                table.getTableHeader().setForeground(Color.WHITE);
 
                 // Rendi le colonne non ridimensionabili
                 TableColumn column;
@@ -597,7 +599,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         public CustomContentPane() {
             // Carica l'immagine di sfondo
-            backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+            backgroundImage = new ImageIcon("file/sfondo2.png").getImage();
         }
 
         @Override

@@ -195,8 +195,6 @@ public class HomePage extends JFrame implements ActionListener {
         this.add(panelComboBox);
         this.add(ContBtn);
 
-
-
         this.setLayout(null);
         this.setResizable(false);
         //this.getContentPane().setBackground(new Color(123, 50, 250));
@@ -356,7 +354,7 @@ public class HomePage extends JFrame implements ActionListener {
 
         public CustomContentPane() {
             // Carica l'immagine di sfondo
-            backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+            backgroundImage = new ImageIcon("file/sfondo2.png").getImage();
         }
 
         @Override

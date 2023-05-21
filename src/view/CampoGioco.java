@@ -229,9 +229,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		stampaMatrice();
 
 		ContBtnTabella.setVisible(true);
-		//ContBtnTabella.setBackground(new Color(123, 50, 250));
 		ContBtnTabella.setOpaque(false);
-
 		GrigliaGioco.setVisible(true);
 
 		if(difficolta == 4){
@@ -255,7 +253,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		//Creazione dell'oggetto TableCellRenderer personalizzato
 		Font font = new Font("Arial", Font.BOLD, 13);
-		Color foregroundColor = Color.black;
+		Color foregroundColor = Color.WHITE;
 		TableCellRenderer renderer = new CustomTableCellRenderer(font, foregroundColor);
 
 		//Creazione campi del modello dati della tabella
@@ -276,9 +274,11 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		//Grafica tabella
 		table.setFont(font1);
-		table.setBackground(Color.CYAN);
+		table.setBackground(Color.WHITE);
 		table.setForeground(Color.BLACK);
 		table.getTableHeader().setFont(font1);
+		table.getTableHeader().setBackground(Color.BLACK);
+		table.getTableHeader().setForeground(Color.WHITE);
 
 		//Panel in cui inserire tabella
 		panelTabellaRis = new JPanel(new BorderLayout());
@@ -352,9 +352,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		testo.setFont(fontA);
 		Testo.setBorder(border);
 		testo.setBorder(border);
-
-		//Testo.setSize(280,35);
-		//testo.setSize(280,35);
 
 		testo.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
@@ -708,7 +705,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 				Iterator<String> c = paroleTrovate.iterator();
 				while(c.hasNext() && parolaEsistente == false){
 					if(t.equals(c.next())){
-						parolaEsistente=true;
+						parolaEsistente = true;
 					}
 				}
 
@@ -1147,7 +1144,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		public CustomContentPane() {
 			// Carica l'immagine di sfondo
-			backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+			backgroundImage = new ImageIcon("file/sfondo2.png").getImage();
 		}
 
 		@Override
