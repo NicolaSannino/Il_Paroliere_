@@ -18,6 +18,11 @@ public class ScrollableComboBoxExample {
             button = new JButton();
             button.setPreferredSize(new Dimension(180, 40)); // Imposta le dimensioni desiderate
             button.setText("Scelte:");
+            button.setBackground(Color.BLACK);
+            button.setForeground(Color.WHITE);
+            button.setFont(new Font("MV Boli", Font.BOLD, 17));
+            button.setBorder(null);
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -28,6 +33,7 @@ public class ScrollableComboBoxExample {
             list = new JList<>(items);
             scrollPane = new JScrollPane(list);
             scrollPane.setSize(120,40);
+
             popupMenu = new JPopupMenu();
             popupMenu.add(scrollPane);
 

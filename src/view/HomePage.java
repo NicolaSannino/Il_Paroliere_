@@ -2,6 +2,12 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.text.Caret;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -15,6 +21,10 @@ public class HomePage extends JFrame implements ActionListener {
     private JLabel titoloSelectBox, titoloBoxImp, ErrorNome;
     private JTextField InsNome;
 
+    private CustomCaret caret;
+    private Timer caretTimer;
+    private boolean caretVisible;
+
     String selectedOption = "Facile";
 
     Color coloreBtnPrima;
@@ -23,11 +33,12 @@ public class HomePage extends JFrame implements ActionListener {
 
         this.setTitle("HomePage il Paroliere");
         this.setSize(1100, 700);
+        this.setContentPane(new CustomContentPane());
 
         Border bordo1 = BorderFactory.createLineBorder(Color.black, 4);
         Border bordo2 = BorderFactory.createLineBorder(Color.black, 3);
         Font fontA = new Font ("MV Boli", Font.BOLD, 20);
-        Font fontB = new Font ("MV Boli", Font.BOLD, 15);
+        Font fontB = new Font ("MV Boli", Font.BOLD, 13);
 
         //======================================================================================================
         // TITOLO FRAME
@@ -38,8 +49,7 @@ public class HomePage extends JFrame implements ActionListener {
         labelTitolo.setForeground(new Color(0, 0, 0));
         labelTitolo.setFont(new Font("Arial Bold Italic", Font.BOLD, 40));
 
-        labelTitolo.setBackground(new Color(123, 50, 250));
-        labelTitolo.setOpaque(true);
+        labelTitolo.setOpaque(false);
         labelTitolo.setVerticalAlignment(labelTitolo.TOP);
         labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
         labelTitolo.setSize(400, 70);
@@ -71,6 +81,7 @@ public class HomePage extends JFrame implements ActionListener {
         selectBox.setFont(fontB);
         selectBox.setOpaque(true);
         selectBox.setSelectedIndex(0);
+        selectBox.setRenderer(new CustomComboBoxRenderer());
 
         ErrorNome = new JLabel();
         ErrorNome.setText("Inserisci Nome Utente");
@@ -91,6 +102,21 @@ public class HomePage extends JFrame implements ActionListener {
                 }
             }
         });
+
+        caret = new CustomCaret();
+        InsNome.setCaret(caret);
+
+        // Imposta la frequenza di lampeggio del cursore
+        int blinkRate = 500;
+        caretTimer = new Timer(blinkRate, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                caretVisible = !caretVisible;
+                caret.setVisible(caretVisible);
+            }
+        });
+        caretTimer.start();
+
         InsNome.setBounds(175,220,250,30);
         InsNome.setFont(fontA);
         InsNome.setBackground(Color.BLACK);
@@ -113,7 +139,8 @@ public class HomePage extends JFrame implements ActionListener {
 
         panelComboBox = new JPanel();
         panelComboBox.setSize(600, 300);
-        panelComboBox.setBackground(new Color(123, 50, 250));
+        //panelComboBox.setBackground(new Color(123, 50, 250));
+        panelComboBox.setOpaque(false);
         panelComboBox.setLayout(null);
         panelComboBox.add(titoloBoxImp);
         panelComboBox.add(titoloSelectBox);
@@ -128,7 +155,7 @@ public class HomePage extends JFrame implements ActionListener {
         //======================================================================================================
 
         btnOpenGioco = new RoundedButton("GIOCA");
-        btnOpenGioco.setBounds(0,0,200,50);
+        btnOpenGioco.setBounds(250,0,200,50);
         btnOpenGioco.addActionListener(this);
         btnOpenGioco.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnOpenGioco.setBackground(Color.BLACK);
@@ -138,7 +165,7 @@ public class HomePage extends JFrame implements ActionListener {
         btnOpenGioco.setBorder(null);
 
         btnStatistiche = new RoundedButton("STATISTICHE");
-        btnStatistiche.setBounds(250,0,200,50);
+        btnStatistiche.setBounds(0,0,200,50);
         btnStatistiche.addActionListener(this);
         btnStatistiche.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnStatistiche.setBackground(Color.BLACK);
@@ -148,7 +175,8 @@ public class HomePage extends JFrame implements ActionListener {
         btnStatistiche.setBorder(null);
 
         ContBtn = new JPanel();
-        ContBtn.setBackground(new Color(123, 50, 250));
+        //ContBtn.setBackground(new Color(123, 50, 250));
+        ContBtn.setOpaque(false);
         ContBtn.setSize(450,50);
         ContBtn.setLayout(null);
         this.centerComponent(this, ContBtn, 500);
@@ -167,9 +195,11 @@ public class HomePage extends JFrame implements ActionListener {
         this.add(panelComboBox);
         this.add(ContBtn);
 
+
+
         this.setLayout(null);
         this.setResizable(false);
-        this.getContentPane().setBackground(new Color(123, 50, 250));
+        //this.getContentPane().setBackground(new Color(123, 50, 250));
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         centerFrame(this);
@@ -182,6 +212,10 @@ public class HomePage extends JFrame implements ActionListener {
     public void setSelectedOption(String selectedOption) {
         this.selectedOption = selectedOption;
     }
+
+    //======================================================================================================
+    // METODO CENTRA COMPONENTI E FRAME
+    //======================================================================================================
 
     public void centerComponent(Frame f, JComponent c, int y){
         Dimension frameSize = f.getSize();
@@ -196,6 +230,10 @@ public class HomePage extends JFrame implements ActionListener {
         f.setLocation ((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2 - 30);
     }
+
+    //======================================================================================================
+    // METODO ONMOUSEHOVET BOTTONI
+    //======================================================================================================
 
     private MouseAdapter createMouseListener(Color c) {
         return new MouseAdapter() {
@@ -212,6 +250,10 @@ public class HomePage extends JFrame implements ActionListener {
             }
         };
     }
+
+    //======================================================================================================
+    // METODO ACTION LISTENER
+    //======================================================================================================
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -254,5 +296,81 @@ public class HomePage extends JFrame implements ActionListener {
             selectedOption = (String) selectBox.getSelectedItem();
             System.out.println("Opzione selezionata: " + selectedOption);
         }
+    }
+
+    //======================================================================================================
+    // METODO PER MODIFICARE CURSORE DI TESTO
+    //======================================================================================================
+
+    private class CustomCaret extends DefaultCaret {
+        private static final Color CARET_COLOR = Color.WHITE;
+        private static final int CARET_WIDTH = 2;
+
+        @Override
+        public void paint(Graphics g) {
+            if (isVisible()) {
+                JTextComponent textComponent = getComponent();
+                if (textComponent == null) {
+                    return;
+                }
+
+                try {
+                    Rectangle caretRectangle = textComponent.getUI().modelToView(textComponent, getDot());
+                    if (caretRectangle == null) {
+                        return;
+                    }
+
+                    g.setColor(CARET_COLOR);
+                    g.fillRect(caretRectangle.x, caretRectangle.y, CARET_WIDTH, caretRectangle.height);
+                } catch (Exception e) {
+                    // Gestione dell'eccezione
+                }
+            }
+        }
+    }
+
+    //======================================================================================================
+    // METODO PER CENTRARE LE PAROLE ALL'INTERNO DI UNA SELECTBOX
+    //======================================================================================================
+
+    private static class CustomComboBoxRenderer extends BasicComboBoxRenderer {
+
+        public CustomComboBoxRenderer() {
+            setOpaque(true);
+            setHorizontalAlignment(SwingConstants.CENTER); // Centra l'elemento all'interno della select box
+            setBorder(new EmptyBorder(5, 10, 5, 10)); // Imposta i margini interni per una maggiore spaziatura
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+            // Personalizza ulteriormente l'aspetto degli elementi nella lista se necessario
+
+            return this;
+        }
+    }
+
+    private static class CustomContentPane extends JPanel {
+        private Image backgroundImage;
+
+        public CustomContentPane() {
+            // Carica l'immagine di sfondo
+            backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // Disegna l'immagine di sfondo
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new HomePage();
+        });
     }
 }

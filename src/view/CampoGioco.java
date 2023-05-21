@@ -26,6 +26,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.JTextComponent;
 
 import controller.dailettera;
 
@@ -57,9 +59,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 	private JLabel Testo, timeLabel, ContBtnTabella, Utente,Punteggio;
 	private JTextField testo;
 	private RoundedButton Invio, Annulla, Termina, NuovaPartita;
-	private JPanel GrigliaGioco, ContBtn;
+	private JPanel GrigliaGioco, ContBtn, panelContBtn;
 	private Timer timer;
 	RoundedButton Tabella;
+
+	private CampoGioco.CustomCaret caret;
+	private Timer caretTimer;
+	private boolean caretVisible;
 
 	int minutes = 10;
 	int seconds = 480;
@@ -74,6 +80,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		this.setTitle("Campo da Gioco");
 		this.setSize(1500, 800);
+		this.setContentPane(new CustomContentPane());
 
 		difficolta = dim;
 
@@ -85,7 +92,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//======================================================================================================
 
 		nome_utenti = nome;
-		Utente=new JLabel(nome_utenti);
+		Utente = new JLabel(nome_utenti);
 		Utente.setFont(new Font("MV Boli", Font.BOLD, 35));
 		Utente.setBounds(30, 30, 200,40);
 
@@ -96,9 +103,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Punteggio = new JLabel();
 		Punteggio.setText(String.valueOf(totPunteggio));
 		Punteggio.setFont(new Font("MV Boli", Font.BOLD, 35));
-		Punteggio.setOpaque(true); // Imposta la proprietà opaca su true per rendere visibile il colore di sfondo
+		Punteggio.setOpaque(true);
 		Punteggio.setBackground(Color.BLACK);
-		Punteggio.setBounds(1150, 600, 301,60);
+
+		if(difficolta == 4){
+			Punteggio.setBounds(1150, 650, 301,100);
+		}else if(difficolta == 5){
+			Punteggio.setBounds(1150, 630, 301,100);
+		} else if (difficolta == 6) {
+			Punteggio.setBounds(1150, 600, 301,100);
+		}
+
 		Punteggio.setHorizontalAlignment(Punteggio.CENTER);
 		Punteggio.setVerticalAlignment(Punteggio.CENTER);
 		Punteggio.setForeground(Color.WHITE);
@@ -112,8 +127,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		labelTitolo.setForeground(new Color(0, 0, 0));
 		labelTitolo.setFont(new Font("Arial Bold Italic", Font.BOLD, 40));
 
-		labelTitolo.setBackground(new Color(123, 50, 250));
-		labelTitolo.setOpaque(true);
+		//labelTitolo.setBackground(new Color(123, 50, 250));
+		labelTitolo.setOpaque(false);
 		labelTitolo.setSize(600, 70);
 		labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
 		this.centerComponent(this, labelTitolo, 20);
@@ -133,19 +148,22 @@ public class CampoGioco extends JFrame implements ActionListener{
 		toggleButton.setBorder(null);
 		toggleButton.setUI(new CustomButtonUI());
 
+		toggleButton.setSize(120, 35);
 
 		if(difficolta == 4){
-			toggleButton.setBounds(400,300,100,30);
+			//toggleButton.setBounds(400,300,100,30);
+			this.centerComponent(this, toggleButton, 600);
 		}else if(difficolta == 5){
-			toggleButton.setBounds(380,310,100,30);
+			//toggleButton.setBounds(380,310,100,30);
+			this.centerComponent(this, toggleButton, 620);
 		} else if (difficolta == 6) {
-			toggleButton.setBounds(360,340,100,30);
+			//toggleButton.setBounds(360,340,100,30);
+			this.centerComponent(this, toggleButton, 650);
 		}
 
 		//======================================================================================================
 		// CREAZIONE GRIGLIA DA GIOCO BOTTONI
 		//======================================================================================================
-
 
 		GrigliaGioco = new JPanel();
 		ContBtn = new JPanel();
@@ -195,7 +213,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 		stampaMatrice();
 
 		ContBtnTabella.setVisible(true);
-		ContBtnTabella.setBackground(new Color(123, 50, 250));
+		//ContBtnTabella.setBackground(new Color(123, 50, 250));
+		ContBtnTabella.setOpaque(false);
 
 		GrigliaGioco.setVisible(true);
 
@@ -210,7 +229,8 @@ public class CampoGioco extends JFrame implements ActionListener{
 			this.centerComponent(this, GrigliaGioco, 130);
 		}
 
-		GrigliaGioco.setBackground(new Color(123, 50, 250));
+		//GrigliaGioco.setBackground(new Color(123, 50, 250));
+		GrigliaGioco.setOpaque(false);
 		GrigliaGioco.setBorder(border2);
 
 		//======================================================================================================
@@ -292,6 +312,21 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}
 			}
 		});
+
+		caret = new CampoGioco.CustomCaret();
+		testo.setCaret(caret);
+
+		// Imposta la frequenza di lampeggio del cursore
+		int blinkRate = 500;
+		caretTimer = new Timer(blinkRate, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				caretVisible = !caretVisible;
+				caret.setVisible(caretVisible);
+			}
+		});
+		caretTimer.start();
+
 		Testo.setOpaque(true);
 		Testo.setBackground(Color.BLACK);
 		Testo.setForeground(Color.WHITE);
@@ -301,8 +336,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 		testo.setFont(fontA);
 		Testo.setBorder(border);
 		testo.setBorder(border);
-		Testo.setSize(280,35);
-		testo.setSize(280,35);
+
+		//Testo.setSize(280,35);
+		//testo.setSize(280,35);
 
 		testo.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
@@ -332,8 +368,17 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// BOTTONI PER CERCARE O ANNULARE LA PAROLA INSERITA E TERMINA PARTITA
 		//======================================================================================================
 
+		panelContBtn = new JPanel();
+		panelContBtn.setBounds(40, 130, 450, 500);
+		panelContBtn.setOpaque(false);
+		//panelContBtn.setBackground(Color.WHITE);
+		panelContBtn.setLayout(null);
+
+		Testo.setBounds(85, 50, 280, 35);
+		testo.setBounds(85, 50, 280, 35);
+
 		Invio = new RoundedButton("Cerca Parola");
-		Invio.setBounds(0,0,200,50);
+		Invio.setBounds(280,0,170, 50);
 		Invio.addActionListener(this);
 		Invio.setFont(new Font("MV Boli", Font.BOLD, 20));
 		Invio.setBackground(Color.BLACK);
@@ -343,7 +388,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Invio.setBorder(null);
 
 		Annulla = new RoundedButton("Annulla Parola");
-		Annulla.setBounds(250,0,200,50);
+		Annulla.setBounds(0,0,170,50);
 		Annulla.addActionListener(this);
 		Annulla.setFont(new Font("MV Boli", Font.BOLD, 20));
 		Annulla.setBackground(Color.BLACK);
@@ -355,10 +400,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 		ContBtn.add(Invio);
 		ContBtn.add(Annulla);
 		ContBtn.setVisible(true);
-		ContBtn.setSize(450,50);
-		ContBtn.setBackground(new Color(123, 50, 250));
+		//ContBtn.setSize(450,50);
+		ContBtn.setBounds(0,200, 450, 50);
+		//ContBtn.setBackground(new Color(123, 50, 250));
+		ContBtn.setOpaque(false);
 		ContBtn.setLayout(null);
-		this.centerComponent(this, ContBtn, 700);
+		//this.centerComponent(this, ContBtn, 700);
 
 		Termina = new RoundedButton("Termina Partita");
 		Termina.setBounds(1270, 35, 170, 50);
@@ -372,7 +419,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Termina.setBorder(null);
 
 		NuovaPartita = new RoundedButton("Nuova Partita");
-		NuovaPartita.setBounds(30, 700, 170, 50);
+		NuovaPartita.setBounds(140, 350, 170, 50);
 		NuovaPartita.addActionListener(this);
 		NuovaPartita.addMouseListener(createMouseListener(coloreBtnPrima));
 		NuovaPartita.setFont(new Font("MV Boli", Font.BOLD, 17));
@@ -381,6 +428,11 @@ public class CampoGioco extends JFrame implements ActionListener{
 		coloreBtnPrima = NuovaPartita.getBackground();
 		NuovaPartita.addMouseListener(createMouseListener(coloreBtnPrima));
 		NuovaPartita.setBorder(null);
+
+		panelContBtn.add(Testo);
+		panelContBtn.add(testo);
+		panelContBtn.add(ContBtn);
+		panelContBtn.add(NuovaPartita);
 
 		//======================================================================================================
 		// TIMER DELLA PARTITA
@@ -433,21 +485,22 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(Utente);
 		this.add(labelTitolo);
 		this.add(GrigliaGioco);
-		this.add(ContBtn);
+		//this.add(ContBtn);
 		this.add(Termina);
 		this.add(timeLabel);
 		this.add(toggleButton);
 		this.add(panelTabellaRis);
-		this.add(NuovaPartita);
-		this.add(Testo);
-		this.add(testo);
+		//this.add(NuovaPartita);
+		//this.add(Testo);
+		//this.add(testo);
+		this.add(panelContBtn);
 
 		ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
 		this.setIconImage(icon.getImage());
 
 		this.setLayout(null);
 		this.setResizable(false);
-		this.getContentPane().setBackground(new Color(123, 50, 250));
+		//this.getContentPane().setBackground(new Color(123, 50, 250));
 		//this.getContentPane().setBackground(Color.darkGray);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1034,5 +1087,59 @@ public class CampoGioco extends JFrame implements ActionListener{
 			i++;
 		}
 		return i;
+	}
+
+	//======================================================================================================
+	// METODO PER MODIFICARE CURSORE DI TESTO
+	//======================================================================================================
+
+	private class CustomCaret extends DefaultCaret {
+		private static final Color CARET_COLOR = Color.WHITE;
+		private static final int CARET_WIDTH = 2;
+
+		@Override
+		public void paint(Graphics g) {
+			if (isVisible()) {
+				JTextComponent textComponent = getComponent();
+				if (textComponent == null) {
+					return;
+				}
+
+				try {
+					Rectangle caretRectangle = textComponent.getUI().modelToView(textComponent, getDot());
+					if (caretRectangle == null) {
+						return;
+					}
+
+					g.setColor(CARET_COLOR);
+					g.fillRect(caretRectangle.x, caretRectangle.y, CARET_WIDTH, caretRectangle.height);
+				} catch (Exception e) {
+					// Gestione dell'eccezione
+				}
+			}
+		}
+	}
+
+	private static class CustomContentPane extends JPanel {
+		private Image backgroundImage;
+
+		public CustomContentPane() {
+			// Carica l'immagine di sfondo
+			backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+		}
+
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+
+			// Disegna l'immagine di sfondo
+			g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+		}
+	}
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			new HomePage();
+		});
 	}
 }

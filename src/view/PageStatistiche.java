@@ -5,8 +5,6 @@ import model.Query;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -38,7 +36,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
     public PageStatistiche() throws SQLException {
 
         this.setTitle("Pagina Statistiche");
-        this.setSize(1100, 700);
+        this.setSize(1200, 700);
+        this.setContentPane(new CustomContentPane());
 
         //======================================================================================================
         // TITOLO FRAME
@@ -49,8 +48,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         labelTitolo.setForeground(new Color(0, 0, 0));
         labelTitolo.setFont(new Font("Arial Bold Italic", Font.PLAIN, 40));
 
-        labelTitolo.setBackground(new Color(123, 50, 250));
-        labelTitolo.setOpaque(true);
+        //labelTitolo.setBackground(new Color(123, 50, 250));
+        labelTitolo.setOpaque(false);
         labelTitolo.setVerticalAlignment(labelTitolo.TOP);
         labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
         labelTitolo.setSize(600, 70);
@@ -91,7 +90,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderDiff.setBorder(null);
 
         panelContBtnStats = new JPanel();
-        panelContBtnStats.setBackground(new Color(123, 50, 250));
+        //panelContBtnStats.setBackground(new Color(123, 50, 250));
+        panelContBtnStats.setOpaque(false);
         panelContBtnStats.setSize(700, 60);
         panelContBtnStats.setLayout(null);
         panelContBtnStats.add(btnOrderPoint);
@@ -118,9 +118,9 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         panelCercaParole = new JPanel(null);
         panelCercaParole.setVisible(true);
-        panelCercaParole.setBounds(600,250,300,300);
-        this.add(panelCercaParole);
-        panelCercaParole.setBackground(Color.black);
+        panelCercaParole.setBounds(850,280,300,260);
+        panelCercaParole.setOpaque(false);
+        panelCercaParole.setBorder(bordo2);
 
         btnInvia = new RoundedButton("Invia");
         btnInvia.addActionListener(new ActionListener() {
@@ -173,48 +173,47 @@ public class PageStatistiche extends JFrame implements ActionListener {
         });
         btnInvia.setFont(new Font("MV Boli", Font.BOLD, 15));
         btnInvia.setBackground(Color.WHITE);
-        btnInvia.setForeground(Color.BLUE);
+        btnInvia.setForeground(Color.BLACK);
         btnInvia.setSize(150,40);
-        centerIntoPanel(panelCercaParole, btnInvia, 240);
+        centerIntoPanel(panelCercaParole, btnInvia, 200);
         coloreBtnPrima = btnInvia.getBackground();
         btnInvia.addMouseListener(createMouseListener(coloreBtnPrima));
         btnInvia.setBorder(null);
-        //scrollPane1=new JScrollPane();
         panelCercaParole.add(btnInvia);
 
-        titoloSelectBox = new JLabel();
-        titoloSelectBox.setText("Seleziona La Difficolta");
+        titoloSelectBox = new JLabel("Seleziona La Difficolta");
+        titoloSelectBox.setBounds(40, 20, 220, 30);
         titoloSelectBox.setHorizontalAlignment(JLabel.CENTER);
-        titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 15));
-        titoloSelectBox.setBounds(150,90,300,30);
+        titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 20));
+        titoloSelectBox.setForeground(Color.BLACK);
         panelCercaParole.add(titoloSelectBox);
 
         DBConnectionMariaDB c = new DBConnectionMariaDB();
         Query q = new Query();
 
+        String[][] s = q.getQuerySelectPartite();
 
-        String[][] s=q.getQuerySelectPartite();
         // Crea un array di opzioni per la ComboBox
         if(s!=null){
-            String[] options= new String[lunghezza(s)];
+            String[] options = new String[lunghezza(s)];
             for(int i=0;i<lunghezza(s);i++){
-                options[i]=s[i][0];
+                options[i] = s[i][0];
             }
             // Crea una ComboBox personalizzata scrollable
             comboBox = new ScrollableComboBoxExample.ScrollableComboBox<>(options);
             //String selectedText = comboBox.getSelectedItem().toString();
 
-            JPanel p=new JPanel();
-            //comboBox.setSize(800,30);
+            JPanel p = new JPanel();
 
             comboBox.setBackground(Color.BLACK);
-            comboBox.setForeground(Color.BLACK);
+            comboBox.setForeground(Color.WHITE);
+            comboBox.setFont(new Font("MV Boli", Font.BOLD, 20));
             //comboBox.getButton().setSize(220,40);
             //centerComponent(panelCercaParole,comboBox.getPopupMenu(),120);
 
             p.add(comboBox);
             panelCercaParole.add(p);
-            p.setBounds(90,100,120,40);
+            p.setBounds(75,100,150,40);
             //p.setOpaque(false);
 
             // Creazione campi del modello dati della tabella
@@ -264,9 +263,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 scrollPane = new JScrollPane(table);
                 panel.add(scrollPane, BorderLayout.CENTER);
                 panel.setVisible(true);
-                panel.setSize(768, 230);
-
-                centerComponent(this, panel, 280);
+                panel.setBounds(50,280, 768,230);
 
                 //======================================================================================================
                 // IMPOSTAZIONI FRAME
@@ -279,10 +276,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 this.add(labelTitolo);
                 this.add(panelContBtnStats);
                 this.add(btnExit);
+                this.add(panelCercaParole);
 
                 this.setLayout(null);
                 this.setResizable(false);
-                this.getContentPane().setBackground(new Color(123, 50, 250));
                 this.setVisible(true);
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 centerFrame(this);
@@ -513,7 +510,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         // Aggiungi dati di esempio
         if (risultati[0][0] != null) {
             for (int i = 0; i < lunghezza(risultati); i++) {
-                model.addRow(new Object[]{risultati[i][0], risultati[i][1],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
+                model.addRow(new Object[]{risultati[i][0], risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
             }
 
             // Creazione della tabella
@@ -593,5 +590,28 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.setSize(768, 230);
 
         }
+    }
+
+    private static class CustomContentPane extends JPanel {
+        private Image backgroundImage;
+
+        public CustomContentPane() {
+            // Carica l'immagine di sfondo
+            backgroundImage = new ImageIcon("file/sfondo.png").getImage();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // Disegna l'immagine di sfondo
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new HomePage();
+        });
     }
 }
