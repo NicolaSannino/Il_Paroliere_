@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="label parola trovata non a scomparsa">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="label parola trovata a scomparsa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
     </list>
@@ -150,7 +150,7 @@
       <workItem from="1684584248411" duration="6930000" />
       <workItem from="1684612296313" duration="9089000" />
       <workItem from="1684656971480" duration="7292000" />
-      <workItem from="1684669497273" duration="1821000" />
+      <workItem from="1684669497273" duration="4124000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -369,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684661654633</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="label parola trovata a scomparsa">
+      <created>1684671435237</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1684671435237</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +406,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit aggiornamento" />
     <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
     <MESSAGE value="modifica classe centra ogetti" />
     <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
@@ -424,7 +430,8 @@
     <MESSAGE value="onMouseHover a tutti i bottoni" />
     <MESSAGE value="sistemazione selectbox e jtogglebutton" />
     <MESSAGE value="sistemazione grafica e selectbox parole partita" />
-    <option name="LAST_COMMIT_MESSAGE" value="sistemazione grafica e selectbox parole partita" />
+    <MESSAGE value="label parola trovata a scomparsa" />
+    <option name="LAST_COMMIT_MESSAGE" value="label parola trovata a scomparsa" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

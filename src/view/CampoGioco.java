@@ -464,7 +464,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 						int minute = (seconds % 3600) / 60;
 						int second = seconds % 60;
 						timeLabel.setText(String.format("%02d:%02d", minute, second));
-						if((temporaneo-2)==seconds){
+						if((temporaneo-3)==seconds){
 							ParolaTrovata.setText("");
 						}
 					if(Integer.compare(seconds,0)==0){
@@ -737,7 +737,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 				} else {
 					//System.out.println("parola non trovata");
-					if(t.equals(testo.getText())){
+					if(t.equals("Inserisci Parola")){
 						ParolaTrovata.setText("NON HAI INSERITO PAROLE");
 						temporaneo=seconds;
 					}else{
