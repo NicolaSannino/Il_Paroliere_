@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione controllo parola trovata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +25,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="HARD" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -151,7 +150,8 @@
       <workItem from="1684584248411" duration="6930000" />
       <workItem from="1684612296313" duration="9089000" />
       <workItem from="1684656971480" duration="7292000" />
-      <workItem from="1684669497273" duration="4124000" />
+      <workItem from="1684669497273" duration="4188000" />
+      <workItem from="1684676800003" duration="795000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -377,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684671435237</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="sistemazione controllo parola trovata">
+      <created>1684673827126</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1684673827126</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +414,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
     <MESSAGE value="modifica classe centra ogetti" />
     <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
     <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
@@ -432,7 +438,8 @@
     <MESSAGE value="sistemazione selectbox e jtogglebutton" />
     <MESSAGE value="sistemazione grafica e selectbox parole partita" />
     <MESSAGE value="label parola trovata a scomparsa" />
-    <option name="LAST_COMMIT_MESSAGE" value="label parola trovata a scomparsa" />
+    <MESSAGE value="sistemazione controllo parola trovata" />
+    <option name="LAST_COMMIT_MESSAGE" value="sistemazione controllo parola trovata" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

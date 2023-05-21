@@ -737,10 +737,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 				} else {
 					//System.out.println("parola non trovata");
-					if(t.equals("Inserisci Parola")){
+					if(t.equals("Inserisci lettere")){
 						ParolaTrovata.setText("NON HAI INSERITO PAROLE");
 						temporaneo=seconds;
-					}else{
+					}else if(t.equals(testo.getText())){
 						ParolaTrovata.setText("PAROLA GIÀ TROVATA");
 						temporaneo=seconds;
 					}
