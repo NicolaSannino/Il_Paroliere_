@@ -139,7 +139,6 @@ public class HomePage extends JFrame implements ActionListener {
 
         panelComboBox = new JPanel();
         panelComboBox.setSize(600, 300);
-        //panelComboBox.setBackground(new Color(123, 50, 250));
         panelComboBox.setOpaque(false);
         panelComboBox.setLayout(null);
         panelComboBox.add(titoloBoxImp);
@@ -175,7 +174,6 @@ public class HomePage extends JFrame implements ActionListener {
         btnStatistiche.setBorder(null);
 
         ContBtn = new JPanel();
-        //ContBtn.setBackground(new Color(123, 50, 250));
         ContBtn.setOpaque(false);
         ContBtn.setSize(450,50);
         ContBtn.setLayout(null);
@@ -197,7 +195,6 @@ public class HomePage extends JFrame implements ActionListener {
 
         this.setLayout(null);
         this.setResizable(false);
-        //this.getContentPane().setBackground(new Color(123, 50, 250));
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         centerFrame(this);

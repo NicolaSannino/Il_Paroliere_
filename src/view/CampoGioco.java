@@ -56,7 +56,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	JToggleButton toggleButton = new JToggleButton("Bottoni");
 
 	private char[][] tabella = new char[difficolta][difficolta];
-	private JLabel Testo, timeLabel, ContBtnTabella, Utente,Punteggio,ParolaTrovata;
+	private JLabel Testo, timeLabel, ContBtnTabella, Utente, Punteggio, ParolaTrovata;
 	private JTextField testo;
 	private RoundedButton Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn, panelContBtn;
@@ -119,8 +119,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Punteggio.setVerticalAlignment(Punteggio.CENTER);
 		Punteggio.setForeground(Color.WHITE);
 
-
-
 		//======================================================================================================
 		//LABEL PAROLA TROVATA
 		//======================================================================================================
@@ -168,13 +166,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 		toggleButton.setSize(120, 35);
 
 		if(difficolta == 4){
-			//toggleButton.setBounds(400,300,100,30);
 			this.centerComponent(this, toggleButton, 600);
 		}else if(difficolta == 5){
-			//toggleButton.setBounds(380,310,100,30);
 			this.centerComponent(this, toggleButton, 620);
 		} else if (difficolta == 6) {
-			//toggleButton.setBounds(360,340,100,30);
 			this.centerComponent(this, toggleButton, 650);
 		}
 
@@ -244,7 +239,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 			this.centerComponent(this, GrigliaGioco, 130);
 		}
 
-		//GrigliaGioco.setBackground(new Color(123, 50, 250));
 		GrigliaGioco.setOpaque(false);
 		GrigliaGioco.setBorder(border2);
 
@@ -284,7 +278,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//Panel in cui inserire tabella
 		panelTabellaRis = new JPanel(new BorderLayout());
 		//panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
-		//panelTabellaRis.add(titleLabelTblRis);
 		panelTabellaRis.setVisible(true);
 
 		panelTabellaRis.setBounds(1150,160,301,450);
@@ -385,7 +378,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		panelContBtn = new JPanel();
 		panelContBtn.setBounds(40, 130, 450, 500);
 		panelContBtn.setOpaque(false);
-		//panelContBtn.setBackground(Color.WHITE);
 		panelContBtn.setLayout(null);
 
 		Testo.setBounds(85, 50, 280, 35);
@@ -414,12 +406,9 @@ public class CampoGioco extends JFrame implements ActionListener{
 		ContBtn.add(Invio);
 		ContBtn.add(Annulla);
 		ContBtn.setVisible(true);
-		//ContBtn.setSize(450,50);
 		ContBtn.setBounds(0,200, 450, 50);
-		//ContBtn.setBackground(new Color(123, 50, 250));
 		ContBtn.setOpaque(false);
 		ContBtn.setLayout(null);
-		//this.centerComponent(this, ContBtn, 700);
 
 		Termina = new RoundedButton("Termina Partita");
 		Termina.setBounds(1270, 35, 170, 50);
@@ -501,14 +490,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 		this.add(Utente);
 		this.add(labelTitolo);
 		this.add(GrigliaGioco);
-		//this.add(ContBtn);
 		this.add(Termina);
 		this.add(timeLabel);
 		this.add(toggleButton);
 		this.add(panelTabellaRis);
-		//this.add(NuovaPartita);
-		//this.add(Testo);
-		//this.add(testo);
 		this.add(panelContBtn);
 
 		ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
@@ -516,8 +501,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 		this.setLayout(null);
 		this.setResizable(false);
-		//this.getContentPane().setBackground(new Color(123, 50, 250));
-		//this.getContentPane().setBackground(Color.darkGray);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		centerFrame(this);
@@ -1146,6 +1129,10 @@ public class CampoGioco extends JFrame implements ActionListener{
 			}
 		}
 	}
+
+	//======================================================================================================
+	// METODO PER METTERE IMMAGINE COME SFONDO
+	//======================================================================================================
 
 	private static class CustomContentPane extends JPanel {
 		private Image backgroundImage;

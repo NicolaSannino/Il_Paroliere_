@@ -21,17 +21,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
     DefaultTableModel model;
     JTable table;
     JTextField testo;
-    JScrollPane scrollPane,scrollPane1;
+    JScrollPane scrollPane, scrollPane1;
     JPanel panel,panelCercaParole;
-
-    Font font1 = new Font("MV Boli", Font.BOLD, 15);
-    Color coloreBtnPrima, ColorbtnOrderPoint, ColorbtnOrderTime, ColorbtnOrderDiff;
-    Font fontA = new Font ("MV Boli", Font.BOLD, 20);
-    Font fontB = new Font ("MV Boli", Font.BOLD, 15);
-    Border bordo2 = BorderFactory.createLineBorder(Color.black, 3);
     JLabel titoloSelectBox;
+
     ScrollableComboBoxExample.ScrollableComboBox<String> comboBox;
     private JComboBox<String> selectBox;
+
+    Color coloreBtnPrima, ColorbtnOrderPoint, ColorbtnOrderTime, ColorbtnOrderDiff;
+
+    Font font1 = new Font("MV Boli", Font.BOLD, 15);
+
+    Border bordo2 = BorderFactory.createLineBorder(Color.black, 3);
 
     public PageStatistiche() throws SQLException {
 
@@ -48,7 +49,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
         labelTitolo.setForeground(new Color(0, 0, 0));
         labelTitolo.setFont(new Font("Arial Bold Italic", Font.PLAIN, 40));
 
-        //labelTitolo.setBackground(new Color(123, 50, 250));
         labelTitolo.setOpaque(false);
         labelTitolo.setVerticalAlignment(labelTitolo.TOP);
         labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);
@@ -90,7 +90,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnOrderDiff.setBorder(null);
 
         panelContBtnStats = new JPanel();
-        //panelContBtnStats.setBackground(new Color(123, 50, 250));
         panelContBtnStats.setOpaque(false);
         panelContBtnStats.setSize(700, 60);
         panelContBtnStats.setLayout(null);
@@ -172,9 +171,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
                     }
 
-
                     //Connessione al database e query per ottenere i dati
-
 
                 }
             }
@@ -202,7 +199,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         String[][] s = q.getQuerySelectPartite();
 
         // Crea un array di opzioni per la ComboBox
-        if(s!=null){
+        if(s != null){
 
             // Creazione campi del modello dati della tabella
             model = new DefaultTableModel();
@@ -343,9 +340,11 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
                 //Grafica tabella
                 table.setFont(font1);
-                table.setBackground(Color.CYAN);
+                table.setBackground(Color.WHITE);
                 table.setForeground(Color.BLACK);
                 table.getTableHeader().setFont(font1);
+                table.getTableHeader().setBackground(Color.BLACK);
+                table.getTableHeader().setForeground(Color.WHITE);
 
                 // Rendi le colonne non ridimensionabili
                 TableColumn column;
@@ -391,9 +390,11 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
                 //Grafica tabella
                 table.setFont(font1);
-                table.setBackground(Color.CYAN);
+                table.setBackground(Color.WHITE);
                 table.setForeground(Color.BLACK);
                 table.getTableHeader().setFont(font1);
+                table.getTableHeader().setBackground(Color.BLACK);
+                table.getTableHeader().setForeground(Color.WHITE);
 
                 // Rendi le colonne non ridimensionabili
                 TableColumn column;
@@ -483,6 +484,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
         return i;
     }
 
+    //======================================================================================================
+    // METODO PER FAR CAMBIARE COLORE AL BOTTONE
+    //======================================================================================================
+
     private MouseAdapter createMouseListener(Color c) {
         return new MouseAdapter() {
             @Override
@@ -498,6 +503,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
             }
         };
     }
+
+    //======================================================================================================
+    // METODO ACTION LISTENER BOTTONI
+    //======================================================================================================
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -748,6 +757,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
         }
     }
 
+    //======================================================================================================
+    // METODI PER RIEMPIRE LA TABELLA
+    //======================================================================================================
+
     public void RiempiTabella(String risultati[][]) {
         model = new DefaultTableModel();
         model.addColumn("Partita");
@@ -776,9 +789,11 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
             //Grafica Tabella
             table.setFont(font1);
-            table.setBackground(Color.CYAN);
+            table.setBackground(Color.WHITE);
             table.setForeground(Color.BLACK);
             table.getTableHeader().setFont(font1);
+            table.getTableHeader().setBackground(Color.BLACK);
+            table.getTableHeader().setForeground(Color.WHITE);
 
             // Rendi le colonne non ridimensionabili
             TableColumn column;
@@ -802,6 +817,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
         model.addColumn("Parola");
         model.addColumn("Punteggio");
 
+        btnOrderTime.setBackground(Color.BLACK);
+        btnOrderDiff.setBackground(Color.BLACK);
+        btnOrderPoint.setBackground(Color.BLACK);
+
+        ColorbtnOrderTime = btnOrderTime.getBackground();
+        ColorbtnOrderDiff = btnOrderDiff.getBackground();
+        ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+        btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+        btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+        btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+
         // Aggiungi dati di esempio
         if (risultati != null) {
             for (int i = 0; i < lunghezza(risultati); i++) {
@@ -821,9 +848,11 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
             //Grafica Tabella
             table.setFont(font1);
-            table.setBackground(Color.CYAN);
+            table.setBackground(Color.WHITE);
             table.setForeground(Color.BLACK);
             table.getTableHeader().setFont(font1);
+            table.getTableHeader().setBackground(Color.BLACK);
+            table.getTableHeader().setForeground(Color.WHITE);
 
             // Rendi le colonne non ridimensionabili
             TableColumn column;
@@ -841,6 +870,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         }
     }
+
+    //======================================================================================================
+    // METODO PER METTERE UN IMMAGINE COME SFONDO
+    //======================================================================================================
 
     private static class CustomContentPane extends JPanel {
         private Image backgroundImage;
