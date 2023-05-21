@@ -202,20 +202,24 @@ public class Query {
         return null;
     }
 
-    public String[] getQuerySelectPartiteParole(String num) throws SQLException {
+    public String[][] getQuerySelectPartiteParole(String num) throws SQLException {
         int codice=0;
         DBConnectionMariaDB c=new DBConnectionMariaDB();
         String query="SELECT * FROM parolePartite WHERE numPartita='"+num+"';";
         ResultSet s= c.QuerySelect(c.getC(),query,codice);
         String parola;
         if(s!=null) {
-            String[] dati=new String[100];
+            String[][] dati=new String[100][2];
             parola=s.getString("parola");
-            dati[0]=parola;
+            dati[0][0]=parola;
+            int punteggio=parola.length();
+            dati[0][1]=Integer.toString(punteggio);
             int j=1;
             while(s.next()){
                 parola=s.getString("parola");
-                dati[j]=parola;
+                dati[j][0]=parola;
+                punteggio=parola.length();
+                dati[j][1]=Integer.toString(punteggio);
                 j++;
             }
             return dati;

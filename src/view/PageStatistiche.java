@@ -129,46 +129,54 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 String selectedWord = (String) comboBox.getSelectedItem();
                 System.out.println(selectedWord);
                 Container parent = table.getParent();
-                Container parent2=parent.getParent();
-                Container parent3=parent2.getParent();
-
                 if (parent != null) {
-                    parent.remove(table);
-                    parent.revalidate();
-                    parent.repaint();
-                    if(parent2!=null){
-                        parent2.remove(parent);
-                        parent.revalidate();
-                        parent.repaint();
-                        if(parent3!=null){
-                            parent3.remove(parent2);
-                            parent3.revalidate();
-                            parent3.repaint();
+                    Container parent2 = parent.getParent();
+                    if (parent2 != null) {
+                        Container parent3 = parent2.getParent();
+                        if (parent3 != null) {
+                            DBConnectionMariaDB c = new DBConnectionMariaDB();
+                            Query q = new Query();
+
+                            String[][] risultati1;
+                            try {
+                                risultati1 = q.getQuerySelectPartiteParole(selectedWord);
+                                if (risultati1 != null) {
+                                    if (parent != null) {
+                                        parent.remove(table);
+                                        parent.revalidate();
+                                        parent.repaint();
+                                        if (parent2 != null) {
+                                            parent2.remove(parent);
+                                            parent.revalidate();
+                                            parent.repaint();
+                                            if (parent3 != null) {
+                                                parent3.remove(parent2);
+                                                parent3.revalidate();
+                                                parent3.repaint();
+                                                RiempiTabella1(risultati1);
+                                                btnOrderDiff.setBackground(Color.BLACK);
+                                                btnOrderTime.setBackground(Color.BLACK);
+                                                btnOrderPoint.setBackground(Color.BLACK);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("Partita non esiste");
+                                }
+
+                            } catch (SQLException ex) {
+                                throw new RuntimeException(ex);
+                            }
+
                         }
+
                     }
+
+
+                    //Connessione al database e query per ottenere i dati
+
+
                 }
-
-                //Connessione al database e query per ottenere i dati
-
-                DBConnectionMariaDB c = new DBConnectionMariaDB();
-                Query q = new Query();
-
-                String[] risultati1;
-                try {
-                    risultati1 = q.getQuerySelectPartiteParole(selectedWord);
-
-                /*
-                for(int i=0;i<lunghezza(risultati);i++){
-                    for (int j=0;j<4;j++){
-                        System.out.println(risultati[i][j]);
-                    }
-                }
-                */
-                    RiempiTabella(risultati1);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-
             }
         });
         btnInvia.setFont(new Font("MV Boli", Font.BOLD, 15));
@@ -195,10 +203,97 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         // Crea un array di opzioni per la ComboBox
         if(s!=null){
+
+            // Creazione campi del modello dati della tabella
+            model = new DefaultTableModel();
+            model.addColumn("Partita");
+            model.addColumn("Punteggio");
+            model.addColumn("Tempo");
+            model.addColumn("Parole Trovate");
+            model.addColumn("Difficoltà");
+            model.addColumn("Nome Utente");
+
+            // Aggiungi dati di esempio
+
+            for (int i = 0; i < lunghezza(s); i++) {
+                model.addRow(new Object[]{s[i][0], s[i][1], s[i][2], s[i][3], s[i][4], s[i][5]});
+            }
+
+            // Creazione della tabella
+            table = new JTable(model);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            table.setRowHeight(50);
+
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+            table.setDefaultRenderer(Object.class, centerRenderer);
+            table.getTableHeader().setReorderingAllowed(false);
+            table.disable();
+
+            //Grafica tabella
+            table.setFont(font1);
+            table.setBackground(Color.WHITE);
+            table.setForeground(Color.BLACK);
+            table.getTableHeader().setFont(font1);
+            table.getTableHeader().setBackground(Color.BLACK);
+            table.getTableHeader().setForeground(Color.WHITE);
+
+            // Rendi le colonne non ridimensionabili
+            TableColumn column;
+            for (int i = 0; i < table.getColumnCount(); i++) {
+                column = table.getColumnModel().getColumn(i);
+                column.setResizable(false); // Rendi la colonna non ridimensionabile
+                column.setPreferredWidth(125); // Imposta la larghezza desiderata per la colonna
+            }
+
+            scrollPane = new JScrollPane(table);
+            panel.add(scrollPane, BorderLayout.CENTER);
+            panel.setVisible(true);
+            panel.setBounds(50,280, 768,230);
+
+            //======================================================================================================
+            // IMPOSTAZIONI FRAME
+            //======================================================================================================
+
+            ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
+            this.setIconImage(icon.getImage());
+
+            this.add(panel);
+            this.add(labelTitolo);
+            this.add(panelContBtnStats);
+            this.add(btnExit);
+            this.add(panelCercaParole);
+
+            this.setLayout(null);
+            this.setResizable(false);
+            this.setVisible(true);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            centerFrame(this);
+
             String[] options = new String[lunghezza(s)];
             for(int i=0;i<lunghezza(s);i++){
                 options[i] = s[i][0];
             }
+            // Crea una ComboBox personalizzata scrollable
+            comboBox = new ScrollableComboBoxExample.ScrollableComboBox<>(options);
+            //String selectedText = comboBox.getSelectedItem().toString();
+
+            JPanel p = new JPanel();
+
+            comboBox.setBackground(Color.BLACK);
+            comboBox.setForeground(Color.WHITE);
+            comboBox.setFont(new Font("MV Boli", Font.BOLD, 20));
+            //comboBox.getButton().setSize(220,40);
+            //centerComponent(panelCercaParole,comboBox.getPopupMenu(),120);
+
+            p.add(comboBox);
+            panelCercaParole.add(p);
+            p.setBounds(75,100,150,40);
+            //p.setOpaque(false);
+
+
+        }else{
+            String[] options = new String[0];
             // Crea una ComboBox personalizzata scrollable
             comboBox = new ScrollableComboBoxExample.ScrollableComboBox<>(options);
             //String selectedText = comboBox.getSelectedItem().toString();
@@ -230,7 +325,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
             Query q2 = new Query();
 
             String[][] risultati = q2.getQuerySelectPartite();
-            if (risultati[0][0] != null) {
+            if (risultati != null) {
                 for (int i = 0; i < lunghezza(risultati); i++) {
                     model.addRow(new Object[]{risultati[i][0], risultati[i][1], risultati[i][2], risultati[i][3], risultati[i][4], risultati[i][5]});
                 }
@@ -248,11 +343,9 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
                 //Grafica tabella
                 table.setFont(font1);
-                table.setBackground(Color.WHITE);
+                table.setBackground(Color.CYAN);
                 table.setForeground(Color.BLACK);
                 table.getTableHeader().setFont(font1);
-                table.getTableHeader().setBackground(Color.BLACK);
-                table.getTableHeader().setForeground(Color.WHITE);
 
                 // Rendi le colonne non ridimensionabili
                 TableColumn column;
@@ -265,7 +358,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 scrollPane = new JScrollPane(table);
                 panel.add(scrollPane, BorderLayout.CENTER);
                 panel.setVisible(true);
-                panel.setBounds(50,280, 768,230);
+                panel.setBounds(50, 280, 768, 230);
 
                 //======================================================================================================
                 // IMPOSTAZIONI FRAME
@@ -274,6 +367,46 @@ public class PageStatistiche extends JFrame implements ActionListener {
                 ImageIcon icon = new ImageIcon("file/ParoliereIcon.png");
                 this.setIconImage(icon.getImage());
 
+                this.add(panel);
+                this.add(labelTitolo);
+                this.add(panelContBtnStats);
+                this.add(btnExit);
+                this.add(panelCercaParole);
+
+                this.setLayout(null);
+                this.setResizable(false);
+                this.setVisible(true);
+                this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                centerFrame(this);
+            }else{
+                table = new JTable(model);
+                table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                table.setRowHeight(50);
+
+                DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+                table.setDefaultRenderer(Object.class, centerRenderer);
+                table.getTableHeader().setReorderingAllowed(false);
+                table.disable();
+
+                //Grafica tabella
+                table.setFont(font1);
+                table.setBackground(Color.CYAN);
+                table.setForeground(Color.BLACK);
+                table.getTableHeader().setFont(font1);
+
+                // Rendi le colonne non ridimensionabili
+                TableColumn column;
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    column = table.getColumnModel().getColumn(i);
+                    column.setResizable(false); // Rendi la colonna non ridimensionabile
+                    column.setPreferredWidth(128); // Imposta la larghezza desiderata per la colonna
+                }
+
+                scrollPane = new JScrollPane(table);
+                panel.add(scrollPane, BorderLayout.CENTER);
+                panel.setVisible(true);
+                panel.setBounds(50, 280, 772, 230);
                 this.add(panel);
                 this.add(labelTitolo);
                 this.add(panelContBtnStats);
@@ -377,126 +510,241 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         if (e.getSource() == btnOrderTime) {
 
-            btnOrderTime.setBackground(Color.GRAY);
-            btnOrderDiff.setBackground(Color.BLACK);
-            btnOrderPoint.setBackground(Color.BLACK);
+            Container parent = table.getParent();
+            if(parent!=null) {
+                Container parent2 = parent.getParent();
+                if (parent2 != null) {
+                    Container parent3 = parent2.getParent();
+                    DBConnectionMariaDB c = new DBConnectionMariaDB();
+                    Query q = new Query();
 
-            ColorbtnOrderTime = btnOrderTime.getBackground();
-            ColorbtnOrderDiff = btnOrderDiff.getBackground();
-            ColorbtnOrderPoint = btnOrderPoint.getBackground();
+                    String[][] risultati1;
+                    try {
+                        risultati1 = q.getQuerySelectPartiteTempo();
+                        if (risultati1 != null) {
+                            if (parent != null) {
+                                parent.remove(table);
+                                parent.revalidate();
+                                parent.repaint();
+                                if (parent2 != null) {
+                                    parent2.remove(parent);
+                                    parent.revalidate();
+                                    parent.repaint();
+                                    if (parent3 != null) {
+                                        parent3.remove(parent2);
+                                        parent3.revalidate();
+                                        parent3.repaint();
+                                        RiempiTabella(risultati1);
+                                        btnOrderTime.setBackground(Color.GRAY);
+                                        btnOrderDiff.setBackground(Color.BLACK);
+                                        btnOrderPoint.setBackground(Color.BLACK);
 
-            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
-            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
-            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+                                        ColorbtnOrderTime = btnOrderTime.getBackground();
+                                        ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                                        ColorbtnOrderPoint = btnOrderPoint.getBackground();
 
-            System.out.println(table.getRowCount());
+                                        btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                                        btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                                        btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+
+                                        System.out.println(table.getRowCount());
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("Tabella non esiste");
+                        }
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }else{
+                String[][] risultati1;
+                DBConnectionMariaDB c = new DBConnectionMariaDB();
+                Query q = new Query();
+                try {
+                    risultati1 = q.getQuerySelectPartiteTempo();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                if(risultati1!=null){
+                    RiempiTabella(risultati1);
+                }else {
+                    System.out.println("Tabella non esiste");
+                }
+                btnOrderTime.setBackground(Color.GRAY);
+                btnOrderDiff.setBackground(Color.BLACK);
+                btnOrderPoint.setBackground(Color.BLACK);
+
+                ColorbtnOrderTime = btnOrderTime.getBackground();
+                ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+                btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+
+                System.out.println(table.getRowCount());
+            }
 
         }
 
         if (e.getSource() == btnOrderDiff) {
 
             Container parent = table.getParent();
-            Container parent2=parent.getParent();
-            Container parent3=parent2.getParent();
+            if(parent!=null){
+                Container parent2=parent.getParent();
+                if(parent2 !=null){
+                    Container parent3=parent2.getParent();
+                    DBConnectionMariaDB c = new DBConnectionMariaDB();
+                    Query q = new Query();
 
-            if (parent != null) {
-                parent.remove(table);
-                parent.revalidate();
-                parent.repaint();
-                if(parent2!=null){
-                    parent2.remove(parent);
-                    parent.revalidate();
-                    parent.repaint();
-                    if(parent3!=null){
-                        parent3.remove(parent2);
-                        parent3.revalidate();
-                        parent3.repaint();
+                    String[][] risultati1;
+                    try {
+                        risultati1 = q.getQuerySelectPartiteDifficolta();
+
+                        if(risultati1 != null){
+                            if (parent != null) {
+                                parent.remove(table);
+                                parent.revalidate();
+                                parent.repaint();
+                                if(parent2!=null){
+                                    parent2.remove(parent);
+                                    parent.revalidate();
+                                    parent.repaint();
+                                    if(parent3!=null){
+                                        parent3.remove(parent2);
+                                        parent3.revalidate();
+                                        parent3.repaint();
+                                    }
+                                }
+                                RiempiTabella(risultati1);
+                                btnOrderDiff.setBackground(Color.GRAY);
+                                btnOrderTime.setBackground(Color.BLACK);
+                                btnOrderPoint.setBackground(Color.BLACK);
+
+                                ColorbtnOrderTime = btnOrderTime.getBackground();
+                                ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                                ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+                                btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                                btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                                btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+                            }
+                        }else{
+                            System.out.println("Tabella non esiste");
+                        }
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
+
+                }
+            }else{
+                String[][] risultati1;
+                Query q = new Query();
+                try {
+                    risultati1 = q.getQuerySelectPartiteDifficolta();
+
+                    if(risultati1 != null){
+                        RiempiTabella(risultati1);
+                    }else {
+                        System.out.println("Tabella non esiste");
+                    }
+                    btnOrderDiff.setBackground(Color.GRAY);
+                    btnOrderTime.setBackground(Color.BLACK);
+                    btnOrderPoint.setBackground(Color.BLACK);
+
+                    ColorbtnOrderTime = btnOrderTime.getBackground();
+                    ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                    ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+                    btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                    btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                    btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
-
-            DBConnectionMariaDB c = new DBConnectionMariaDB();
-            Query q = new Query();
-
-            String[][] risultati1;
-            try {
-                risultati1 = q.getQuerySelectPartiteDifficolta();
-                /*
-                for(int i=0;i<lunghezza(risultati);i++){
-                    for (int j=0;j<4;j++){
-                        System.out.println(risultati[i][j]);
-                    }
-                }
-                */
-                RiempiTabella(risultati1);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            btnOrderDiff.setBackground(Color.GRAY);
-            btnOrderTime.setBackground(Color.BLACK);
-            btnOrderPoint.setBackground(Color.BLACK);
-
-            ColorbtnOrderTime = btnOrderTime.getBackground();
-            ColorbtnOrderDiff = btnOrderDiff.getBackground();
-            ColorbtnOrderPoint = btnOrderPoint.getBackground();
-
-            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
-            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
-            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
         }
 
         if (e.getSource() == btnOrderPoint) {
 
             Container parent = table.getParent();
-            Container parent2=parent.getParent();
-            Container parent3=parent2.getParent();
+            if(parent!=null) {
+                Container parent2 = parent.getParent();
+                if (parent2 != null) {
+                    Container parent3 = parent2.getParent();
 
-            if (parent != null) {
-                parent.remove(table);
-                parent.revalidate();
-                parent.repaint();
-                if(parent2!=null){
-                    parent2.remove(parent);
-                    parent.revalidate();
-                    parent.repaint();
-                    if(parent3!=null){
-                        parent3.remove(parent2);
-                        parent3.revalidate();
-                        parent3.repaint();
+                    String[][] risultati1;
+
+                    Query q1 = new Query();
+
+                    try {
+                        risultati1 = q1.getQuerySelectPartitePunteggio();
+
+                        if (risultati1 != null) {
+                            if (parent != null) {
+                                parent.remove(table);
+                                parent.revalidate();
+                                parent.repaint();
+                                if (parent2 != null) {
+                                    parent2.remove(parent);
+                                    parent.revalidate();
+                                    parent.repaint();
+                                    if (parent3 != null) {
+                                        parent3.remove(parent2);
+                                        parent3.revalidate();
+                                        parent3.repaint();
+                                    }
+                                }
+                                RiempiTabella(risultati1);
+                                btnOrderPoint.setBackground(Color.GRAY);
+                                btnOrderTime.setBackground(Color.BLACK);
+                                btnOrderDiff.setBackground(Color.BLACK);
+
+                                ColorbtnOrderTime = btnOrderTime.getBackground();
+                                ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                                ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+                                btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                                btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                                btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+                            }
+                        } else {
+                            System.out.println("Tabella non esiste");
+                        }
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
-            }
-
-            DBConnectionMariaDB c = new DBConnectionMariaDB();
-            Query q = new Query();
-
-            String[][] risultati1;
-            try {
-                risultati1 = q.getQuerySelectPartitePunteggio();
-                /*
-                for(int i=0;i<lunghezza(risultati);i++){
-                    for (int j=0;j<4;j++){
-                        System.out.println(risultati[i][j]);
-                    }
+            }else{
+                String[][] risultati1;
+                Query q1 = new Query();
+                try {
+                    risultati1 = q1.getQuerySelectPartitePunteggio();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
-                */
-                RiempiTabella(risultati1);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                if(risultati1!=null){
+                    RiempiTabella(risultati1);
+                    btnOrderPoint.setBackground(Color.GRAY);
+                    btnOrderTime.setBackground(Color.BLACK);
+                    btnOrderDiff.setBackground(Color.BLACK);
+
+                    ColorbtnOrderTime = btnOrderTime.getBackground();
+                    ColorbtnOrderDiff = btnOrderDiff.getBackground();
+                    ColorbtnOrderPoint = btnOrderPoint.getBackground();
+
+                    btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
+                    btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
+                    btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
+                }else {
+                    System.out.println("Tabella non esiste");
+                }
+
             }
-
-            btnOrderPoint.setBackground(Color.GRAY);
-            btnOrderTime.setBackground(Color.BLACK);
-            btnOrderDiff.setBackground(Color.BLACK);
-
-            ColorbtnOrderTime = btnOrderTime.getBackground();
-            ColorbtnOrderDiff = btnOrderDiff.getBackground();
-            ColorbtnOrderPoint = btnOrderPoint.getBackground();
-
-            btnOrderTime.addMouseListener(createMouseListener(ColorbtnOrderTime));
-            btnOrderDiff.addMouseListener(createMouseListener(ColorbtnOrderDiff));
-            btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
         }
     }
 
@@ -549,7 +797,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         }
     }
 
-    public void RiempiTabella(String risultati[]) {
+    public void RiempiTabella1(String risultati[][]) {
         model = new DefaultTableModel();
         model.addColumn("Parola");
         model.addColumn("Punteggio");
@@ -557,7 +805,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         // Aggiungi dati di esempio
         if (risultati != null) {
             for (int i = 0; i < lunghezza(risultati); i++) {
-                model.addRow(new Object[]{risultati[i], risultati[i],});
+                model.addRow(new Object[]{risultati[i][0], risultati[i][1]});
             }
 
             // Creazione della tabella
