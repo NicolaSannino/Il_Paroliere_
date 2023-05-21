@@ -56,7 +56,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 	JToggleButton toggleButton = new JToggleButton("Bottoni");
 
 	private char[][] tabella = new char[difficolta][difficolta];
-	private JLabel Testo, timeLabel, ContBtnTabella, Utente,Punteggio;
+	private JLabel Testo, timeLabel, ContBtnTabella, Utente,Punteggio,ParolaTrovata;
 	private JTextField testo;
 	private RoundedButton Invio, Annulla, Termina, NuovaPartita;
 	private JPanel GrigliaGioco, ContBtn, panelContBtn;
@@ -117,6 +117,22 @@ public class CampoGioco extends JFrame implements ActionListener{
 		Punteggio.setHorizontalAlignment(Punteggio.CENTER);
 		Punteggio.setVerticalAlignment(Punteggio.CENTER);
 		Punteggio.setForeground(Color.WHITE);
+
+
+
+		//======================================================================================================
+		//LABEL PAROLA TROVATA
+		//======================================================================================================
+		ParolaTrovata = new JLabel();
+		ParolaTrovata.setText("");
+		ParolaTrovata.setFont(new Font("MV Boli", Font.BOLD, 20));
+		ParolaTrovata.setOpaque(false);
+		ParolaTrovata.setSize(300,45);
+		this.centerComponent(this,ParolaTrovata,695);
+
+		ParolaTrovata.setHorizontalAlignment(ParolaTrovata.CENTER);
+		ParolaTrovata.setVerticalAlignment(ParolaTrovata.CENTER);
+		//ParolaTrovata.setForeground(Color.BLACK);
 
 		//======================================================================================================
 		// TITOLO CAMPO DA GIOCO
@@ -481,6 +497,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 		// IMPOSTAZIONI FRAME
 		//======================================================================================================
 
+		this.add(ParolaTrovata);
 		this.add(Punteggio);
 		this.add(Utente);
 		this.add(labelTitolo);
@@ -650,7 +667,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 			if(azione.equals("Annulla Parola")){
 				//System.out.println(difficolta);
-
+				ParolaTrovata.setText("PAROLA ANNULLATA");
 				button.setBackground(Color.BLACK);
 				button.setForeground(Color.WHITE);
 
@@ -700,7 +717,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 					try {
 						if(q.ricercaParolaDb(t,conn) == true){
 							//System.out.println("parola trovata");
-
+							ParolaTrovata.setText("PAROLA TROVATA");
 							paroleTrovate.add(t);
 							punteggio = t.length();
 							model.addRow(new Object[]{t, punteggio});
@@ -710,14 +727,19 @@ public class CampoGioco extends JFrame implements ActionListener{
 							numParTrovate++;
 
 						}else{
-							System.out.println("parola non trovata");
+							ParolaTrovata.setText("PAROLA NON TROVATA");
 						}
 					} catch (SQLException ex) {
 						throw new RuntimeException(ex);
 					}
 
 				} else {
-					System.out.println("parola non trovata");
+					//System.out.println("parola non trovata");
+					if(t.equals(testo.getText())){
+						ParolaTrovata.setText("NON HAI INSERITO PAROLE");
+					}else{
+						ParolaTrovata.setText("PAROLA GIÀ TROVATA");
+					}
 				}
 
 				parolaEsistente=false;
