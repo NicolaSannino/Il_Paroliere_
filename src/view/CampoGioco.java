@@ -69,6 +69,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 	int minutes = 10;
 	int seconds = 480;
+	int temporaneo=480;
 	boolean fine = false;
 
 	boolean buttonTesto = true;
@@ -458,13 +459,14 @@ public class CampoGioco extends JFrame implements ActionListener{
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(fine == false){
-
 					seconds--;
-					int hour = seconds / 3600;
-					int minute = (seconds % 3600) / 60;
-					int second = seconds % 60;
-					timeLabel.setText(String.format("%02d:%02d", minute, second));
-
+						int hour = seconds / 3600;
+						int minute = (seconds % 3600) / 60;
+						int second = seconds % 60;
+						timeLabel.setText(String.format("%02d:%02d", minute, second));
+						if((temporaneo-2)==seconds){
+							ParolaTrovata.setText("");
+						}
 					if(Integer.compare(seconds,0)==0){
 						DBConnectionMariaDB connTermine1 = new DBConnectionMariaDB();
 						Query q2 = new Query();
@@ -665,6 +667,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			if(azione.equals("Annulla Parola")){
 				//System.out.println(difficolta);
 				ParolaTrovata.setText("PAROLA ANNULLATA");
+				temporaneo=seconds;
 				button.setBackground(Color.BLACK);
 				button.setForeground(Color.WHITE);
 
@@ -715,6 +718,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 						if(q.ricercaParolaDb(t,conn) == true){
 							//System.out.println("parola trovata");
 							ParolaTrovata.setText("PAROLA TROVATA");
+							temporaneo=seconds;
 							paroleTrovate.add(t);
 							punteggio = t.length();
 							model.addRow(new Object[]{t, punteggio});
@@ -725,6 +729,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 
 						}else{
 							ParolaTrovata.setText("PAROLA NON TROVATA");
+							temporaneo=seconds;
 						}
 					} catch (SQLException ex) {
 						throw new RuntimeException(ex);
@@ -734,9 +739,12 @@ public class CampoGioco extends JFrame implements ActionListener{
 					//System.out.println("parola non trovata");
 					if(t.equals(testo.getText())){
 						ParolaTrovata.setText("NON HAI INSERITO PAROLE");
+						temporaneo=seconds;
 					}else{
 						ParolaTrovata.setText("PAROLA GIÀ TROVATA");
+						temporaneo=seconds;
 					}
+
 				}
 
 				parolaEsistente=false;

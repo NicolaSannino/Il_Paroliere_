@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione grafica e selectbox parole partita">
-      <change afterPath="$PROJECT_DIR$/file/Sfondo2.png" afterDir="false" />
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="label parola trovata non a scomparsa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomTableCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomTableCellRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +150,7 @@
       <workItem from="1684584248411" duration="6930000" />
       <workItem from="1684612296313" duration="9089000" />
       <workItem from="1684656971480" duration="7292000" />
+      <workItem from="1684669497273" duration="1821000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
