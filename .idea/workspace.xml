@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="Tabelle piu belle">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione finale label parola trovata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,10 +149,10 @@
       <workItem from="1684511668902" duration="6029000" />
       <workItem from="1684584248411" duration="6930000" />
       <workItem from="1684612296313" duration="9089000" />
-      <workItem from="1684656971480" duration="7617000" />
-      <workItem from="1684672128730" duration="1105000" />
-      <workItem from="1684673294376" duration="336000" />
-      <workItem from="1684685714547" duration="1735000" />
+      <workItem from="1684656971480" duration="7292000" />
+      <workItem from="1684669497273" duration="4188000" />
+      <workItem from="1684676800003" duration="1039000" />
+      <workItem from="1684737537182" duration="444000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -373,14 +371,28 @@
       <option name="project" value="LOCAL" />
       <updated>1684661654633</updated>
     </task>
-    <task id="LOCAL-00032" summary="Tabelle piu belle">
-      <created>1684666800000</created>
+    <task id="LOCAL-00032" summary="label parola trovata a scomparsa">
+      <created>1684671435237</created>
       <option name="number" value="00032" />
       <option name="presentableId" value="LOCAL-00032" />
       <option name="project" value="LOCAL" />
-      <updated>1684666800000</updated>
+      <updated>1684671435237</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="sistemazione controllo parola trovata">
+      <created>1684673827126</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1684673827126</updated>
+    </task>
+    <task id="LOCAL-00034" summary="sistemazione finale label parola trovata">
+      <created>1684677819396</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684677819396</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,8 +422,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
-    <MESSAGE value="modifica classe centra ogetti" />
     <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
     <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
     <MESSAGE value="bottone scelta" />
@@ -434,8 +444,10 @@
     <MESSAGE value="onMouseHover a tutti i bottoni" />
     <MESSAGE value="sistemazione selectbox e jtogglebutton" />
     <MESSAGE value="sistemazione grafica e selectbox parole partita" />
-    <MESSAGE value="Tabelle piu belle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tabelle piu belle" />
+    <MESSAGE value="label parola trovata a scomparsa" />
+    <MESSAGE value="sistemazione controllo parola trovata" />
+    <MESSAGE value="sistemazione finale label parola trovata" />
+    <option name="LAST_COMMIT_MESSAGE" value="sistemazione finale label parola trovata" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
