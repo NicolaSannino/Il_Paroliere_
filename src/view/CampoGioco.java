@@ -770,12 +770,13 @@ public class CampoGioco extends JFrame implements ActionListener{
 				dif="Difficile";
 			}
 
-
 			String tempo=Integer.toString(totOra)+":"+Integer.toString(totMinuti)+":"+Integer.toString(totSecondi);
 
 			System.out.println(tempo);
 			System.out.println(totPunteggio);
 			System.out.println(numParTrovate);
+
+			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
 
 			try {
 				int l;
@@ -791,7 +792,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 				}else{
 					l=lunghezza(str);
 					l1=Integer.parseInt(str[l-1][0])+1;
-					q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
 					Iterator <String> i = paroleTrovate.iterator();
 					while(i.hasNext()){
 						String parola=i.next();

@@ -233,7 +233,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnInvia.setBorder(null);
         panelCercaParole.add(btnInvia);
 
-        titoloSelectBox = new JLabel("Seleziona la partita");
+        titoloSelectBox = new JLabel("Seleziona la partita:");
         titoloSelectBox.setBounds(40, 20, 220, 30);
         titoloSelectBox.setHorizontalAlignment(JLabel.CENTER);
         titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 20));
@@ -256,6 +256,13 @@ public class PageStatistiche extends JFrame implements ActionListener {
             model.addColumn("Parole Trovate");
             model.addColumn("Difficoltà");
             model.addColumn("Nome Utente");
+
+            if(lunghezza(s)<4){
+                System.out.println("hfksdgkdsg");
+                panel.setBounds(50,280, 753,230);
+            }else{
+                panel.setBounds(50,280, 768,230);
+            }
 
             // Aggiungi dati di esempio
 
@@ -293,7 +300,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
             scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
-            panel.setBounds(50,280, 768,230);
 
             //======================================================================================================
             // IMPOSTAZIONI FRAME
@@ -333,7 +339,8 @@ public class PageStatistiche extends JFrame implements ActionListener {
             p.add(comboBox);
             panelCercaParole.add(p);
             p.setBounds(75,100,150,40);
-            //p.setOpaque(false);
+            p.setOpaque(true);
+            p.setBackground(Color.BLACK);
 
 
         }else{
@@ -903,6 +910,14 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
         // Aggiungi dati di esempio
         if (risultati[0][0] != null) {
+
+            if(lunghezza(risultati)<4){
+                System.out.println("hfksdgkdsg");
+                panel.setBounds(50,280, 753,230);
+            }else{
+                panel.setBounds(50,280, 768,230);
+            }
+
             for (int i = 0; i < lunghezza(risultati); i++) {
                 model.addRow(new Object[]{risultati[i][0], risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
             }
@@ -939,11 +954,6 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
 
-            if(lunghezza(risultati)<4){
-                panel.setSize(753, 230);
-            }else{
-                panel.setSize(768, 230);
-            }
         }
     }
 
@@ -1003,9 +1013,9 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.setBackground(Color.BLACK);
 
             if(lunghezza(risultati)<4){
-                panel.setSize(753, 230);
+                panel.setBounds(50,280, 753,230);
             }else{
-                panel.setSize(768, 230);
+                panel.setBounds(50,280, 768,230);
             }
         }
     }
