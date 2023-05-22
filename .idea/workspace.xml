@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="sistemazione finale label parola trovata">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-    </list>
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="commit finale controllo label parola trovata" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -392,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684677819396</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="commit finale controllo label parola trovata">
+      <created>1684738571223</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1684738571223</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
     <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
     <MESSAGE value="bottone scelta" />
     <MESSAGE value="aggiustamento paroliere, click bottoni e ricerca" />
@@ -447,7 +451,8 @@
     <MESSAGE value="label parola trovata a scomparsa" />
     <MESSAGE value="sistemazione controllo parola trovata" />
     <MESSAGE value="sistemazione finale label parola trovata" />
-    <option name="LAST_COMMIT_MESSAGE" value="sistemazione finale label parola trovata" />
+    <MESSAGE value="commit finale controllo label parola trovata" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit finale controllo label parola trovata" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
