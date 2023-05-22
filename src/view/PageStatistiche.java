@@ -24,7 +24,10 @@ public class PageStatistiche extends JFrame implements ActionListener {
     JScrollPane scrollPane, scrollPane1;
     JPanel panel,panelCercaParole;
     JLabel titoloSelectBox;
+    private JLabel ParolaTrovata;
+    private Timer timer;
 
+    private int seconds=3;
     ScrollableComboBoxExample.ScrollableComboBox<String> comboBox;
     private JComboBox<String> selectBox;
 
@@ -39,6 +42,20 @@ public class PageStatistiche extends JFrame implements ActionListener {
         this.setTitle("Pagina Statistiche");
         this.setSize(1200, 700);
         this.setContentPane(new CustomContentPane());
+
+        //======================================================================================================
+        // LABEL AVVISI
+        //======================================================================================================
+        ParolaTrovata = new JLabel();
+        ParolaTrovata.setText("");
+        ParolaTrovata.setFont(new Font("MV Boli", Font.BOLD, 20));
+        ParolaTrovata.setOpaque(false);
+        ParolaTrovata.setSize(520,135);
+        this.centerComponent(this,ParolaTrovata,20);
+
+        ParolaTrovata.setHorizontalAlignment(ParolaTrovata.CENTER);
+        ParolaTrovata.setVerticalAlignment(ParolaTrovata.CENTER);
+        this.add(ParolaTrovata);
 
         //======================================================================================================
         // TITOLO FRAME
@@ -125,6 +142,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnInvia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                seconds=3;
                 String selectedWord = (String) comboBox.getSelectedItem();
                 System.out.println(selectedWord);
                 Container parent = table.getParent();
@@ -160,7 +178,36 @@ public class PageStatistiche extends JFrame implements ActionListener {
                                         }
                                     }
                                 } else {
-                                    System.out.println("Partita non esiste");
+                                    if(selectedWord != null){
+                                        System.out.println("Partita non esiste");
+                                        ParolaTrovata.setText("In questa partita non sono state trovate parole");
+                                        timer = new Timer(1000, new ActionListener() {
+                                            public void actionPerformed(ActionEvent e) {
+                                                seconds--;
+                                                if(Integer.compare(seconds,0)==0){
+                                                    ParolaTrovata.setText("");
+                                                    seconds=3;
+                                                    timer.stop();
+                                                }
+                                            }
+                                        });
+                                        timer.start();
+                                    }else{
+                                        System.out.println("Partita non esiste");
+                                        ParolaTrovata.setText("Nessuna partita selezionata");
+                                        timer = new Timer(1000, new ActionListener() {
+                                            public void actionPerformed(ActionEvent e) {
+                                                seconds--;
+                                                if(Integer.compare(seconds,0)==0){
+                                                    ParolaTrovata.setText("");
+                                                    seconds=3;
+                                                    timer.stop();
+                                                }
+                                            }
+                                        });
+                                        timer.start();
+                                    }
+
                                 }
 
                             } catch (SQLException ex) {
@@ -186,7 +233,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         btnInvia.setBorder(null);
         panelCercaParole.add(btnInvia);
 
-        titoloSelectBox = new JLabel("Seleziona La Difficolta");
+        titoloSelectBox = new JLabel("Seleziona la partita");
         titoloSelectBox.setBounds(40, 20, 220, 30);
         titoloSelectBox.setHorizontalAlignment(JLabel.CENTER);
         titoloSelectBox.setFont(new Font("MV Boli", Font.BOLD, 20));
@@ -290,6 +337,19 @@ public class PageStatistiche extends JFrame implements ActionListener {
 
 
         }else{
+            ParolaTrovata.setText("Non esistono partite");
+            timer = new Timer(1000, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    seconds--;
+                    if(Integer.compare(seconds,0)==0){
+                        ParolaTrovata.setText("");
+                        seconds=3;
+                        timer.stop();
+                    }
+                }
+            });
+            timer.start();
+
             String[] options = new String[0];
             // Crea una ComboBox personalizzata scrollable
             comboBox = new ScrollableComboBoxExample.ScrollableComboBox<>(options);
@@ -518,7 +578,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == btnOrderTime) {
-
+            seconds=3;
             Container parent = table.getParent();
             if(parent!=null) {
                 Container parent2 = parent.getParent();
@@ -562,6 +622,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                             }
                         } else {
                             System.out.println("Tabella non esiste");
+                            ParolaTrovata.setText("Non esistono partite");
+                            timer = new Timer(1000, new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    seconds--;
+                                    if(Integer.compare(seconds,0)==0){
+                                        ParolaTrovata.setText("");
+                                        seconds=3;
+                                        timer.stop();
+                                    }
+                                }
+                            });
+                            timer.start();
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
@@ -581,6 +653,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                     RiempiTabella(risultati1);
                 }else {
                     System.out.println("Tabella non esiste");
+                    ParolaTrovata.setText("Non esistono partite");
+                    timer = new Timer(1000, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            seconds--;
+                            if(Integer.compare(seconds,0)==0){
+                                ParolaTrovata.setText("");
+                                seconds=3;
+                                timer.stop();
+                            }
+                        }
+                    });
+                    timer.start();
                 }
                 btnOrderTime.setBackground(Color.GRAY);
                 btnOrderDiff.setBackground(Color.BLACK);
@@ -600,7 +684,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == btnOrderDiff) {
-
+            seconds=3;
             Container parent = table.getParent();
             if(parent!=null){
                 Container parent2=parent.getParent();
@@ -643,6 +727,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                             }
                         }else{
                             System.out.println("Tabella non esiste");
+                            ParolaTrovata.setText("Non esistono partite");
+                            timer = new Timer(1000, new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    seconds--;
+                                    if(Integer.compare(seconds,0)==0){
+                                        ParolaTrovata.setText("");
+                                        seconds=3;
+                                        timer.stop();
+                                    }
+                                }
+                            });
+                            timer.start();
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
@@ -658,7 +754,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                     if(risultati1 != null){
                         RiempiTabella(risultati1);
                     }else {
-                        System.out.println("Tabella non esiste");
+                        ParolaTrovata.setText("Non esistono partite");
+                        timer = new Timer(1000, new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                seconds--;
+                                if(Integer.compare(seconds,0)==0){
+                                    ParolaTrovata.setText("");
+                                    seconds=3;
+                                    timer.stop();
+                                }
+                            }
+                        });
+                        timer.start();
                     }
                     btnOrderDiff.setBackground(Color.GRAY);
                     btnOrderTime.setBackground(Color.BLACK);
@@ -678,7 +785,7 @@ public class PageStatistiche extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == btnOrderPoint) {
-
+            seconds=3;
             Container parent = table.getParent();
             if(parent!=null) {
                 Container parent2 = parent.getParent();
@@ -722,6 +829,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                             }
                         } else {
                             System.out.println("Tabella non esiste");
+                            ParolaTrovata.setText("Non esistono partite");
+                            timer = new Timer(1000, new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    seconds--;
+                                    if(Integer.compare(seconds,0)==0){
+                                        ParolaTrovata.setText("");
+                                        seconds=3;
+                                        timer.stop();
+                                    }
+                                }
+                            });
+                            timer.start();
                         }
 
                     } catch (SQLException ex) {
@@ -751,6 +870,18 @@ public class PageStatistiche extends JFrame implements ActionListener {
                     btnOrderPoint.addMouseListener(createMouseListener(ColorbtnOrderPoint));
                 }else {
                     System.out.println("Tabella non esiste");
+                    ParolaTrovata.setText("Non esistono partite");
+                    timer = new Timer(1000, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            seconds--;
+                            if(Integer.compare(seconds,0)==0){
+                                ParolaTrovata.setText("");
+                                seconds=3;
+                                timer.stop();
+                            }
+                        }
+                    });
+                    timer.start();
                 }
 
             }
@@ -807,8 +938,12 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
-            panel.setSize(768, 230);
 
+            if(lunghezza(risultati)<4){
+                panel.setSize(753, 230);
+            }else{
+                panel.setSize(768, 230);
+            }
         }
     }
 
@@ -866,8 +1001,12 @@ public class PageStatistiche extends JFrame implements ActionListener {
             panel.add(scrollPane, BorderLayout.CENTER);
             panel.setVisible(true);
             panel.setBackground(Color.BLACK);
-            panel.setSize(768, 230);
 
+            if(lunghezza(risultati)<4){
+                panel.setSize(753, 230);
+            }else{
+                panel.setSize(768, 230);
+            }
         }
     }
 
