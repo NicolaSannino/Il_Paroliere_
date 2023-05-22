@@ -1,0 +1,284 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"176fe9ab-5033-4136-ac6c-a795ad7ab536\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/CampoGioco.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/CampoGioco.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"MIXED\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"e6b6e71a-6328-4b90-9e0c-ea04bcd5c5de\" />\r\n        <option name=\"url\" value=\"https://github.com/NicolaSannino/Il_Paroliere_.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2L6RmBRJinVOSYnhfaY42B11D2a\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Downloads/mariadb-java-client-1.4.6.jar&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"Il_Paroliere\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"176fe9ab-5033-4136-ac6c-a795ad7ab536\" name=\"Changes\" comment=\"\" />\r\n      <created>1675189711879</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1675189711879</updated>\r\n      <workItem from=\"1675189713685\" duration=\"605000\" />\r\n      <workItem from=\"1675190401634\" duration=\"5000\" />\r\n      <workItem from=\"1675763700181\" duration=\"408000\" />\r\n      <workItem from=\"1676367942818\" duration=\"3722000\" />\r\n      <workItem from=\"1676453329761\" duration=\"1679000\" />\r\n      <workItem from=\"1678183396337\" duration=\"5927000\" />\r\n      <workItem from=\"1678262813504\" duration=\"79000\" />\r\n      <workItem from=\"1678263433344\" duration=\"94000\" />\r\n      <workItem from=\"1678364963911\" duration=\"52000\" />\r\n      <workItem from=\"1679392560859\" duration=\"1647000\" />\r\n      <workItem from=\"1679568085707\" duration=\"2321000\" />\r\n      <workItem from=\"1679577587697\" duration=\"2386000\" />\r\n      <workItem from=\"1679740515344\" duration=\"1992000\" />\r\n      <workItem from=\"1679744010567\" duration=\"3995000\" />\r\n      <workItem from=\"1679998306414\" duration=\"15000\" />\r\n      <workItem from=\"1679998475602\" duration=\"50000\" />\r\n      <workItem from=\"1680825823049\" duration=\"2035000\" />\r\n      <workItem from=\"1680968047259\" duration=\"499000\" />\r\n      <workItem from=\"1680970373998\" duration=\"2572000\" />\r\n      <workItem from=\"1681298028703\" duration=\"2047000\" />\r\n      <workItem from=\"1681810933689\" duration=\"271000\" />\r\n      <workItem from=\"1681894489699\" duration=\"481000\" />\r\n      <workItem from=\"1681894998192\" duration=\"1616000\" />\r\n      <workItem from=\"1681976898413\" duration=\"1446000\" />\r\n      <workItem from=\"1683020611645\" duration=\"1703000\" />\r\n      <workItem from=\"1683716290290\" duration=\"13000\" />\r\n      <workItem from=\"1683734996464\" duration=\"3638000\" />\r\n      <workItem from=\"1683742601572\" duration=\"6936000\" />\r\n      <workItem from=\"1683790253441\" duration=\"8724000\" />\r\n      <workItem from=\"1683823718615\" duration=\"691000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Prima matrice\">\r\n      <created>1676454368951</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1676454368951</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"seconda matrice\">\r\n      <created>1678184374622</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678184374622</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"nuova grafica 1\">\r\n      <created>1680826545869</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680826545869</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"implementazione matrice in campo gioco\">\r\n      <created>1680827086135</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827086135</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"implementazione matrice in campo gioco 2\">\r\n      <created>1680827207273</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827207273</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"implementazione matrice in campo gioco 3\">\r\n      <created>1680827346757</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827346757</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"commit view\">\r\n      <created>1680827474015</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827474015</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"commit aggiornamento\">\r\n      <created>1680827699161</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827699161</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo\">\r\n      <created>1682099512596</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682099512596</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"modifica classe centra ogetti\">\r\n      <created>1683021884725</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683021884725</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"matrice per controllo parola all'interno del paroliere\">\r\n      <created>1683738602828</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683738602828</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola\">\r\n      <created>1683749459998</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683749459998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"bottone scelta\">\r\n      <created>1683794752374</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683794752374</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"14\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/master\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Prima matrice\" />\r\n    <MESSAGE value=\"seconda matrice\" />\r\n    <MESSAGE value=\"nuova grafica 1\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco 2\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco 3\" />\r\n    <MESSAGE value=\"commit view\" />\r\n    <MESSAGE value=\"commit aggiornamento\" />\r\n    <MESSAGE value=\"inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo\" />\r\n    <MESSAGE value=\"modifica classe centra ogetti\" />\r\n    <MESSAGE value=\"matrice per controllo parola all'interno del paroliere\" />\r\n    <MESSAGE value=\"Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola\" />\r\n    <MESSAGE value=\"bottone scelta\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"bottone scelta\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/Il_Paroliere$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1683736989739\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,8 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
++    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="Utilizzo Center label">
++      <change afterPath="$PROJECT_DIR$/src/view/CampoGiocoDifficile.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -25,7 +27,7 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-    <option name="RESET_MODE" value="MIXED" />
++    <option name="RESET_MODE" value="HARD" />
+   </component>
+   <component name="GitHubPullRequestSearchHistory">{
+   &quot;lastFilter&quot;: {
+@@ -42,6 +44,9 @@
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
++  </component>
++  <component name="ProblemsViewState">
++    <option name="selectedTabId" value="ProjectErrors" />
+   </component>
+   <component name="ProjectId" id="2L6RmBRJinVOSYnhfaY42B11D2a" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+@@ -53,9 +58,8 @@
+   &quot;keyToString&quot;: {
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Downloads/mariadb-java-client-1.4.6.jar&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/nicol/Downloads/mysql-connector-j-8.0.32.jar&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+@@ -63,23 +67,16 @@
+     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;Settings.JavaScript&quot;,
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+ }</component>
+-  <component name="RunManager">
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Main" />
+-      <module name="Il_Paroliere" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Application.Main" />
+-      </list>
+-    </recent_temporary>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\file" />
++      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\src\model" />
++      <recent name="C:\Users\nicol\IdeaProjects\Il_Paroliere\src\model\file" />
++    </key>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -94,31 +91,42 @@
+       <workItem from="1675763700181" duration="408000" />
+       <workItem from="1676367942818" duration="3722000" />
+       <workItem from="1676453329761" duration="1679000" />
+-      <workItem from="1678183396337" duration="5927000" />
+-      <workItem from="1678262813504" duration="79000" />
+-      <workItem from="1678263433344" duration="94000" />
+-      <workItem from="1678364963911" duration="52000" />
+-      <workItem from="1679392560859" duration="1647000" />
+-      <workItem from="1679568085707" duration="2321000" />
+-      <workItem from="1679577587697" duration="2386000" />
+-      <workItem from="1679740515344" duration="1992000" />
+-      <workItem from="1679744010567" duration="3995000" />
+-      <workItem from="1679998306414" duration="15000" />
+-      <workItem from="1679998475602" duration="50000" />
+-      <workItem from="1680825823049" duration="2035000" />
+-      <workItem from="1680968047259" duration="499000" />
+-      <workItem from="1680970373998" duration="2572000" />
+-      <workItem from="1681298028703" duration="2047000" />
+-      <workItem from="1681810933689" duration="271000" />
+-      <workItem from="1681894489699" duration="481000" />
+-      <workItem from="1681894998192" duration="1616000" />
+-      <workItem from="1681976898413" duration="1446000" />
+-      <workItem from="1683020611645" duration="1703000" />
+-      <workItem from="1683716290290" duration="13000" />
+-      <workItem from="1683734996464" duration="3638000" />
+-      <workItem from="1683742601572" duration="6936000" />
+-      <workItem from="1683790253441" duration="8724000" />
+-      <workItem from="1683823718615" duration="691000" />
++      <workItem from="1678183396337" duration="863000" />
++      <workItem from="1678185459497" duration="2365000" />
++      <workItem from="1678364233574" duration="414000" />
++      <workItem from="1678365132279" duration="12000" />
++      <workItem from="1678365276809" duration="11000" />
++      <workItem from="1678365874637" duration="49000" />
++      <workItem from="1679394311076" duration="2043000" />
++      <workItem from="1679568018964" duration="1193000" />
++      <workItem from="1679569236855" duration="1177000" />
++      <workItem from="1679990122454" duration="2077000" />
++      <workItem from="1679996509959" duration="3234000" />
++      <workItem from="1680090245494" duration="896000" />
++      <workItem from="1680553326093" duration="1956000" />
++      <workItem from="1680594412862" duration="641000" />
++      <workItem from="1680601503572" duration="735000" />
++      <workItem from="1680603836402" duration="1749000" />
++      <workItem from="1680784837152" duration="1193000" />
++      <workItem from="1680825824513" duration="1682000" />
++      <workItem from="1680827531429" duration="113000" />
++      <workItem from="1680827657352" duration="74000" />
++      <workItem from="1680827741964" duration="100000" />
++      <workItem from="1680827853712" duration="14000" />
++      <workItem from="1680966652462" duration="65000" />
++      <workItem from="1680969622632" duration="2609000" />
++      <workItem from="1681028080812" duration="1599000" />
++      <workItem from="1681802616890" duration="364000" />
++      <workItem from="1681810738563" duration="1655000" />
++      <workItem from="1681895559221" duration="3313000" />
++      <workItem from="1682579059746" duration="121000" />
++      <workItem from="1683019953322" duration="2444000" />
++      <workItem from="1683716522161" duration="127000" />
++      <workItem from="1683787441732" duration="123000" />
++      <workItem from="1683798827694" duration="1470000" />
++      <workItem from="1683818664351" duration="12000" />
++      <workItem from="1683823066980" duration="2512000" />
++      <workItem from="1683870842046" duration="72000" />
+     </task>
+     <task id="LOCAL-00001" summary="Prima matrice">
+       <created>1676454368951</created>
+@@ -127,91 +135,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1676454368951</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="seconda matrice">
+-      <created>1678184374622</created>
++    <task id="LOCAL-00002" summary="Accesso file e DB">
++      <created>1680601550239</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1678184374622</updated>
++      <updated>1680601550239</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="nuova grafica 1">
+-      <created>1680826545869</created>
++    <task id="LOCAL-00003" summary="Grafica campo da gioco">
++      <created>1680826063128</created>
+       <option name="number" value="00003" />
+       <option name="presentableId" value="LOCAL-00003" />
+       <option name="project" value="LOCAL" />
+-      <updated>1680826545869</updated>
++      <updated>1680826063128</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="implementazione matrice in campo gioco">
+-      <created>1680827086135</created>
++    <task id="LOCAL-00004" summary="Utilizzo Center label">
++      <created>1680970576999</created>
+       <option name="number" value="00004" />
+       <option name="presentableId" value="LOCAL-00004" />
+       <option name="project" value="LOCAL" />
+-      <updated>1680827086135</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="implementazione matrice in campo gioco 2">
+-      <created>1680827207273</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680827207273</updated>
+-    </task>
+-    <task id="LOCAL-00006" summary="implementazione matrice in campo gioco 3">
+-      <created>1680827346757</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680827346757</updated>
+-    </task>
+-    <task id="LOCAL-00007" summary="commit view">
+-      <created>1680827474015</created>
+-      <option name="number" value="00007" />
+-      <option name="presentableId" value="LOCAL-00007" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680827474015</updated>
+-    </task>
+-    <task id="LOCAL-00008" summary="commit aggiornamento">
+-      <created>1680827699161</created>
+-      <option name="number" value="00008" />
+-      <option name="presentableId" value="LOCAL-00008" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680827699161</updated>
+-    </task>
+-    <task id="LOCAL-00009" summary="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo">
+-      <created>1682099512596</created>
+-      <option name="number" value="00009" />
+-      <option name="presentableId" value="LOCAL-00009" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1682099512596</updated>
+-    </task>
+-    <task id="LOCAL-00010" summary="modifica classe centra ogetti">
+-      <created>1683021884725</created>
+-      <option name="number" value="00010" />
+-      <option name="presentableId" value="LOCAL-00010" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1683021884725</updated>
++      <updated>1680970576999</updated>
+     </task>
+-    <task id="LOCAL-00011" summary="matrice per controllo parola all'interno del paroliere">
+-      <created>1683738602828</created>
+-      <option name="number" value="00011" />
+-      <option name="presentableId" value="LOCAL-00011" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1683738602828</updated>
+-    </task>
+-    <task id="LOCAL-00012" summary="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola">
+-      <created>1683749459998</created>
+-      <option name="number" value="00012" />
+-      <option name="presentableId" value="LOCAL-00012" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1683749459998</updated>
+-    </task>
+-    <task id="LOCAL-00013" summary="bottone scelta">
+-      <created>1683794752374</created>
+-      <option name="number" value="00013" />
+-      <option name="presentableId" value="LOCAL-00013" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1683794752374</updated>
+-    </task>
+-    <option name="localTasksCounter" value="14" />
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -242,25 +187,13 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Prima matrice" />
+-    <MESSAGE value="seconda matrice" />
+-    <MESSAGE value="nuova grafica 1" />
+-    <MESSAGE value="implementazione matrice in campo gioco" />
+-    <MESSAGE value="implementazione matrice in campo gioco 2" />
+-    <MESSAGE value="implementazione matrice in campo gioco 3" />
+-    <MESSAGE value="commit view" />
+-    <MESSAGE value="commit aggiornamento" />
+-    <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
+-    <MESSAGE value="modifica classe centra ogetti" />
+-    <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
+-    <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
+-    <MESSAGE value="bottone scelta" />
+-    <option name="LAST_COMMIT_MESSAGE" value="bottone scelta" />
++    <MESSAGE value="Accesso file e DB" />
++    <MESSAGE value="Grafica campo da gioco" />
++    <MESSAGE value="Utilizzo Center label" />
++    <option name="LAST_COMMIT_MESSAGE" value="Utilizzo Center label" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+     <select />
+   </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/Il_Paroliere$Main.ic" NAME="Main Coverage Results" MODIFIED="1683736989739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+-  </component>
+ </project>
+\ No newline at end of file

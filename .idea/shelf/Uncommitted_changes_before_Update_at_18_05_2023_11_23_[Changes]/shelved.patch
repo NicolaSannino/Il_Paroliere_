@@ -1,0 +1,522 @@
+Index: src/model/Query.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.sql.Connection;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\n\r\npublic class Query {\r\n\r\n\r\n    public static void main(String[] args) {\r\n        // TODO Auto-generated method stub\r\n        Query q=new Query();\r\n        if(q.inserimentoParole()){\r\n            System.out.println(\"fine corretta\");\r\n        }else{\r\n            System.out.println(\"fine non corretta\");\r\n        }\r\n\r\n    }\r\n\r\n    public String[] getQuerySelectId() {\r\n        int codice=0;\r\n        DBConnection c=new DBConnection();\r\n        String query=\"\";\r\n        ResultSet s= c.QuerySelect(c.getC(),query,codice);\r\n        int i=0;\r\n        String marca,targa,anno,valore,id,foto,prop;\r\n        if(s!=null) {\r\n            String[] dati=new String[100];\r\n\r\n            return dati;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public String[][] getQuerySelectPartite() throws SQLException {\r\n        int codice=0;\r\n        DBConnectionMariaDB c=new DBConnectionMariaDB();\r\n        String query=\"SELECT * FROM partite\";\r\n        ResultSet s= c.QuerySelect(c.getC(),query,codice);\r\n        int i=0;\r\n        String numero,punteggio,tempo,parole_trovate,diff;\r\n        if(s!=null) {\r\n            String[][] dati=new String[100][5];\r\n            numero=s.getString(\"numero\");\r\n            punteggio=s.getString(\"punteggio\");\r\n            tempo=s.getString(\"tempo\");\r\n            parole_trovate=s.getString(\"parole_trovate\");\r\n            diff=s.getString(\"difficolta\");\r\n            dati[0][0]=numero;\r\n            dati[0][1]=punteggio;\r\n            dati[0][2]=tempo;\r\n            dati[0][3]=parole_trovate;\r\n            dati[0][4]=diff;\r\n            int j=1;\r\n            while(s.next()){\r\n                numero=s.getString(\"numero\");\r\n                punteggio=s.getString(\"punteggio\");\r\n                tempo=s.getString(\"tempo\");\r\n                parole_trovate=s.getString(\"parole_trovate\");\r\n                diff=s.getString(\"difficolta\");\r\n                dati[j][0]=numero;\r\n                dati[j][1]=numero;\r\n                dati[j][2]=numero;\r\n                dati[j][3]=numero;\r\n                dati[j][4]=diff;\r\n                j++;\r\n            }\r\n            return dati;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public boolean getInsertPartita(int punteggio,String tempo,String diff,int parole,DBConnectionMariaDB conn){\r\n        String querySelect=\"INSERT INTO partite (punteggio,tempo,parole_trovate,difficolta) VALUES(\"+punteggio+\",'\"+tempo+\"',\"+parole+\",'\"+diff+\"')\";\r\n        return conn.QueryGenerica(conn.getC(),querySelect);\r\n    }\r\n\r\n    public boolean getInsertParola(String parola,DBConnection conn){\r\n        String querySelect=\"INSERT INTO tbl_parole (parola) VALUES('\"+parola+\"')\";\r\n        return conn.QueryGenerica(conn.getC(),querySelect);\r\n    }\r\n\r\n    public boolean ricercaParolaDb(String p, DBConnectionMariaDB conn) throws SQLException {\r\n        String querySelect=\"SELECT parola FROM tbl_parole WHERE parola='\"+p+\"';\";\r\n        ResultSet s= conn.QuerySelect(conn.getC(),querySelect,0);\r\n        if(s ==null) {\r\n            return false;\r\n        }\r\n        String parola=s.getString(\"parola\");\r\n        if(parola.equals(p)==true){\r\n            return true;\r\n        }else {\r\n            return false;\r\n        }\r\n    }\r\n\r\n\r\n    public boolean inserimentoParole() {\r\n        //connessione al db\r\n        //System.out.print(\"ciao\");\r\n        BufferedReader reader;\r\n        try {\r\n            String line;\r\n            reader = new BufferedReader(new FileReader(\"file/parole.txt\"));\r\n            DBConnection conn = new DBConnection();\r\n            while ((line = reader.readLine()) != null) {\r\n                //System.out.println(line);\r\n                if(getInsertParola(line,conn)){\r\n                    System.out.println(\"giusto\");\r\n                }else {\r\n                    System.out.println(\"errore\");\r\n                    return false;\r\n                }\r\n            }\r\n\r\n            reader.close();\r\n            return true;\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Query.java b/src/model/Query.java
+--- a/src/model/Query.java	(revision bfc73fd5885008200d8eb315c78dc2f97b46b8e0)
++++ b/src/model/Query.java	(date 1684400664674)
+@@ -7,6 +7,7 @@
+ import java.sql.SQLException;
+ 
+ public class Query {
++    
+ 
+ 
+     public static void main(String[] args) {
+@@ -41,19 +42,21 @@
+         String query="SELECT * FROM partite";
+         ResultSet s= c.QuerySelect(c.getC(),query,codice);
+         int i=0;
+-        String numero,punteggio,tempo,parole_trovate,diff;
++        String numero,punteggio,tempo,parole_trovate,diff,nome_utenti;
+         if(s!=null) {
+-            String[][] dati=new String[100][5];
++            String[][] dati=new String[100][6];
+             numero=s.getString("numero");
+             punteggio=s.getString("punteggio");
+             tempo=s.getString("tempo");
+             parole_trovate=s.getString("parole_trovate");
+             diff=s.getString("difficolta");
++            nome_utenti=s.getString("nome_utenti");
+             dati[0][0]=numero;
+             dati[0][1]=punteggio;
+             dati[0][2]=tempo;
+             dati[0][3]=parole_trovate;
+             dati[0][4]=diff;
++            dati[0][5]=nome_utenti;
+             int j=1;
+             while(s.next()){
+                 numero=s.getString("numero");
+@@ -61,11 +64,13 @@
+                 tempo=s.getString("tempo");
+                 parole_trovate=s.getString("parole_trovate");
+                 diff=s.getString("difficolta");
++                nome_utenti=s.getString("nome_utenti");
+                 dati[j][0]=numero;
+-                dati[j][1]=numero;
+-                dati[j][2]=numero;
+-                dati[j][3]=numero;
++                dati[j][1]=punteggio;
++                dati[j][2]=tempo;
++                dati[j][3]=parole_trovate;
+                 dati[j][4]=diff;
++                dati[j][5]=nome_utenti;
+                 j++;
+             }
+             return dati;
+@@ -73,8 +78,8 @@
+         return null;
+     }
+ 
+-    public boolean getInsertPartita(int punteggio,String tempo,String diff,int parole,DBConnectionMariaDB conn){
+-        String querySelect="INSERT INTO partite (punteggio,tempo,parole_trovate,difficolta) VALUES("+punteggio+",'"+tempo+"',"+parole+",'"+diff+"')";
++    public boolean getInsertPartita(int punteggio,String tempo,String diff,String nome_utenti,int parole,DBConnectionMariaDB conn){
++        String querySelect="INSERT INTO partite (punteggio,tempo,parole_trovate,difficolta,nome_utenti) VALUES("+punteggio+",'"+tempo+"',"+parole+",'"+diff+"','"+nome_utenti+"')";
+         return conn.QueryGenerica(conn.getC(),querySelect);
+     }
+ 
+@@ -123,4 +128,9 @@
+             return false;
+         }
+     }
++
++
++
++
++
+ }
+Index: src/view/PageStatistiche.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport model.DBConnectionMariaDB;\r\nimport model.Query;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.table.DefaultTableCellRenderer;\r\nimport javax.swing.table.DefaultTableModel;\r\nimport javax.swing.table.TableColumn;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.sql.SQLException;\r\n\r\npublic class PageStatistiche extends JFrame implements ActionListener {\r\n\r\n    RoundedButton btnExit, btnOrderTime, btnOrderDiff, btnOrderPoint;\r\n    JPanel panelContBtnStats;\r\n\r\n    DefaultTableModel model;\r\n    JTable table;\r\n\r\n    public PageStatistiche() throws SQLException {\r\n\r\n        this.setTitle(\"Pagina Statistiche\");\r\n        this.setSize(1100, 700);\r\n\r\n        //======================================================================================================\r\n        // TITOLO FRAME\r\n        //======================================================================================================\r\n\r\n        JLabel labelTitolo = new JLabel();\r\n        labelTitolo.setText(\"Pagina Statistiche Paroliere\");\r\n        labelTitolo.setForeground(new Color(0, 0, 0));\r\n        labelTitolo.setFont(new Font(\"MV Boli\", Font.PLAIN, 40));\r\n\r\n        labelTitolo.setBackground(new Color(123, 50, 250));\r\n        labelTitolo.setOpaque(true);\r\n        labelTitolo.setVerticalAlignment(labelTitolo.TOP);\r\n        labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);\r\n        labelTitolo.setSize(600, 70);\r\n        this.centerComponent(this, labelTitolo, 20);\r\n\r\n        //======================================================================================================\r\n        // CREAZIONE BOTTONI ORDINAMENTO E TORNA HOMEPAGE\r\n        //======================================================================================================\r\n\r\n        btnOrderPoint = new RoundedButton(\"PUNTEGGIO\");\r\n        btnOrderPoint.setBounds(250, 0, 200, 60);\r\n        btnOrderPoint.addActionListener(this);\r\n        btnOrderPoint.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnOrderPoint.setBackground(Color.BLACK);\r\n        btnOrderPoint.setForeground(Color.white);\r\n        btnOrderPoint.setBorder(null);\r\n\r\n        btnOrderTime = new RoundedButton(\"TEMPO\");\r\n        btnOrderTime.setBounds(0, 0, 200, 60);\r\n        btnOrderTime.addActionListener(this);\r\n        btnOrderTime.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnOrderTime.setBackground(Color.BLACK);\r\n        btnOrderTime.setForeground(Color.white);\r\n        btnOrderTime.setBorder(null);\r\n\r\n        btnOrderDiff = new RoundedButton(\"DIFFICOLATA\");\r\n        btnOrderDiff.setBounds(500, 0, 200, 60);\r\n        btnOrderDiff.addActionListener(this);\r\n        btnOrderDiff.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnOrderDiff.setBackground(Color.BLACK);\r\n        btnOrderDiff.setForeground(Color.white);\r\n        btnOrderDiff.setBorder(null);\r\n\r\n        panelContBtnStats = new JPanel();\r\n        panelContBtnStats.setBackground(new Color(123, 50, 250));\r\n        panelContBtnStats.setSize(700, 60);\r\n        panelContBtnStats.setLayout(null);\r\n        panelContBtnStats.add(btnOrderPoint);\r\n        panelContBtnStats.add(btnOrderTime);\r\n        panelContBtnStats.add(btnOrderDiff);\r\n        centerComponent(this, panelContBtnStats, 150);\r\n\r\n        btnExit = new RoundedButton(\"HOME PAGE\");\r\n        btnExit.setSize(200, 60);\r\n        btnExit.addActionListener(this);\r\n        btnExit.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnExit.setBackground(Color.BLACK);\r\n        btnExit.setForeground(Color.white);\r\n        btnExit.setBorder(null);\r\n        centerComponent(this, btnExit, 550);\r\n\r\n        //======================================================================================================\r\n        // CREAZIONE TABELLA STATISTICHE\r\n        //======================================================================================================\r\n\r\n        JPanel panel = new JPanel(new BorderLayout());\r\n\r\n        // Creazione campi del modello dati della tabella\r\n        DefaultTableModel model = new DefaultTableModel();\r\n        model.addColumn(\"Partita\");\r\n        model.addColumn(\"Punteggio\");\r\n        model.addColumn(\"Tempo\");\r\n        model.addColumn(\"Parole Trovate\");\r\n        model.addColumn(\"Difficoltà\");\r\n\r\n        // Aggiungi dati di esempio\r\n\r\n        DBConnectionMariaDB c = new DBConnectionMariaDB();\r\n        Query q = new Query();\r\n\r\n        String[][] risultati = q.getQuerySelectPartite();\r\n        if(risultati[0][0] != null){\r\n            for (int i = 0; i < lunghezza(risultati); i++) {\r\n                model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4]});\r\n            }\r\n\r\n            // Creazione della tabella\r\n            JTable table = new JTable(model);\r\n            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);\r\n            table.setRowHeight(40);\r\n\r\n            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();\r\n            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);\r\n            table.setDefaultRenderer(Object.class, centerRenderer);\r\n            table.getTableHeader().setReorderingAllowed(false);\r\n            table.disable();\r\n\r\n            // Rendi le colonne non ridimensionabili\r\n            TableColumn column;\r\n            for (int i = 0; i < table.getColumnCount(); i++) {\r\n                column = table.getColumnModel().getColumn(i);\r\n                column.setResizable(false); // Rendi la colonna non ridimensionabile\r\n            }\r\n\r\n            JScrollPane scrollPane = new JScrollPane(table);\r\n            panel.add(scrollPane, BorderLayout.CENTER);\r\n            panel.setVisible(true);\r\n            panel.setBackground(Color.BLACK);\r\n            panel.setSize(400,200);\r\n\r\n            centerComponent(this, panel, 300);\r\n\r\n            //======================================================================================================\r\n            // IMPOSTAZIONI FRAME\r\n            //======================================================================================================\r\n\r\n            ImageIcon icon = new ImageIcon(\"file/ParoliereIcon.png\");\r\n            this.setIconImage(icon.getImage());\r\n\r\n            this.add(panel);\r\n            this.add(labelTitolo);\r\n            this.add(panelContBtnStats);\r\n            this.add(btnExit);\r\n\r\n            this.setLayout(null);\r\n            this.setResizable(false);\r\n            this.getContentPane().setBackground(new Color(123, 50, 250));\r\n            this.setVisible(true);\r\n            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n            centerFrame(this);\r\n        }\r\n    }\r\n\r\n    public void centerComponent(Frame f, JComponent c, int y){\r\n        Dimension frameSize = f.getSize();\r\n        Dimension componentSize = c.getSize();\r\n        c.setLocation ((frameSize.width - componentSize.width) / 2, y);\r\n    }\r\n\r\n    public static void centerFrame(Frame f)\r\n    {\r\n        Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();\r\n        Dimension frameSize = f.getSize ();\r\n        f.setLocation ((screenSize.width - frameSize.width) / 2,\r\n                (screenSize.height - frameSize.height) / 2 -30);\r\n    }\r\n\r\n    public int lunghezza(String[][] str){\r\n        boolean trovato=false;\r\n        int i=0;\r\n        while(str[i][0] != null && trovato==false){\r\n            if(str[i][0] == null){\r\n                trovato=true;\r\n            }\r\n            i++;\r\n        }\r\n        return i;\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n\r\n        if(e.getSource() == btnExit){\r\n\r\n            HomePage pageHome = new HomePage();\r\n            this.dispose();\r\n        }\r\n\r\n        if(e.getSource() == btnOrderTime){\r\n\r\n            btnOrderTime.setBackground(Color.GRAY);\r\n            btnOrderDiff.setBackground(Color.BLACK);\r\n            btnOrderPoint.setBackground(Color.BLACK);\r\n        }\r\n\r\n        if(e.getSource() == btnOrderDiff){\r\n\r\n            btnOrderDiff.setBackground(Color.GRAY);\r\n            btnOrderTime.setBackground(Color.BLACK);\r\n            btnOrderPoint.setBackground(Color.BLACK);\r\n        }\r\n\r\n        if(e.getSource() == btnOrderPoint){\r\n\r\n            btnOrderPoint.setBackground(Color.GRAY);\r\n            btnOrderTime.setBackground(Color.BLACK);\r\n            btnOrderDiff.setBackground(Color.BLACK);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/PageStatistiche.java b/src/view/PageStatistiche.java
+--- a/src/view/PageStatistiche.java	(revision bfc73fd5885008200d8eb315c78dc2f97b46b8e0)
++++ b/src/view/PageStatistiche.java	(date 1684396437820)
+@@ -61,7 +61,7 @@
+         btnOrderTime.setForeground(Color.white);
+         btnOrderTime.setBorder(null);
+ 
+-        btnOrderDiff = new RoundedButton("DIFFICOLATA");
++        btnOrderDiff = new RoundedButton("DIFFICOLTÀ");
+         btnOrderDiff.setBounds(500, 0, 200, 60);
+         btnOrderDiff.addActionListener(this);
+         btnOrderDiff.setFont(new Font("MV Boli", Font.BOLD, 15));
+@@ -100,6 +100,7 @@
+         model.addColumn("Tempo");
+         model.addColumn("Parole Trovate");
+         model.addColumn("Difficoltà");
++        model.addColumn("Nome Utente");
+ 
+         // Aggiungi dati di esempio
+ 
+@@ -109,7 +110,7 @@
+         String[][] risultati = q.getQuerySelectPartite();
+         if(risultati[0][0] != null){
+             for (int i = 0; i < lunghezza(risultati); i++) {
+-                model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4]});
++                model.addRow(new Object[]{risultati[i][0],risultati[i][1],risultati[i][2],risultati[i][3],risultati[i][4],risultati[i][5]});
+             }
+ 
+             // Creazione della tabella
+@@ -134,7 +135,7 @@
+             panel.add(scrollPane, BorderLayout.CENTER);
+             panel.setVisible(true);
+             panel.setBackground(Color.BLACK);
+-            panel.setSize(400,200);
++            panel.setSize(500,200);
+ 
+             centerComponent(this, panel, 300);
+ 
+Index: src/view/CampoGioco.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.Dimension;\r\nimport java.awt.Toolkit;\r\nimport java.awt.event.*;\r\nimport java.sql.SQLException;\r\nimport java.util.Iterator;\r\nimport java.util.Random;\r\nimport java.util.Vector;\r\n\r\nimport javax.swing.JButton;\r\nimport javax.swing.JFrame;\r\nimport javax.swing.JLabel;\r\nimport javax.swing.border.Border;\r\n\r\nimport model.DBConnectionMariaDB;\r\nimport model.Query;\r\n\r\nimport javax.swing.JToggleButton;\r\nimport javax.swing.table.DefaultTableCellRenderer;\r\nimport javax.swing.table.DefaultTableModel;\r\nimport javax.swing.table.TableCellRenderer;\r\nimport javax.swing.table.TableColumn;\r\n\r\nimport controller.dailettera;\r\n\r\nimport view.RoundedButton;\r\n\r\npublic class CampoGioco extends JFrame implements ActionListener{\r\n\r\n\tprivate int difficolta = 6;\r\n\r\n\tint numParTrovate = 0;\r\n\tint totPunteggio = 0;\r\n\tint punteggio;\r\n\r\n\tboolean parolaEsistente = false;\r\n\tVector<String> paroleTrovate = new Vector(0,1);\r\n\r\n\tDefaultTableModel model;\r\n\tJPanel panelTabellaRis;\r\n\r\n\tJTable table;\r\n\tVector<JButton> buttonsclick = new Vector(0,1);\r\n\r\n\tJButton[][] buttons = new JButton[difficolta][difficolta];\r\n\r\n\tJToggleButton toggleButton = new JToggleButton(\"Bottoni\");\r\n\r\n\tprivate char[][] tabella = new char[difficolta][difficolta];\r\n\tprivate JLabel Testo, timeLabel, ContBtnTabella;\r\n\tprivate JTextField testo;\r\n\tprivate RoundedButton Invio, Annulla, Termina, NuovaPartita;\r\n\tprivate JPanel GrigliaGioco, ContBtn;\r\n\tprivate Timer timer;\r\n\tRoundedButton Tabella;\r\n\r\n\tint minutes = 10;\r\n\tint seconds = 480;\r\n\tboolean fine = false;\r\n\r\n\tboolean buttonTesto = true;\r\n\r\n\tpublic CampoGioco(int dim){\r\n\r\n\t\tthis.setTitle(\"Campo da Gioco\");\r\n\t\tthis.setSize(1500, 800);\r\n\r\n\t\tdifficolta = dim;\r\n\r\n\t\tBorder border = BorderFactory.createLineBorder(Color.black, 3); //Bordo del jtextfield\r\n\t\tBorder border2 = BorderFactory.createLineBorder(Color.WHITE\t, 3); //Bordo dei btn della griglia\r\n\r\n\t\t//======================================================================================================\r\n\t\t// TITOLO CAMPO DA GIOCO\r\n\t\t//======================================================================================================\r\n\r\n\t\tJLabel labelTitolo = new JLabel();\r\n\t\tlabelTitolo.setText(\"Campo Da Gioco Paroliere\");\r\n\t\tlabelTitolo.setForeground(new Color(0, 0, 0));\r\n\t\tlabelTitolo.setFont(new Font(\"MV Boli\", Font.PLAIN, 40));\r\n\r\n\t\tlabelTitolo.setBackground(new Color(123, 50, 250));\r\n\t\tlabelTitolo.setOpaque(true);\r\n\t\tlabelTitolo.setSize(500, 70);\r\n\t\tthis.centerComponent(this, labelTitolo, 20);\r\n\r\n\t\t//======================================================================================================\r\n\t\t// BOTTONE ATTIVA DISATTIVA JBUTTON\r\n\t\t//======================================================================================================\r\n\r\n\t\tCentraOggetti c = new CentraOggetti();\r\n\t\ttoggleButton.addActionListener(this);\r\n\t\ttoggleButton.setBackground(Color.WHITE);\r\n\t\ttoggleButton.setForeground(Color.GRAY);\r\n\t\ttoggleButton.setPreferredSize(new Dimension(80, 40));\r\n\t\ttoggleButton.setMargin(new Insets(0, 10, 0, 10));\r\n\t\ttoggleButton.setVisible(true);\r\n\r\n\t\tif(difficolta == 4){\r\n\t\t\ttoggleButton.setBounds(400,300,100,30);\r\n\t\t}else if(difficolta == 5){\r\n\t\t\ttoggleButton.setBounds(380,310,100,30);\r\n\t\t} else if (difficolta == 6) {\r\n\t\t\ttoggleButton.setBounds(360,340,100,30);\r\n\t\t}\r\n\r\n\t\t//======================================================================================================\r\n\t\t// CREAZIONE GRIGLIA DA GIOCO BOTTONI\r\n\t\t//======================================================================================================\r\n\r\n\t\tGrigliaGioco = new JPanel();\r\n\t\tContBtn = new JPanel();\r\n\t\tGrigliaGioco.setLayout(new GridLayout(difficolta, difficolta, 0, 0));\r\n\r\n\t\tint a = 0;\r\n\r\n\t\tfor(int i = 1;i < difficolta+1; i++){\r\n\t\t\ta++;\r\n\t\t\tfor(int j = 1;j < difficolta+1; j++){\r\n\t\t\t\tRandom rand = new Random();\r\n\t\t\t\tint num;\r\n\t\t\t\tnum = rand.nextInt(100000);\r\n\t\t\t\tTabella = new RoundedButton(\"\"+(char)dailettera.controllo(num));\r\n\t\t\t\tTabella.setBorder(null);\r\n\t\t\t\tContBtnTabella = new JLabel();\r\n\r\n\t\t\t\ttabella[i-1][j-1] = (char)dailettera.controllo(num);\r\n\t\t\t\tbuttons[i-1][j-1] = Tabella;\r\n\t\t\t\tTabella.setName(\"Btn\"+a);\r\n\t\t\t\tTabella.addActionListener(this);\r\n\r\n\t\t\t\tContBtnTabella.setSize(75,75);\r\n\t\t\t\tContBtnTabella.setLayout(null);\r\n\t\t\t\tContBtnTabella.setBorder(border2);\r\n\r\n\t\t\t\tint labelWidth = ContBtnTabella.getWidth();\r\n\t\t\t\tint labelHeight = ContBtnTabella.getHeight();\r\n\r\n\t\t\t\tint x = (labelWidth - 55) / 2;\r\n\t\t\t\tint y = (labelHeight - 55) / 2;\r\n\r\n\t\t\t\tContBtnTabella.add(Tabella);\r\n\r\n\t\t\t\tTabella.setBounds(x, y, 55, 55);\r\n\t\t\t\tTabella.setBackground(Color.BLACK);\r\n\t\t\t\tTabella.setFont(new Font(\"MV Boli\", Font.BOLD, 20));\r\n\t\t\t\tTabella.setForeground(Color.WHITE);\r\n\r\n\t\t\t\tGrigliaGioco.add(ContBtnTabella);\r\n\r\n\t\t\t\ta++;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tstampaMatrice();\r\n\r\n\t\tContBtnTabella.setVisible(true);\r\n\t\tContBtnTabella.setBackground(new Color(123, 50, 250));\r\n\r\n\t\tGrigliaGioco.setVisible(true);\r\n\r\n\t\tif(difficolta == 4){\r\n\t\t\tGrigliaGioco.setSize(302, 302);\r\n\t\t\tthis.centerComponent(this, GrigliaGioco, 160);\r\n\t\t}else if(difficolta == 5){\r\n\t\t\tGrigliaGioco.setSize(376, 376);\r\n\t\t\tthis.centerComponent(this, GrigliaGioco, 140);\r\n\t\t} else if (difficolta == 6) {\r\n\t\t\tGrigliaGioco.setSize(450, 450);\r\n\t\t\tthis.centerComponent(this, GrigliaGioco, 130);\r\n\t\t}\r\n\r\n\t\tGrigliaGioco.setBackground(new Color(123, 50, 250));\r\n\t\tGrigliaGioco.setBorder(border2);\r\n\r\n\t\t//======================================================================================================\r\n\t\t// CREAZIONE TABELLA RISULTATI\r\n\t\t//======================================================================================================\r\n\r\n\t\t//Creazione dell'oggetto TableCellRenderer personalizzato\r\n\t\tFont font = new Font(\"Arial\", Font.BOLD, 13);\r\n\t\tColor foregroundColor = Color.black;\r\n\t\tTableCellRenderer renderer = new CustomTableCellRenderer(font, foregroundColor);\r\n\r\n\t\t//Creazione campi del modello dati della tabella\r\n\t\tmodel = new DefaultTableModel();\r\n\t\tmodel.addColumn(\"Parola\");\r\n\t\tmodel.addColumn(\"Punteggio\");\r\n\r\n\t\t// Creazione della tabella\r\n\t\ttable = new JTable(model);\r\n\t\ttable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);\r\n\t\ttable.setRowHeight(40);\r\n\t\ttable.getTableHeader().setReorderingAllowed(false);\r\n\t\t//table.setSize(200,200);\r\n\t\tDefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();\r\n\t\tcenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);\r\n\t\ttable.setDefaultRenderer(Object.class, centerRenderer);\r\n\t\ttable.getTableHeader().setReorderingAllowed(false);\r\n\r\n\t\t//Panel in cui inserire tabella\r\n\t\tpanelTabellaRis = new JPanel(new BorderLayout());\r\n\t\t//panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella\r\n\t\t//panelTabellaRis.add(titleLabelTblRis);\r\n\t\tpanelTabellaRis.setVisible(true);\r\n\r\n\t\tpanelTabellaRis.setBounds(1150,160,301,450);\r\n\r\n\t\tif(difficolta == 4){\r\n\t\t\tpanelTabellaRis.setBounds(1150,160,301,450);\r\n\t\t}else if(difficolta == 5){\r\n\t\t\tpanelTabellaRis.setBounds(1150,140,301,450);\r\n\t\t} else if (difficolta == 6) {\r\n\t\t\tpanelTabellaRis.setBounds(1150,130,301,450);\r\n\t\t}\r\n\r\n\t\tJScrollPane scrollPane = new JScrollPane(table);\r\n\t\tpanelTabellaRis.add(scrollPane, BorderLayout.CENTER);\r\n\t\tpanelTabellaRis.setVisible(true);\r\n\t\ttable.getTableHeader().setReorderingAllowed(false);\r\n\t\ttable.setVisible(true);\r\n\t\tTableColumn column;\r\n\r\n\t\tcolumn = table.getColumnModel().getColumn(0);\r\n\t\tcolumn.setPreferredWidth(150); // Imposta la larghezza desiderata per la colonna\r\n\t\tcolumn.setResizable(false);\r\n\t\tcolumn = table.getColumnModel().getColumn(1);\r\n\t\tcolumn.setPreferredWidth(149); // Imposta la larghezza desiderata per la colonna\r\n\t\tcolumn.setResizable(false);\r\n\r\n\t\t//======================================================================================================\r\n\t\t// JLABEL PER INSERIMENTO PAROLA DA CERCARE\r\n\t\t//======================================================================================================\r\n\r\n\t\tTesto = new JLabel(\"Inserisci lettere\");\r\n\t\ttesto= new JTextField(\"Inserisci lettere\");\r\n\t\ttesto.addFocusListener(new FocusListener() {\r\n\t\t\tpublic void focusGained(FocusEvent e) {\r\n\t\t\t\tif (testo.getText().equals(\"Inserisci lettere\")) {\r\n\t\t\t\t\ttesto.setText(\"\");\r\n\t\t\t\t\tbuttonTesto = false;\r\n\t\t\t\t\ttesto.setForeground(Color.BLACK);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\tpublic void focusLost(FocusEvent e) {\r\n\r\n\t\t\t}\r\n\t\t});\r\n\r\n\t\tthis.add(Testo);\r\n\t\tthis.add(testo);\r\n\t\ttesto.setVisible(false);\r\n\r\n\t\tFont fontA = new Font (\"MV Boli\", Font. BOLD, 20);\r\n\r\n\t\tTesto.setBorder(border);\r\n\t\ttesto.setBorder(border);\r\n\t\tTesto.setSize(280,35);\r\n\t\ttesto.setSize(280,35);\r\n\t\tTesto.setFont(fontA);\r\n\t\ttesto.setFont(fontA);\r\n\t\tTesto.setForeground(Color.BLACK);\r\n\t\ttesto.setForeground(Color.BLACK);\r\n\t\ttesto.setOpaque(false);\r\n\r\n\t\tif(difficolta == 6){\r\n\t\t\tthis.centerComponent(this, Testo, 620);\r\n\t\t\tthis.centerComponent(this, testo, 620);\r\n\t\t}else{\r\n\t\t\tthis.centerComponent(this, Testo, 550);\r\n\t\t\tthis.centerComponent(this, testo, 550);\r\n\t\t}\r\n\r\n\t\t//======================================================================================================\r\n\t\t// BOTTONI PER CERCARE O ANNULARE LA PAROLA INSERITA E TERMINA PARTITA\r\n\t\t//======================================================================================================\r\n\r\n\t\tInvio = new RoundedButton(\"Cerca Parola\");\r\n\t\tInvio.setBounds(0,0,200,50);\r\n\t\tInvio.addActionListener(this);\r\n\t\tInvio.setFont(new Font(\"MV Boli\", Font.BOLD, 20));\r\n\t\tInvio.setBackground(Color.BLACK);\r\n\t\tInvio.setForeground(Color.white);\r\n\t\tInvio.setBorder(null);\r\n\r\n\t\tAnnulla = new RoundedButton(\"Annulla Parola\");\r\n\t\tAnnulla.setBounds(250,0,200,50);\r\n\t\tAnnulla.addActionListener(this);\r\n\t\tAnnulla.setFont(new Font(\"MV Boli\", Font.BOLD, 20));\r\n\t\tAnnulla.setBackground(Color.BLACK);\r\n\t\tAnnulla.setForeground(Color.white);\r\n\t\tAnnulla.setBorder(null);\r\n\r\n\t\tContBtn.add(Invio);\r\n\t\tContBtn.add(Annulla);\r\n\t\tContBtn.setVisible(true);\r\n\t\tContBtn.setSize(450,50);\r\n\t\tContBtn.setBackground(new Color(123, 50, 250));\r\n\t\tContBtn.setLayout(null);\r\n\t\tthis.centerComponent(this, ContBtn, 700);\r\n\r\n\t\tTermina = new RoundedButton(\"Termina Partita\");\r\n\t\tTermina.setBounds(1270, 35, 170, 50);\r\n\t\tTermina.addActionListener(this);\r\n\t\tTermina.setFont(new Font(\"MV Boli\", Font.BOLD, 17));\r\n\t\tTermina.setBackground(Color.BLACK);\r\n\t\tTermina.setForeground(Color.white);\r\n\t\tTermina.setBorder(null);\r\n\r\n\t\tNuovaPartita = new RoundedButton(\"Nuova Partita\");\r\n\t\tNuovaPartita.setBounds(30, 700, 170, 50);\r\n\t\tNuovaPartita.addActionListener(this);\r\n\t\tNuovaPartita.setFont(new Font(\"MV Boli\", Font.BOLD, 17));\r\n\t\tNuovaPartita.setBackground(Color.BLACK);\r\n\t\tNuovaPartita.setForeground(Color.white);\r\n\t\tNuovaPartita.setBorder(null);\r\n\r\n\t\t//======================================================================================================\r\n\t\t// TIMER DELLA PARTITA\r\n\t\t//======================================================================================================\r\n\r\n\t\ttimeLabel = new JLabel(\"00:00\");\r\n\t\ttimeLabel.setFont(new Font(\"MV Boli\", Font.BOLD, 35));\r\n\t\ttimeLabel.setBounds(30, 30, 200,40);\r\n\r\n\t\ttimer = new Timer(1000, new ActionListener() {\r\n\t\t\tpublic void actionPerformed(ActionEvent e) {\r\n\t\t\t\tif(fine == false){\r\n\r\n\t\t\t\t\tseconds--;\r\n\t\t\t\t\tint hour = seconds / 3600;\r\n\t\t\t\t\tint minute = (seconds % 3600) / 60;\r\n\t\t\t\t\tint second = seconds % 60;\r\n\t\t\t\t\ttimeLabel.setText(String.format(\"%02d:%02d\", minute, second));\r\n\r\n\t\t\t\t\tif(Integer.compare(seconds,0)==0){\r\n\t\t\t\t\t\tDBConnectionMariaDB connTermine1 = new DBConnectionMariaDB();\r\n\t\t\t\t\t\tQuery q2 = new Query();\r\n\t\t\t\t\t\tString dif1=\"Facile\";\r\n\t\t\t\t\t\tif(Integer.compare(difficolta,6)==0){\r\n\t\t\t\t\t\t\tdif1=\"Facile\";\r\n\t\t\t\t\t\t}\r\n\r\n\t\t\t\t\t\tif(Integer.compare(difficolta,5)==0){\r\n\t\t\t\t\t\t\tdif1=\"Medio\";\r\n\t\t\t\t\t\t}\r\n\r\n\t\t\t\t\t\tif(Integer.compare(difficolta,4)==0){\r\n\t\t\t\t\t\t\tdif1=\"Difficile\";\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tq2.getInsertPartita(totPunteggio,\"08:00:00\",dif1,numParTrovate,connTermine1);\r\n\t\t\t\t\t\tfine = true;\r\n\t\t\t\t\t\ttimer.stop();\r\n\t\t\t\t\t\tCampoGioco.this.dispose();\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t});\r\n\t\ttimer.start();\r\n\r\n\t\t//======================================================================================================\r\n\t\t// IMPOSTAZIONI FRAME\r\n\t\t//======================================================================================================\r\n\r\n\t\tthis.add(labelTitolo);\r\n\t\tthis.add(GrigliaGioco);\r\n\t\tthis.add(ContBtn);\r\n\t\tthis.add(Termina);\r\n\t\tthis.add(timeLabel);\r\n\t\tthis.add(toggleButton);\r\n\t\tthis.add(panelTabellaRis);\r\n\t\tthis.add(NuovaPartita);\r\n\r\n\t\tImageIcon icon = new ImageIcon(\"file/ParoliereIcon.png\");\r\n\t\tthis.setIconImage(icon.getImage());\r\n\r\n\t\tthis.setLayout(null);\r\n\t\tthis.setResizable(false);\r\n\t\tthis.getContentPane().setBackground(new Color(123, 50, 250));\r\n\t\t//this.getContentPane().setBackground(Color.darkGray);\r\n\t\tthis.setVisible(true);\r\n\t\tthis.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\t\tcenterFrame(this);\r\n\t}\r\n\r\n\t//======================================================================================================\r\n\t// METODO CENTRA COMPONENTI - FRAME\r\n\t//======================================================================================================\r\n\r\n\tpublic void centerComponent(Frame f, JComponent c, int y){\r\n\t\tDimension frameSize = f.getSize();\r\n\t\tDimension componentSize = c.getSize();\r\n\t\tc.setLocation ((frameSize.width - componentSize.width) / 2, y);\r\n\t}\r\n\r\n\tpublic static void centerFrame(Frame f)\r\n\t{\r\n\t\tDimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();\r\n\t\tDimension frameSize = f.getSize ();\r\n\t\tf.setLocation ((screenSize.width - frameSize.width) / 2,\r\n\t\t\t\t(screenSize.height - frameSize.height) / 2 - 20);\r\n\t}\r\n\r\n\t//======================================================================================================\r\n\t// METODO PER GLI ACTIONLISTENER DEI BOTTONI\r\n\t//======================================================================================================\r\n\r\n\t@Override\r\n\tpublic void actionPerformed(ActionEvent e) {\r\n\t\tboolean trovato=false;\r\n\t\tString azione = e.getActionCommand();\r\n\r\n\t\tif((testo.getText().equals(\"\") || testo.getText().equals(\"Inserisci lettere\")&& (Testo.getText().equals(\"Inserisci lettere\")||Testo.getText().equals(\"\")))){\r\n\t\t\tbuttonTesto=true;\r\n\t\t}else{\r\n\t\t\tbuttonTesto=false;\r\n\t\t}\r\n\r\n\t\tif(azione.equals(\"Bottoni\") || azione.equals(\"Tastiera\")){\r\n\t\t\tSystem.out.println(buttonTesto);\r\n\t\t\tif (toggleButton.isSelected() && buttonTesto) {\r\n\t\t\t\t// se il pulsante è selezionato, eseguire queste azioni\r\n\t\t\t\ttoggleButton.setText(\"Tastiera\");\r\n\t\t\t\ttesto.setVisible(true);\r\n\t\t\t\tTesto.setVisible(false);\r\n\t\t\t\tAzzeraBottoni();\r\n\t\t\t} else {\r\n\t\t\t\tif(buttonTesto){\r\n\t\t\t\t\t// se il pulsante non è selezionato, eseguire queste azioni\r\n\t\t\t\t\ttoggleButton.setText(\"Bottoni\");\r\n\t\t\t\t\ttesto.setVisible(false);\r\n\t\t\t\t\tTesto.setVisible(true);\r\n\t\t\t\t\tSettaBottoni();\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}else{\r\n\t\t\tJButton button = (JButton) e.getSource();\r\n\t\t\tbuttonsclick.add(button);\r\n\r\n\t\t\tfor (int i = 97; i < 123; i++) {\r\n\t\t\t\ti = (char) i;\r\n\t\t\t\tif (azione.equals(Character.toString(i))) {\r\n\t\t\t\t\tif (Testo.getText().equals(\"Inserisci lettere\")) {\r\n\t\t\t\t\t\tTesto.setText(\"\");\r\n\t\t\t\t\t\tTesto.setText(Testo.getText() + azione);\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\tTesto.setText(Testo.getText() + azione);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tfor(int n=0;n<difficolta && trovato==false;n++){\r\n\t\t\t\t\t\tfor(int j=0;j<difficolta && trovato==false;j++){\r\n\t\t\t\t\t\t\tif(buttons[n][j].equals(button)){\r\n\t\t\t\t\t\t\t\tupdateButtons(n,j);\r\n\t\t\t\t\t\t\t\ttrovato=true;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\r\n\t\t\tif(azione.equals(\"Annulla Parola\")){\r\n\t\t\t\t//System.out.println(difficolta);\r\n\t\t\t\tbuttonTesto=true;\r\n\t\t\t\tbuttonsclick.clear();\r\n\t\t\t\tif(toggleButton.isSelected()){\r\n\t\t\t\t\ttesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tTesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tAzzeraBottoni();\r\n\t\t\t\t}else{\r\n\t\t\t\t\ttesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tTesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tSettaBottoni();\r\n\t\t\t\t}\r\n\r\n\t\t\t}\r\n\r\n\t\t\tif (azione.equals(\"Cerca Parola\")) {\r\n\t\t\t\tSystem.out.println(Testo.getText());\r\n\t\t\t\tDBConnectionMariaDB conn = new DBConnectionMariaDB();\r\n\t\t\t\tQuery q = new Query();\r\n\t\t\t\tbuttonTesto=true;\r\n\r\n\t\t\t\tString t;\r\n\t\t\t\tif(toggleButton.isSelected()){\r\n\t\t\t\t\tt=testo.getText();\r\n\t\t\t\t}else{\r\n\t\t\t\t\tt=Testo.getText();\r\n\t\t\t\t}\r\n\r\n\t\t\t\t//System.out.println(Testo.getText());\r\n\r\n\t\t\t\tIterator<String> c = paroleTrovate.iterator();\r\n\t\t\t\twhile(c.hasNext() && parolaEsistente == false){\r\n\t\t\t\t\tif(t.equals(c.next())){\r\n\t\t\t\t\t\tparolaEsistente=true;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tif (controllaParola(t) == true && parolaEsistente == false) {\r\n\t\t\t\t\t//System.out.println(\"parola trovata\");\r\n\t\t\t\t\ttry {\r\n\t\t\t\t\t\tif(q.ricercaParolaDb(t,conn) == true){\r\n\t\t\t\t\t\t\t//System.out.println(\"parola trovata\");\r\n\r\n\t\t\t\t\t\t\tparoleTrovate.add(t);\r\n\t\t\t\t\t\t\tpunteggio = t.length();\r\n\t\t\t\t\t\t\tmodel.addRow(new Object[]{t, punteggio});\r\n\t\t\t\t\t\t\ttable.setModel(model);\r\n\t\t\t\t\t\t\ttotPunteggio=totPunteggio+punteggio;\r\n\t\t\t\t\t\t\tnumParTrovate++;\r\n\r\n\t\t\t\t\t\t}else{\r\n\t\t\t\t\t\t\tSystem.out.println(\"parola non trovata\");\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t} catch (SQLException ex) {\r\n\t\t\t\t\t\tthrow new RuntimeException(ex);\r\n\t\t\t\t\t}\r\n\r\n\t\t\t\t} else {\r\n\t\t\t\t\tSystem.out.println(\"parola non trovata\");\r\n\t\t\t\t}\r\n\r\n\t\t\t\tparolaEsistente=false;\r\n\r\n\t\t\t\tif(toggleButton.isSelected()){\r\n\t\t\t\t\ttesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tTesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tAzzeraBottoni();\r\n\t\t\t\t}else{\r\n\t\t\t\t\ttesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tTesto.setText(\"Inserisci lettere\");\r\n\t\t\t\t\tSettaBottoni();\r\n\t\t\t\t}\r\n\t\t\t\tbuttonsclick.clear();\r\n\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tif(azione.equals(\"Termina Partita\")){\r\n\t\t\tDBConnectionMariaDB connTermine = new DBConnectionMariaDB();\r\n\t\t\tQuery q1 = new Query();\r\n\r\n\t\t\tint totSec=480-seconds;\r\n\r\n\t\t\tint totOra=totSec / 3600;\r\n\t\t\tint totMinuti=(totSec % 3600) / 60;\r\n\t\t\tint totSecondi=totSec % 60;\r\n\r\n\t\t\tString dif=\"Facile\";\r\n\t\t\tif(Integer.compare(difficolta,6)==0){\r\n\t\t\t\tdif=\"Facile\";\r\n\t\t\t}\r\n\r\n\t\t\tif(Integer.compare(difficolta,5)==0){\r\n\t\t\t\tdif=\"Medio\";\r\n\t\t\t}\r\n\r\n\t\t\tif(Integer.compare(difficolta,4)==0){\r\n\t\t\t\tdif=\"Difficile\";\r\n\t\t\t}\r\n\r\n\r\n\t\t\tString tempo=Integer.toString(totOra)+\":\"+Integer.toString(totMinuti)+\":\"+Integer.toString(totSecondi);\r\n\r\n\t\t\tSystem.out.println(tempo);\r\n\t\t\tSystem.out.println(totPunteggio);\r\n\t\t\tSystem.out.println(numParTrovate);\r\n\r\n\t\t\tq1.getInsertPartita(totPunteggio,tempo,dif,numParTrovate,connTermine);\r\n\r\n\t\t\tHomePage newPage = new HomePage();\r\n\t\t\tthis.dispose();\r\n\t\t}\r\n\r\n\t\tif(azione.equals(\"Nuova Partita\")){\r\n\t\t\tCampoGioco newPage = new CampoGioco(difficolta);\r\n\t\t\tthis.dispose();\r\n\t\t}\r\n\r\n\t}\r\n\r\n\tpublic void stampaMatrice(){\r\n\t\tfor(int i=0;i<difficolta;i++){\r\n\t\t\tSystem.out.println();\r\n\t\t\tfor(int j=0;j<difficolta;j++){\r\n\t\t\t\tSystem.out.println(tabella[i][j]);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tpublic boolean controllaParola(String parola) {\r\n\t\t// Controlla che la parola non sia vuota o null\r\n\t\tif (parola == null || parola.length() == 0) {\r\n\t\t\treturn false;\r\n\t\t}\r\n\r\n\t\t// Converte la parola in minuscolo per confrontare i caratteri\r\n\t\tparola = parola.toLowerCase();\r\n\r\n\t\t// Cerca la prima lettera della parola nella tabella\r\n\t\tfor (int riga = 0; riga < tabella.length; riga++) {\r\n\t\t\tfor (int colonna = 0; colonna < tabella[0].length; colonna++) {\r\n\t\t\t\tif (tabella[riga][colonna] == parola.charAt(0)) {\r\n\t\t\t\t\t// Se la prima lettera è stata trovata, cerca le lettere successive\r\n\t\t\t\t\tif (cercaParola(parola, riga, colonna, 1)) {\r\n\t\t\t\t\t\treturn true;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t// Se la parola non è stata trovata, restituisce false\r\n\t\treturn false;\r\n\t}\r\n\r\n\t//======================================================================================================\r\n\t// METODO PER CERCARE LA PAROLA\r\n\t//======================================================================================================\r\n\r\n\tprivate boolean cercaParola(String parola, int riga, int colonna, int indice) {\r\n\t\t// Se tutte le lettere della parola sono state trovate, restituisce true\r\n\t\tif (indice == parola.length()) {\r\n\t\t\treturn true;\r\n\t\t}\r\n\r\n\t\t// Cerca la lettera successiva nella tabella\r\n\t\tfor (int riga2 = riga - 1; riga2 <= riga + 1; riga2++) {\r\n\t\t\tfor (int colonna2 = colonna - 1; colonna2 <= colonna + 1; colonna2++) {\r\n\t\t\t\t// Controlla che la posizione sia all'interno della tabella\r\n\t\t\t\tif (riga2 >= 0 && riga2 < tabella.length && colonna2 >= 0 && colonna2 < tabella[0].length && tabella[riga2][colonna2] == parola.charAt(indice)) {\r\n\t\t\t\t\t// Se la lettera successiva è stata trovata, cerca le lettere successive\r\n\t\t\t\t\tif (cercaParola(parola, riga2, colonna2, indice + 1)) {\r\n\t\t\t\t\t\treturn true;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t// Se la parola non è stata trovata, restituisce false\r\n\t\treturn false;\r\n\t}\r\n\r\n\t//======================================================================================================\r\n\t// METODO PER VERIFICARE LA CLICCABILITA DEI BOTTONI\r\n\t//======================================================================================================\r\n\r\n\tprivate void updateButtons(int row, int col) {\r\n\t\t// Impostazione della cliccabilità di tutti i bottoni a false\r\n\t\tfor (int i = 0; i < difficolta; i++) {\r\n\t\t\tfor (int j = 0; j < difficolta; j++) {\r\n\t\t\t\tbuttons[i][j].setEnabled(false);\r\n\t\t\t\tbuttons[i][j].setBorder(null);\r\n\t\t\t}\r\n\t\t}\r\n\t\t// Impostazione della cliccabilità dei bottoni adiacenti alla cella selezionata a false\r\n\t\tif (row > 0 ) {\r\n\t\t\tif(ifBottoneGiaCliccato(buttons[row - 1][col])==false) {\r\n\t\t\t\tbuttons[row - 1][col].setEnabled(true); // Cellula sopra\r\n\t\t\t}\r\n\r\n\t\t\tif(col>0){\r\n\t\t\t\tif(col < difficolta-1){\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row -1][col +1 ])==false){\r\n\t\t\t\t\t\tbuttons[row - 1][col + 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row - 1][col - 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t}else{\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row - 1][col - 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row - 1][col - 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}else{\r\n\t\t\t\tif(row<difficolta){\r\n\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row][col + 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row ][col + 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row-1][col + 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t}\r\n\r\n\t\t}\r\n\t\tif (row < difficolta-1) {\r\n\t\t\tif(ifBottoneGiaCliccato(buttons[row + 1][col])==false){\r\n\t\t\t\tbuttons[row + 1][col].setEnabled(true); // Cellula sotto\r\n\t\t\t}\r\n\r\n\t\t\tif(col>0){\r\n\t\t\t\tif(col < difficolta-1){\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row +1][col +1 ])==false){\r\n\t\t\t\t\t\tbuttons[row + 1][col + 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row + 1][col - 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t}else{\r\n\t\t\t\t\tif(ifBottoneGiaCliccato(buttons[row +1][col - 1 ])==false){\r\n\t\t\t\t\t\tbuttons[row + 1][col - 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}else{\r\n\t\t\t\tif(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){\r\n\t\t\t\t\tbuttons[row + 1][col + 1].setEnabled(true); // Cellula sopra\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tif (col > 0) {\r\n\t\t\tif(ifBottoneGiaCliccato(buttons[row][col - 1])==false){\r\n\t\t\t\tbuttons[row][col - 1].setEnabled(true); // Cellula a sinistra\r\n\t\t\t}\r\n\t\t}\r\n\t\tif (col < difficolta-1) {\r\n\t\t\tif(ifBottoneGiaCliccato(buttons[row][col + 1])==false){\r\n\t\t\t\tbuttons[row][col + 1].setEnabled(true); // Cellula a destra\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t}\r\n\r\n\tpublic boolean ifBottoneGiaCliccato(JButton b) {\r\n\t\tboolean trovato = false;\r\n\t\tIterator<JButton> j = buttonsclick.iterator();\r\n\r\n\t\twhile (j.hasNext() && trovato == false) {\r\n\t\t\tif (b.equals(j.next())) {\r\n\t\t\t\ttrovato = true;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\treturn trovato;\r\n\t}\r\n\r\n\tpublic void AzzeraBottoni(){\r\n\t\tfor (int i = 0; i < difficolta; i++) {\r\n\t\t\tfor (int j = 0; j < difficolta; j++) {\r\n\t\t\t\tbuttons[i][j].setEnabled(false);\r\n\t\t\t\tbuttons[i][j].setBorder(null);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tpublic void SettaBottoni(){\r\n\t\tfor (int i = 0; i < difficolta; i++) {\r\n\t\t\tfor (int j = 0; j < difficolta; j++) {\r\n\t\t\t\tbuttons[i][j].setEnabled(true);\r\n\t\t\t\tbuttons[i][j].setBorder(null);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\tpublic int getDifficolta() {\r\n\t\treturn difficolta;\r\n\t}\r\n\r\n\tpublic void setDifficolta(int difficolta) {\r\n\t\tthis.difficolta = difficolta;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/CampoGioco.java b/src/view/CampoGioco.java
+--- a/src/view/CampoGioco.java	(revision bfc73fd5885008200d8eb315c78dc2f97b46b8e0)
++++ b/src/view/CampoGioco.java	(date 1684401468962)
+@@ -35,6 +35,7 @@
+ 	int numParTrovate = 0;
+ 	int totPunteggio = 0;
+ 	int punteggio;
++	String nome_utenti;
+ 
+ 	boolean parolaEsistente = false;
+ 	Vector<String> paroleTrovate = new Vector(0,1);
+@@ -63,7 +64,9 @@
+ 
+ 	boolean buttonTesto = true;
+ 
+-	public CampoGioco(int dim){
++	public CampoGioco(int dim,String nome){
++
++		nome_utenti=nome;
+ 
+ 		this.setTitle("Campo da Gioco");
+ 		this.setSize(1500, 800);
+@@ -352,7 +355,7 @@
+ 						if(Integer.compare(difficolta,4)==0){
+ 							dif1="Difficile";
+ 						}
+-						q2.getInsertPartita(totPunteggio,"08:00:00",dif1,numParTrovate,connTermine1);
++						q2.getInsertPartita(totPunteggio,"08:00:00",dif1,nome_utenti,numParTrovate,connTermine1);
+ 						fine = true;
+ 						timer.stop();
+ 						CampoGioco.this.dispose();
+@@ -544,6 +547,7 @@
+ 			DBConnectionMariaDB connTermine = new DBConnectionMariaDB();
+ 			Query q1 = new Query();
+ 
++
+ 			int totSec=480-seconds;
+ 
+ 			int totOra=totSec / 3600;
+@@ -570,14 +574,14 @@
+ 			System.out.println(totPunteggio);
+ 			System.out.println(numParTrovate);
+ 
+-			q1.getInsertPartita(totPunteggio,tempo,dif,numParTrovate,connTermine);
++			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
+ 
+ 			HomePage newPage = new HomePage();
+ 			this.dispose();
+ 		}
+ 
+ 		if(azione.equals("Nuova Partita")){
+-			CampoGioco newPage = new CampoGioco(difficolta);
++			CampoGioco newPage = new CampoGioco(difficolta,nome_utenti);
+ 			this.dispose();
+ 		}
+ 
+@@ -711,6 +715,9 @@
+ 				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
+ 					buttons[row + 1][col + 1].setEnabled(true); // Cellula sopra
+ 				}
++				if(ifBottoneGiaCliccato(buttons[row +1][col + 1 ])==false){
++					buttons[row - 1][col + 1].setEnabled(true); // Cellula sopra
++				}
+ 			}
+ 		}
+ 
+Index: src/view/HomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.border.Border;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.sql.SQLException;\r\n\r\npublic class HomePage extends JFrame implements ActionListener {\r\n\r\n    RoundedButton btnOpenGioco, btnStatistiche;\r\n\r\n    private JComboBox<String> selectBox;\r\n    private JPanel panelComboBox, ContBtn;\r\n    private JLabel titoloSelectBox;\r\n    private JTextField InsNome;\r\n\r\n    String selectedOption = \"Facile\";\r\n\r\n    public HomePage(){\r\n\r\n        this.setTitle(\"HomePage il Paroliere\");\r\n        this.setSize(1100, 700);\r\n\r\n        Border bordo1 = BorderFactory.createLineBorder(Color.black, 3);\r\n        Font fontA = new Font (\"MV Boli\", Font. BOLD, 20);\r\n\r\n        //======================================================================================================\r\n        // TITOLO FRAME\r\n        //======================================================================================================\r\n\r\n        JLabel labelTitolo = new JLabel();\r\n        labelTitolo.setText(\"Homepage Paroliere\");\r\n        labelTitolo.setForeground(new Color(0, 0, 0));\r\n        labelTitolo.setFont(new Font(\"MV Boli\", Font.PLAIN, 40));\r\n\r\n        labelTitolo.setBackground(new Color(123, 50, 250));\r\n        labelTitolo.setOpaque(true);\r\n        labelTitolo.setVerticalAlignment(labelTitolo.TOP);\r\n        labelTitolo.setHorizontalAlignment(labelTitolo.CENTER);\r\n        labelTitolo.setSize(400, 70);\r\n        this.centerComponent(this,labelTitolo, 20);\r\n\r\n        //======================================================================================================\r\n        // CREAZIONE SELECT BOX DIFFICOLTA E INSERIMENTO NOME UTENTE\r\n        //======================================================================================================\r\n\r\n        String[] options = {\"Facile\", \"Medio\", \"Difficile\"};\r\n        selectBox = new JComboBox<>(options);\r\n        selectBox.addActionListener(this);\r\n\r\n        titoloSelectBox = new JLabel();\r\n        titoloSelectBox.setText(\"Seleziona la difficoltà\");\r\n        titoloSelectBox.setFont(new Font(\"MV Boli\", Font.BOLD, 25));\r\n\r\n        InsNome = new JTextField(\"Nome Utente\");\r\n        InsNome.setBorder(bordo1);\r\n        InsNome.setSize(250,30);\r\n        InsNome.setFont(fontA);\r\n        InsNome.setForeground(Color.BLACK);\r\n        InsNome.setOpaque(false);\r\n        InsNome.setVisible(true);\r\n        centerComponent(this, InsNome, 350);\r\n\r\n        panelComboBox = new JPanel();\r\n        panelComboBox.setSize(300, 100);\r\n        panelComboBox.setBackground(new Color(123, 50, 250));\r\n        panelComboBox.setLayout(new FlowLayout());\r\n        panelComboBox.add(titoloSelectBox);\r\n        panelComboBox.add(selectBox);\r\n        this.centerComponent(this, panelComboBox, 230);\r\n\r\n        //======================================================================================================\r\n        // BOTTONI PER AVVIARE PARTITA O PAGINA STATISTICHE\r\n        //======================================================================================================\r\n\r\n        btnOpenGioco = new RoundedButton(\"GIOCA\");\r\n        btnOpenGioco.setBounds(0,0,200,50);\r\n        btnOpenGioco.addActionListener(this);\r\n        btnOpenGioco.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnOpenGioco.setBackground(Color.BLACK);\r\n        btnOpenGioco.setForeground(Color.white);\r\n        btnOpenGioco.setBorder(null);\r\n\r\n        btnStatistiche = new RoundedButton(\"STATISTICHE\");\r\n        btnStatistiche.setBounds(250,0,200,50);\r\n        btnStatistiche.addActionListener(this);\r\n        btnStatistiche.setFont(new Font(\"MV Boli\", Font.BOLD, 15));\r\n        btnStatistiche.setBackground(Color.BLACK);\r\n        btnStatistiche.setForeground(Color.white);\r\n        btnStatistiche.setBorder(null);\r\n\r\n        ContBtn = new JPanel();\r\n        ContBtn.setBackground(new Color(123, 50, 250));\r\n        ContBtn.setSize(450,50);\r\n        ContBtn.setLayout(null);\r\n        this.centerComponent(this, ContBtn, 500);\r\n        ContBtn.add(btnOpenGioco);\r\n        ContBtn.add(btnStatistiche);\r\n        ContBtn.setVisible(true);\r\n\r\n        //======================================================================================================\r\n        // IMPOSTAZIONI FRAME\r\n        //======================================================================================================\r\n\r\n        ImageIcon icon = new ImageIcon(\"file/ParoliereIcon.png\");\r\n        this.setIconImage(icon.getImage());\r\n\r\n        this.add(labelTitolo);\r\n        this.add(panelComboBox);\r\n        this.add(ContBtn);\r\n        this.add(InsNome);\r\n\r\n        this.setLayout(null);\r\n        this.setResizable(false);\r\n        this.getContentPane().setBackground(new Color(123, 50, 250));\r\n        this.setVisible(true);\r\n        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        centerFrame(this);\r\n    }\r\n\r\n    public String getSelectedOption() {\r\n        return selectedOption;\r\n    }\r\n\r\n    public void setSelectedOption(String selectedOption) {\r\n        this.selectedOption = selectedOption;\r\n    }\r\n\r\n    public void centerComponent(Frame f, JComponent c, int y){\r\n        Dimension frameSize = f.getSize();\r\n        Dimension componentSize = c.getSize();\r\n        c.setLocation ((frameSize.width - componentSize.width) / 2, y);\r\n    }\r\n\r\n    public static void centerFrame(Frame f)\r\n    {\r\n        Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();\r\n        Dimension frameSize = f.getSize ();\r\n        f.setLocation ((screenSize.width - frameSize.width) / 2,\r\n                (screenSize.height - frameSize.height) / 2 - 30);\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n\r\n        if (e.getSource() == btnOpenGioco){\r\n\r\n            if(selectedOption.equals(\"Facile\")){\r\n                CampoGioco newPage = new CampoGioco(6);\r\n            }\r\n\r\n            if(selectedOption.equals(\"Medio\")){\r\n                CampoGioco newPage = new CampoGioco(5);\r\n            }\r\n\r\n            if(selectedOption.equals(\"Difficile\")){\r\n                CampoGioco newPage = new CampoGioco(4);\r\n            }\r\n\r\n            this.dispose();\r\n        }\r\n\r\n        if(e.getSource() == btnStatistiche){\r\n\r\n            try {\r\n                PageStatistiche pagStat = new PageStatistiche();\r\n            } catch (SQLException ex) {\r\n                System.out.println(\"Non ci sono partite\");\r\n                throw new RuntimeException(ex);\r\n            }\r\n            this.dispose();\r\n        }\r\n\r\n        if(e.getSource() == selectBox){\r\n            selectedOption = (String) selectBox.getSelectedItem();\r\n            System.out.println(\"Opzione selezionata: \" + selectedOption);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/HomePage.java b/src/view/HomePage.java
+--- a/src/view/HomePage.java	(revision bfc73fd5885008200d8eb315c78dc2f97b46b8e0)
++++ b/src/view/HomePage.java	(date 1684400278925)
+@@ -148,15 +148,15 @@
+         if (e.getSource() == btnOpenGioco){
+ 
+             if(selectedOption.equals("Facile")){
+-                CampoGioco newPage = new CampoGioco(6);
++                CampoGioco newPage = new CampoGioco(6,InsNome.getText());
+             }
+ 
+             if(selectedOption.equals("Medio")){
+-                CampoGioco newPage = new CampoGioco(5);
++                CampoGioco newPage = new CampoGioco(5,InsNome.getText());
+             }
+ 
+             if(selectedOption.equals("Difficile")){
+-                CampoGioco newPage = new CampoGioco(4);
++                CampoGioco newPage = new CampoGioco(4,InsNome.getText());
+             }
+ 
+             this.dispose();
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"176fe9ab-5033-4136-ac6c-a795ad7ab536\" name=\"Changes\" comment=\"aggiunta jtextfield per nome utente\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"e6b6e71a-6328-4b90-9e0c-ea04bcd5c5de\" />\r\n        <option name=\"url\" value=\"https://github.com/NicolaSannino/Il_Paroliere_.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2L6RmBRJinVOSYnhfaY42B11D2a\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/IdeaProjects/ProgettoProvaGPO&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"view\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"Il_Paroliere\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"176fe9ab-5033-4136-ac6c-a795ad7ab536\" name=\"Changes\" comment=\"\" />\r\n      <created>1675189711879</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1675189711879</updated>\r\n      <workItem from=\"1675189713685\" duration=\"605000\" />\r\n      <workItem from=\"1675190401634\" duration=\"5000\" />\r\n      <workItem from=\"1675763700181\" duration=\"408000\" />\r\n      <workItem from=\"1676367942818\" duration=\"3722000\" />\r\n      <workItem from=\"1676453329761\" duration=\"1679000\" />\r\n      <workItem from=\"1678183396337\" duration=\"5927000\" />\r\n      <workItem from=\"1678262813504\" duration=\"79000\" />\r\n      <workItem from=\"1678263433344\" duration=\"94000\" />\r\n      <workItem from=\"1678364963911\" duration=\"52000\" />\r\n      <workItem from=\"1679392560859\" duration=\"1647000\" />\r\n      <workItem from=\"1679568085707\" duration=\"2321000\" />\r\n      <workItem from=\"1679577587697\" duration=\"2386000\" />\r\n      <workItem from=\"1679740515344\" duration=\"1992000\" />\r\n      <workItem from=\"1679744010567\" duration=\"3995000\" />\r\n      <workItem from=\"1679998306414\" duration=\"15000\" />\r\n      <workItem from=\"1679998475602\" duration=\"50000\" />\r\n      <workItem from=\"1680825823049\" duration=\"2035000\" />\r\n      <workItem from=\"1680968047259\" duration=\"499000\" />\r\n      <workItem from=\"1680970373998\" duration=\"2572000\" />\r\n      <workItem from=\"1681298028703\" duration=\"2047000\" />\r\n      <workItem from=\"1681810933689\" duration=\"271000\" />\r\n      <workItem from=\"1681894489699\" duration=\"481000\" />\r\n      <workItem from=\"1681894998192\" duration=\"1616000\" />\r\n      <workItem from=\"1681976898413\" duration=\"1446000\" />\r\n      <workItem from=\"1683020611645\" duration=\"1703000\" />\r\n      <workItem from=\"1683716290290\" duration=\"13000\" />\r\n      <workItem from=\"1683734996464\" duration=\"3638000\" />\r\n      <workItem from=\"1683742601572\" duration=\"6936000\" />\r\n      <workItem from=\"1683790253441\" duration=\"8724000\" />\r\n      <workItem from=\"1683823718615\" duration=\"1778000\" />\r\n      <workItem from=\"1683828876198\" duration=\"5107000\" />\r\n      <workItem from=\"1683910162578\" duration=\"1107000\" />\r\n      <workItem from=\"1684150742409\" duration=\"333000\" />\r\n      <workItem from=\"1684172006695\" duration=\"2317000\" />\r\n      <workItem from=\"1684178708007\" duration=\"1959000\" />\r\n      <workItem from=\"1684222834116\" duration=\"5713000\" />\r\n      <workItem from=\"1684248192151\" duration=\"7776000\" />\r\n      <workItem from=\"1684306119903\" duration=\"9239000\" />\r\n      <workItem from=\"1684327166657\" duration=\"720000\" />\r\n      <workItem from=\"1684336026585\" duration=\"10806000\" />\r\n      <workItem from=\"1684392263860\" duration=\"1874000\" />\r\n      <workItem from=\"1684394383250\" duration=\"884000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Prima matrice\">\r\n      <created>1676454368951</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1676454368951</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"seconda matrice\">\r\n      <created>1678184374622</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678184374622</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"nuova grafica 1\">\r\n      <created>1680826545869</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680826545869</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"implementazione matrice in campo gioco\">\r\n      <created>1680827086135</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827086135</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"implementazione matrice in campo gioco 2\">\r\n      <created>1680827207273</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827207273</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"implementazione matrice in campo gioco 3\">\r\n      <created>1680827346757</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827346757</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"commit view\">\r\n      <created>1680827474015</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827474015</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"commit aggiornamento\">\r\n      <created>1680827699161</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680827699161</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo\">\r\n      <created>1682099512596</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682099512596</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"modifica classe centra ogetti\">\r\n      <created>1683021884725</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683021884725</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"matrice per controllo parola all'interno del paroliere\">\r\n      <created>1683738602828</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683738602828</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola\">\r\n      <created>1683749459998</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683749459998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"bottone scelta\">\r\n      <created>1683794752374</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683794752374</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"aggiustamento paroliere, click bottoni e ricerca\">\r\n      <created>1683824615975</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683824615976</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"Creazione tabella\">\r\n      <created>1683831750157</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683831750157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella\">\r\n      <created>1683911269099</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683911269099</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"controllo cambio bottone testo sistemato\">\r\n      <created>1684183396056</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684183396056</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"aggiunta pagina statistiche e hom page rifatta\">\r\n      <created>1684230053659</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684230053659</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"sistemazione pag statistiche\">\r\n      <created>1684230812231</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684230812231</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"Inizio Grafica\">\r\n      <created>1684252729296</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684252729296</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"Bottoni con bordi smussati e sistemazione generale\">\r\n      <created>1684355065812</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684355065812</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"aggiunta jtextfield per nome utente\">\r\n      <created>1684395815956</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684395815956</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"23\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/master\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Prima matrice\" />\r\n    <MESSAGE value=\"seconda matrice\" />\r\n    <MESSAGE value=\"nuova grafica 1\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco 2\" />\r\n    <MESSAGE value=\"implementazione matrice in campo gioco 3\" />\r\n    <MESSAGE value=\"commit view\" />\r\n    <MESSAGE value=\"commit aggiornamento\" />\r\n    <MESSAGE value=\"inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo\" />\r\n    <MESSAGE value=\"modifica classe centra ogetti\" />\r\n    <MESSAGE value=\"matrice per controllo parola all'interno del paroliere\" />\r\n    <MESSAGE value=\"Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola\" />\r\n    <MESSAGE value=\"bottone scelta\" />\r\n    <MESSAGE value=\"aggiustamento paroliere, click bottoni e ricerca\" />\r\n    <MESSAGE value=\"Creazione tabella\" />\r\n    <MESSAGE value=\"Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella\" />\r\n    <MESSAGE value=\"controllo cambio bottone testo sistemato\" />\r\n    <MESSAGE value=\"aggiunta pagina statistiche e hom page rifatta\" />\r\n    <MESSAGE value=\"sistemazione pag statistiche\" />\r\n    <MESSAGE value=\"Inizio Grafica\" />\r\n    <MESSAGE value=\"Bottoni con bordi smussati e sistemazione generale\" />\r\n    <MESSAGE value=\"aggiunta jtextfield per nome utente\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"aggiunta jtextfield per nome utente\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/Il_Paroliere$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1683736989739\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision bfc73fd5885008200d8eb315c78dc2f97b46b8e0)
++++ b/.idea/workspace.xml	(date 1684401469049)
+@@ -4,7 +4,13 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="aggiunta jtextfield per nome utente" />
++    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="aggiunta icona">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Query.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -52,7 +58,7 @@
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/IdeaProjects/ProgettoProvaGPO&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/alber/IdeaProjects/Il_Paroliere_/file&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+@@ -66,23 +72,14 @@
+   }
+ }</component>
+   <component name="RecentsManager">
+-    <key name="CreateClassDialog.RecentsKey">
+-      <recent name="view" />
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\alber\IdeaProjects\Il_Paroliere_\file" />
+     </key>
+   </component>
+-  <component name="RunManager">
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Main" />
+-      <module name="Il_Paroliere" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Application.Main" />
+-      </list>
+-    </recent_temporary>
++  <component name="RunAnythingCache">
++    <option name="myCommands">
++      <command value="JTe" />
++    </option>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -115,25 +112,29 @@
+       <workItem from="1681810933689" duration="271000" />
+       <workItem from="1681894489699" duration="481000" />
+       <workItem from="1681894998192" duration="1616000" />
+-      <workItem from="1681976898413" duration="1446000" />
+-      <workItem from="1683020611645" duration="1703000" />
+-      <workItem from="1683716290290" duration="13000" />
+-      <workItem from="1683734996464" duration="3638000" />
+-      <workItem from="1683742601572" duration="6936000" />
+-      <workItem from="1683790253441" duration="8724000" />
+-      <workItem from="1683823718615" duration="1778000" />
+-      <workItem from="1683828876198" duration="5107000" />
+-      <workItem from="1683910162578" duration="1107000" />
+-      <workItem from="1684150742409" duration="333000" />
+-      <workItem from="1684172006695" duration="2317000" />
+-      <workItem from="1684178708007" duration="1959000" />
+-      <workItem from="1684222834116" duration="5713000" />
+-      <workItem from="1684248192151" duration="7776000" />
+-      <workItem from="1684306119903" duration="9239000" />
+-      <workItem from="1684327166657" duration="720000" />
+-      <workItem from="1684336026585" duration="10806000" />
+-      <workItem from="1684392263860" duration="1874000" />
+-      <workItem from="1684394383250" duration="884000" />
++      <workItem from="1681976898413" duration="1751000" />
++      <workItem from="1682098781489" duration="812000" />
++      <workItem from="1682105099688" duration="1555000" />
++      <workItem from="1683019911432" duration="572000" />
++      <workItem from="1683021305821" duration="1136000" />
++      <workItem from="1683716204225" duration="347000" />
++      <workItem from="1683730700479" duration="7306000" />
++      <workItem from="1683790313062" duration="320000" />
++      <workItem from="1683790675121" duration="1209000" />
++      <workItem from="1683791910821" duration="6443000" />
++      <workItem from="1683807341241" duration="954000" />
++      <workItem from="1683822937891" duration="6385000" />
++      <workItem from="1683908937621" duration="4688000" />
++      <workItem from="1683978584694" duration="3534000" />
++      <workItem from="1684002176052" duration="2973000" />
++      <workItem from="1684179959940" duration="832000" />
++      <workItem from="1684219377233" duration="8805000" />
++      <workItem from="1684232940030" duration="1750000" />
++      <workItem from="1684251710581" duration="189000" />
++      <workItem from="1684252307397" duration="2020000" />
++      <workItem from="1684305715703" duration="1669000" />
++      <workItem from="1684312117626" duration="595000" />
++      <workItem from="1684392226305" duration="8354000" />
+     </task>
+     <task id="LOCAL-00001" summary="Prima matrice">
+       <created>1676454368951</created>
+@@ -191,105 +192,70 @@
+       <option name="project" value="LOCAL" />
+       <updated>1680827699161</updated>
+     </task>
+-    <task id="LOCAL-00009" summary="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo">
+-      <created>1682099512596</created>
++    <task id="LOCAL-00009" summary="commit aggiornamento box ins parola">
++      <created>1681978650188</created>
+       <option name="number" value="00009" />
+       <option name="presentableId" value="LOCAL-00009" />
+       <option name="project" value="LOCAL" />
+-      <updated>1682099512596</updated>
++      <updated>1681978650188</updated>
+     </task>
+-    <task id="LOCAL-00010" summary="modifica classe centra ogetti">
+-      <created>1683021884725</created>
++    <task id="LOCAL-00010" summary="commit sistemazione grafica">
++      <created>1683734949595</created>
+       <option name="number" value="00010" />
+       <option name="presentableId" value="LOCAL-00010" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683021884725</updated>
++      <updated>1683734949595</updated>
+     </task>
+-    <task id="LOCAL-00011" summary="matrice per controllo parola all'interno del paroliere">
+-      <created>1683738602828</created>
++    <task id="LOCAL-00011" summary="commit sistemazione grafica 2">
++      <created>1683738209501</created>
+       <option name="number" value="00011" />
+       <option name="presentableId" value="LOCAL-00011" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683738602828</updated>
++      <updated>1683738209501</updated>
+     </task>
+-    <task id="LOCAL-00012" summary="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola">
+-      <created>1683749459998</created>
++    <task id="LOCAL-00012" summary="sistemazione btn on off">
++      <created>1683796420971</created>
+       <option name="number" value="00012" />
+       <option name="presentableId" value="LOCAL-00012" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683749459998</updated>
++      <updated>1683796420971</updated>
+     </task>
+-    <task id="LOCAL-00013" summary="bottone scelta">
+-      <created>1683794752374</created>
++    <task id="LOCAL-00013" summary="sistemazione tutto">
++      <created>1683831465335</created>
+       <option name="number" value="00013" />
+       <option name="presentableId" value="LOCAL-00013" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683794752374</updated>
++      <updated>1683831465335</updated>
+     </task>
+-    <task id="LOCAL-00014" summary="aggiustamento paroliere, click bottoni e ricerca">
+-      <created>1683824615975</created>
++    <task id="LOCAL-00014" summary="implementazione algoritmo creazione tabella">
++      <created>1684224336961</created>
+       <option name="number" value="00014" />
+       <option name="presentableId" value="LOCAL-00014" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683824615976</updated>
++      <updated>1684224336961</updated>
+     </task>
+-    <task id="LOCAL-00015" summary="Creazione tabella">
+-      <created>1683831750157</created>
++    <task id="LOCAL-00015" summary="implementazione algoritmo creazione tabella2">
++      <created>1684224651628</created>
+       <option name="number" value="00015" />
+       <option name="presentableId" value="LOCAL-00015" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683831750157</updated>
++      <updated>1684224651628</updated>
+     </task>
+-    <task id="LOCAL-00016" summary="Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella">
+-      <created>1683911269099</created>
++    <task id="LOCAL-00016" summary="creazione tab stat">
++      <created>1684234459319</created>
+       <option name="number" value="00016" />
+       <option name="presentableId" value="LOCAL-00016" />
+       <option name="project" value="LOCAL" />
+-      <updated>1683911269099</updated>
++      <updated>1684234459319</updated>
+     </task>
+-    <task id="LOCAL-00017" summary="controllo cambio bottone testo sistemato">
+-      <created>1684183396056</created>
++    <task id="LOCAL-00017" summary="aggiunta icona">
++      <created>1684306963385</created>
+       <option name="number" value="00017" />
+       <option name="presentableId" value="LOCAL-00017" />
+       <option name="project" value="LOCAL" />
+-      <updated>1684183396056</updated>
+-    </task>
+-    <task id="LOCAL-00018" summary="aggiunta pagina statistiche e hom page rifatta">
+-      <created>1684230053659</created>
+-      <option name="number" value="00018" />
+-      <option name="presentableId" value="LOCAL-00018" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684230053659</updated>
+-    </task>
+-    <task id="LOCAL-00019" summary="sistemazione pag statistiche">
+-      <created>1684230812231</created>
+-      <option name="number" value="00019" />
+-      <option name="presentableId" value="LOCAL-00019" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684230812231</updated>
+-    </task>
+-    <task id="LOCAL-00020" summary="Inizio Grafica">
+-      <created>1684252729296</created>
+-      <option name="number" value="00020" />
+-      <option name="presentableId" value="LOCAL-00020" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684252729296</updated>
+-    </task>
+-    <task id="LOCAL-00021" summary="Bottoni con bordi smussati e sistemazione generale">
+-      <created>1684355065812</created>
+-      <option name="number" value="00021" />
+-      <option name="presentableId" value="LOCAL-00021" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684355065812</updated>
+-    </task>
+-    <task id="LOCAL-00022" summary="aggiunta jtextfield per nome utente">
+-      <created>1684395815956</created>
+-      <option name="number" value="00022" />
+-      <option name="presentableId" value="LOCAL-00022" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684395815956</updated>
++      <updated>1684306963385</updated>
+     </task>
+-    <option name="localTasksCounter" value="23" />
++    <option name="localTasksCounter" value="18" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -306,7 +272,7 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
+-                        <option value="origin/master" />
++                        <option value="master" />
+                       </list>
+                     </value>
+                   </entry>
+@@ -327,27 +293,15 @@
+     <MESSAGE value="implementazione matrice in campo gioco 3" />
+     <MESSAGE value="commit view" />
+     <MESSAGE value="commit aggiornamento" />
+-    <MESSAGE value="inserimento timer, creazione classe centraggio oggetti grafici e modifica dimensioni frame che si adatta al proprio schermo" />
+-    <MESSAGE value="modifica classe centra ogetti" />
+-    <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
+-    <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
+-    <MESSAGE value="bottone scelta" />
+-    <MESSAGE value="aggiustamento paroliere, click bottoni e ricerca" />
+-    <MESSAGE value="Creazione tabella" />
+-    <MESSAGE value="Integrazione tabella e sistemazione di alcuni bug dei bottoni all'interno della tabella" />
+-    <MESSAGE value="controllo cambio bottone testo sistemato" />
+-    <MESSAGE value="aggiunta pagina statistiche e hom page rifatta" />
+-    <MESSAGE value="sistemazione pag statistiche" />
+-    <MESSAGE value="Inizio Grafica" />
+-    <MESSAGE value="Bottoni con bordi smussati e sistemazione generale" />
+-    <MESSAGE value="aggiunta jtextfield per nome utente" />
+-    <option name="LAST_COMMIT_MESSAGE" value="aggiunta jtextfield per nome utente" />
+-  </component>
+-  <component name="XSLT-Support.FileAssociations.UIState">
+-    <expand />
+-    <select />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/Il_Paroliere$Main.ic" NAME="Main Coverage Results" MODIFIED="1683736989739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <MESSAGE value="commit aggiornamento box ins parola" />
++    <MESSAGE value="commit sistemazione grafica" />
++    <MESSAGE value="commit sistemazione grafica 2" />
++    <MESSAGE value="sistemazione btn on off" />
++    <MESSAGE value="sistemazione tutto" />
++    <MESSAGE value="implementazione algoritmo creazione tabella" />
++    <MESSAGE value="implementazione algoritmo creazione tabella2" />
++    <MESSAGE value="creazione tab stat" />
++    <MESSAGE value="aggiunta icona" />
++    <option name="LAST_COMMIT_MESSAGE" value="aggiunta icona" />
+   </component>
+ </project>
+\ No newline at end of file
