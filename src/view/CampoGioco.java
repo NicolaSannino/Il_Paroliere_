@@ -775,6 +775,7 @@ public class CampoGioco extends JFrame implements ActionListener{
 			System.out.println(tempo);
 			System.out.println(totPunteggio);
 			System.out.println(numParTrovate);
+			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
 
 			q1.getInsertPartita(totPunteggio,tempo,dif,nome_utenti,numParTrovate,connTermine);
 
