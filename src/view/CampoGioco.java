@@ -280,8 +280,6 @@ public class CampoGioco extends JFrame implements ActionListener{
 		//panelTabellaRis.add(Box.createVerticalStrut(30)); // Spazio vuoto tra etichetta e tabella
 		panelTabellaRis.setVisible(true);
 
-		panelTabellaRis.setBounds(1150,160,301,450);
-
 		if(difficolta == 4){
 			panelTabellaRis.setBounds(1150,160,301,450);
 		}else if(difficolta == 5){
