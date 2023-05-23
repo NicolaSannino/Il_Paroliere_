@@ -1,10 +1,11 @@
 import view.CampoGioco;
 import view.HomePage;
+import view.SplashScreenDemo;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            HomePage window1 = new HomePage();
+            SplashScreenDemo d = new SplashScreenDemo();
 
         } catch (Exception e) {
             e.printStackTrace();

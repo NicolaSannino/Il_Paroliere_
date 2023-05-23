@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="">
+    <list default="true" id="176fe9ab-5033-4136-ac6c-a795ad7ab536" name="Changes" comment="ultima commit 2.0">
+      <change afterPath="$PROJECT_DIR$/src/view/SplashScreenDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CampoGioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CampoGioco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PageStatistiche.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PageStatistiche.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/File.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GraficaJButton.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +157,7 @@
       <workItem from="1684751323423" duration="918000" />
       <workItem from="1684765902945" duration="46000" />
       <workItem from="1684765992597" duration="5039000" />
+      <workItem from="1684824103240" duration="500000" />
     </task>
     <task id="LOCAL-00001" summary="Prima matrice">
       <created>1676454368951</created>
@@ -387,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684677507746</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="ultima commit 2.0">
+      <created>1684792433895</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684792433895</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modifica classe centra ogetti" />
     <MESSAGE value="matrice per controllo parola all'interno del paroliere" />
     <MESSAGE value="Funzioni per cercare la parola all'interno della tabella e gestione bottoni cliccabili per inserire la parola" />
     <MESSAGE value="bottone scelta" />
@@ -442,7 +451,8 @@
     <MESSAGE value="sistemazione grafica e selectbox parole partita" />
     <MESSAGE value="label parola trovata a scomparsa" />
     <MESSAGE value="aggiustamento pagina statistiche" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiustamento pagina statistiche" />
+    <MESSAGE value="ultima commit 2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="ultima commit 2.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
